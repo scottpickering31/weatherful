@@ -25,7 +25,6 @@ function SearchBar() {
       const response = await fetch(url, options);
 
       if (!response.ok) {
-
         throw new Error(`Bad API Response: ${response.statusText}`);
       }
 
@@ -34,15 +33,17 @@ function SearchBar() {
       dispatch(
         setWeatherData(result.locations[Object.keys(result.locations)[0]])
       );
-
     } catch (error) {
       console.error(error);
-
     }
   };
 
   return (
-    <div className="flex flex-row justify-center items-center mb-20 mt-3px-5 ">
+    <div className="flex flex-row justify-center items-center mb-20 mt-3 px-5 gap-2">
+      <img
+        src="../../public/images/placeholder-image.webp"
+        className="h-10 w-10"
+      />
       <input
         type="search"
         name="searchbar"
@@ -52,7 +53,7 @@ function SearchBar() {
       />
       <button
         onClick={handleSubmit}
-        className="ml-2 bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 rounded"
+        className="bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 rounded"
       >
         Search
       </button>
