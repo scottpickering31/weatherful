@@ -105,11 +105,11 @@ function WeatherCard() {
               Sunset: {formatTimeStamp(weatherData.currentConditions.sunset)} PM
             </h3>
             <div className="flex flex-row gap-2 items-center justify-center">
-              <h3>Wind Direction: {weatherData.currentConditions.wdir}</h3>
               <img
                 src="/images/gifs/wind-arrow.gif"
                 style={{ transform: `rotate(${windDirection}deg)` }}
               />
+              <h3>Wind Direction: {weatherData.currentConditions.wdir}</h3>
             </div>
             <h3>Wind Speed: {weatherData.currentConditions.wspd} km/h</h3>
           </div>
