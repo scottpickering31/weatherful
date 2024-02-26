@@ -9,7 +9,8 @@ function WeatherCard() {
   const weatherData = useSelector((state) => state.weatherData.weatherData);
   const iconData = useSelector((state) => state.iconData.iconData);
   const [temperature, setTemperature] = useState("");
-  const [windDirection, setWindDirection] = useState("");
+  const [windArrow, setWindArrow] = useState("");
+  const [windDigit, setWindDigit] = useState("");
 
   useEffect(() => {
     const getRandomCityWeather = async () => {
@@ -68,13 +69,41 @@ function WeatherCard() {
   useEffect(() => {
     if (weatherData && weatherData.currentConditions) {
       let direction = weatherData.currentConditions.wdir;
-      direction.toString();
-      setWindDirection(direction);
+      console.log(direction);
+      switch (true) {
+        case direction <= 20:
+          setWindDigit("North");
+          break;
+        case direction <= 80:
+          setWindDigit("Northeast");
+          break;
+        case direction <= 120:
+          setWindDigit("East");
+          break;
+        case direction <= 160:
+          setWindDigit("Southeast");
+          break;
+        case direction <= 200:
+          setWindDigit("South");
+          break;
+        case direction <= 240:
+          setWindDigit("Southwest");
+          break;
+        case direction <= 280:
+          setWindDigit("West");
+          break;
+        case direction <= 320:
+          setWindDigit("Northwest");
+          break;
+        default:
+          setWindDigit("North");
+      }
+      setWindArrow(direction.toString());
     }
   }, [weatherData]);
 
   return (
-    <div className="border-4 border-slate-300 w-11/12 rounded-xl flex items-center">
+    <div className="border-4 border-slate-300 rounded-xl flex items-center">
       {weatherData === null ? (
         <p>Loading...</p>
       ) : (
@@ -83,35 +112,63 @@ function WeatherCard() {
             {iconData === null ? (
               <p>Loading...</p>
             ) : (
-              <div className="flex flex-row items-center gap-5 text-3xl">
-                <img src={weatherImage} className="h-20 w-20" />
-                <h2>{iconData}</h2>
+              <div className="flex flex-col items-center text-center mb-10 text-xl">
+                <img src={weatherImage} className="h-16 w-16" />
+                <h2 className="font-bold">Current Weather:</h2>
+                <h2 className="text-4xl font-bold text-orange-500">
+                  {iconData}
+                </h2>
               </div>
             )}
             {weatherData.currentConditions && (
-              <div className="flex flex-row items-center gap-2">
-                <img src="/images/gifs/temperature.gif" className="h-20 w-20" />
-                <h3 className="text-3xl text-center">Current Temperature:</h3>
-                <h3 className="text-3xl text-center">{temperature}°C</h3>
+              <div className="flex flex-col items-center gap-2 text-xl text-center font-bold">
+                <img src="/images/gifs/temperature.gif" className="h-16 w-16" />
+                <h2>Current Temperature:</h2>
+                <h2 className="text-orange-500 fold-bold text-4xl">
+                  {temperature}°C
+                </h2>
               </div>
             )}
           </div>
-          <div className="p-5 w-1/2 text-center">
-            <h3>
-              Sunrise: {formatTimeStamp(weatherData.currentConditions.sunrise)}
-              AM
-            </h3>
-            <h3>
-              Sunset: {formatTimeStamp(weatherData.currentConditions.sunset)} PM
-            </h3>
-            <div className="flex flex-row gap-2 items-center justify-center">
+          <div className="p-5 w-1/2 text-center flex justify-around font-bold items-start flex-col gap-10">
+            <div className="flex flex-row gap-2 items-center">
+              <img src="/images/gifs/sunrise.gif" />
+              <h3>
+                Sunrise <span className="text-xl">↑</span>: <br />
+                <span className="text-orange-500 font-bold">
+                  {formatTimeStamp(weatherData.currentConditions.sunrise)} AM
+                </span>
+              </h3>
+            </div>
+            <div className="flex flex-row gap-2 items-center">
+              <img src="/images/gifs/sunset.gif" />
+              <h3>
+                Sunset <span className="text-xl">↓</span>: <br />
+                <span className="text-orange-500 font-bold">
+                  {formatTimeStamp(weatherData.currentConditions.sunset)} PM
+                </span>
+              </h3>
+            </div>
+            <div className="flex flex-row gap-2 items-center">
               <img
                 src="/images/gifs/wind-arrow.gif"
-                style={{ transform: `rotate(${windDirection}deg)` }}
+                style={{ transform: `rotate(${windArrow}deg)` }}
               />
-              <h3>Wind Direction: {weatherData.currentConditions.wdir}</h3>
+              <h3>
+                Wind Direction:{" "}
+                <span className="text-orange-500 font-bold">{windDigit}</span>
+              </h3>
             </div>
-            <h3>Wind Speed: {weatherData.currentConditions.wspd} km/h</h3>
+            <div className="flex flex-row gap-2 items-center">
+              <img src="/images/gifs/wind.gif" />
+              <h3>
+                Wind Speed:{" "}
+                <span className="text-orange-500 font-bold">
+                  {weatherData.currentConditions.wspd}
+                  km/h
+                </span>{" "}
+              </h3>
+            </div>
           </div>
         </div>
       )}
