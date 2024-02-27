@@ -20,18 +20,15 @@ function SearchBar() {
         "X-RapidAPI-Host": import.meta.env.VITE_BASE_URL,
       },
     };
-
     try {
       const response = await fetch(url, options);
-
       if (!response.ok) {
         throw new Error(`Bad API Response: ${response.statusText}`);
       }
-
       const result = await response.json();
       console.log(result);
       dispatch(
-        setWeatherData(result.locations[Object.keys(result.locations)[0]])
+        setWeatherData(result.locations[Object.keys(result.locations)[0]]),
       );
     } catch (error) {
       console.error(error);

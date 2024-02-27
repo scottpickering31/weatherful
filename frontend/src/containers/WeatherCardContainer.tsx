@@ -2,19 +2,24 @@ import WeatherCard from "../components/WeatherCard";
 import { useSelector } from "react-redux";
 
 function WeatherCardContainer() {
-  const location = useSelector((state) => state.weatherData.weatherData);
+  const weatherData = useSelector((state) => state.weatherData.weatherData);
+  console.log(weatherData);
+
+  const cityName = weatherData.locations;
+  console.log(cityName);
+
   return (
     <div className="flex justify-center items-center h-2/3 w-full mb-20 flex-col">
-      {location === null ? (
-        <></>
-      ) : (
-        <div className="flex flex-col items-center mb-10 text-center">
-          <h2 className="mb-5 text-3xl">Today's Weather Forecast in:</h2>
+      <div className="flex flex-col items-center mb-10 text-center">
+        <h2 className="mb-5 text-3xl">Today's Weather Forecast in:</h2>
+        {cityName ? (
           <h1 className="text-orange-500 underline underline-offset-1 text-4xl">
-            {location.name[0].toUpperCase() + location.name.slice(1)}
+            {cityName.toUpperCase().slice(0, 1) + cityName.slice(1)}
           </h1>
-        </div>
-      )}
+        ) : (
+          <p>No city name available</p>
+        )}
+      </div>
       <div>
         <WeatherCard />
       </div>

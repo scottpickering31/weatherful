@@ -1,8 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
-import { setWeatherData } from "../state/reducers/weatherDataSlice";
+import { fetchRandomCity } from "../state/reducers/weatherDataSlice";
 import { getWeatherImages } from "../helpers/weatherImageHelper";
 import { useEffect, useState } from "react";
-import "./WeatherCard.css";
 
 function WeatherCard() {
   const dispatch = useDispatch();
@@ -13,42 +12,8 @@ function WeatherCard() {
   const [windDigit, setWindDigit] = useState("");
 
   useEffect(() => {
-    const getRandomCityWeather = async () => {
-      const randomLocation = [
-        "London",
-        "York",
-        "Liverpool",
-        "Manchester",
-        "Brighton",
-      ];
-      const randomLocationMath = Math.floor(
-        Math.random() * randomLocation.length
-      );
-      const url = `https://visual-crossing-weather.p.rapidapi.com/forecast?iconSet=icons2&aggregateHours=24&location=${randomLocation[randomLocationMath]}&contentType=json&shortColumnNames=0`;
-
-      const options = {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Key": import.meta.env.VITE_API_KEY,
-          "X-RapidAPI-Host": import.meta.env.VITE_BASE_URL,
-        },
-      };
-
-      try {
-        const response = await fetch(url, options);
-        const result = await response.json();
-        if (response.ok) {
-          dispatch(
-            setWeatherData(result.locations[Object.keys(result.locations)[0]])
-          );
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getRandomCityWeather();
-  }, []);
+    dispatch(fetchRandomCity());
+  }, [dispatch]);
 
   let weatherImage = "";
 
@@ -57,14 +22,22 @@ function WeatherCard() {
     weatherImage = getWeatherImages(icons);
   }
 
-  if (weatherData && weatherData.currentConditions) {
-    const fahrenheitToCelcius =
-      ((weatherData.currentConditions.temp - 32) * 5) / 9;
-    const celcius = fahrenheitToCelcius.toFixed(1);
-    if (temperature !== celcius) {
-      setTemperature(celcius);
+  useEffect(() => {
+    if (weatherData && weatherData.currentConditions) {
+      const { sunrise, sunset, temp } = weatherData.currentConditions;
+      const fahrenheitToCelcius = ((temp - 32) * 5) / 9;
+      const celcius = fahrenheitToCelcius.toFixed(1);
+      if (temperature !== celcius) {
+        setTemperature(celcius);
+      }
+      if (sunrise) {
+        console.log(`Sunrise: ${formatTimeStamp(sunrise)} AM`);
+      }
+      if (sunset) {
+        console.log(`Sunset: ${formatTimeStamp(sunset)} PM`);
+      }
     }
-  }
+  }, [weatherData, temperature]);
 
   useEffect(() => {
     if (weatherData && weatherData.currentConditions) {
@@ -135,18 +108,18 @@ function WeatherCard() {
               <img src="/images/gifs/sunrise.gif" />
               <h3>
                 Sunrise <span className="text-xl">↑</span>: <br />
-                <span className="text-orange-500 font-bold">
+                {/* <span className="text-orange-500 font-bold">
                   {formatTimeStamp(weatherData.currentConditions.sunrise)} AM
-                </span>
+                </span> */}
               </h3>
             </div>
             <div className="flex flex-row gap-2 items-center">
               <img src="/images/gifs/sunset.gif" />
               <h3>
                 Sunset <span className="text-xl">↓</span>: <br />
-                <span className="text-orange-500 font-bold">
+                {/* <span className="text-orange-500 font-bold">
                   {formatTimeStamp(weatherData.currentConditions.sunset)} PM
-                </span>
+                </span> */}
               </h3>
             </div>
             <div className="flex flex-row gap-2 items-center">
@@ -163,10 +136,10 @@ function WeatherCard() {
               <img src="/images/gifs/wind.gif" />
               <h3>
                 Wind Speed:{" "}
-                <span className="text-orange-500 font-bold">
+                {/* <span className="text-orange-500 font-bold">
                   {weatherData.currentConditions.wspd}
                   km/h
-                </span>{" "}
+                </span>{" "} */}
               </h3>
             </div>
           </div>
