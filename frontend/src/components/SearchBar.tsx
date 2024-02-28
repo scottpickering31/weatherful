@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setWeatherData } from "../state/reducers/weatherDataSlice";
 
@@ -11,29 +11,31 @@ function SearchBar() {
     getWeatherData();
   };
 
-  const getWeatherData = async () => {
-    const url = `https://visual-crossing-weather.p.rapidapi.com/forecast?aggregateHours=24&location=${location}&contentType=json&shortColumnNames=0`;
-    const options = {
-      method: "GET",
-      headers: {
-        "X-RapidAPI-Key": import.meta.env.VITE_API_KEY,
-        "X-RapidAPI-Host": import.meta.env.VITE_BASE_URL,
-      },
-    };
-    try {
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error(`Bad API Response: ${response.statusText}`);
+    const getWeatherData = async () => {
+      const url = `https://visual-crossing-weather.p.rapidapi.com/forecast?aggregateHours=24&location=${location}&contentType=json&shortColumnNames=0`;
+      const options = {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key": import.meta.env.VITE_API_KEY,
+          "X-RapidAPI-Host": import.meta.env.VITE_BASE_URL,
+        },
+      };
+      try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+          throw new Error(`Bad API Response: ${response.statusText}`);
+        }
+        const result = await response.json();
+        console.log(result);
+        dispatch(
+          setWeatherData(result.locations[Object.keys(result.locations)[0]])
+        );
+      } catch (error) {
+        console.error(error);
       }
-      const result = await response.json();
-      console.log(result);
-      dispatch(
-        setWeatherData(result.locations[Object.keys(result.locations)[0]]),
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    };
+    
+  })
 
   return (
     <div className="flex flex-row justify-center items-center mb-10 mt-3 px-5 gap-2">

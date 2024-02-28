@@ -1,6 +1,7 @@
 import SearchBar from "../components/SearchBar";
 import WeatherCardContainer from "./WeatherCardContainer";
 
+
 function SearchContainer() {
   return (
     <div className="flex items-center bg-white flex-col w-2/3 rounded-3xl p-5 shadow-2xl mobile:w-4/5 tablet:w-3/5 laptop:gap-5 laptop:w-3/5 desktop:gap-5 desktop:w-3/5">

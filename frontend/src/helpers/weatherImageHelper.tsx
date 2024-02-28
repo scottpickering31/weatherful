@@ -55,9 +55,3 @@ export function getWeatherImages(icons: string[]) {
     }
   }
 }
-
-// Main Images for Wind Speed/Directions
-
-// Main Images for Temperature
-
-// Main Images for Humidity

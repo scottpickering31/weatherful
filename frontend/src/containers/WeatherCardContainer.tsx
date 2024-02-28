@@ -1,12 +1,18 @@
+import { useEffect, useState } from "react";
 import WeatherCard from "../components/WeatherCard";
 import { useSelector } from "react-redux";
 
 function WeatherCardContainer() {
-  const weatherData = useSelector((state) => state.weatherData.weatherData);
-  console.log(weatherData);
+  const [cityName, setCityName] = useState<string>("");
 
-  const cityName = weatherData.locations;
-  console.log(cityName);
+  const weatherData = useSelector((state) => state.weatherData.weatherData);
+
+  useEffect(() => {
+    if (weatherData) {
+      const cityKey = Object.keys(weatherData.locations)[0];
+      setCityName(weatherData.locations[cityKey].name);
+    }
+  }, [weatherData]);
 
   return (
     <div className="flex justify-center items-center h-2/3 w-full mb-20 flex-col">
