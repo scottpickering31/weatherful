@@ -1,5 +1,6 @@
 import "./App.css";
 import SearchContainer from "./containers/SearchContainer";
+import FutureForecastContainer from "./containers/FutureForecastContainer";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         />
       </div>
       <SearchContainer />
+      <FutureForecastContainer />
     </div>
   );
 }

@@ -1,23 +1,7 @@
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function Sunrise() {
-  useEffect(() => {
-    if (weatherData && weatherData.currentConditions) {
-      const { sunrise, sunset, temp } = weatherData.currentConditions;
-      const fahrenheitToCelcius = ((temp - 32) * 5) / 9;
-      const celcius = fahrenheitToCelcius.toFixed(1);
-      if (temperature !== celcius) {
-        setTemperature(celcius);
-      }
-      if (sunrise) {
-        console.log(`Sunrise: ${formatTimeStamp(sunrise)} AM`);
-      }
-      if (sunset) {
-        console.log(`Sunset: ${formatTimeStamp(sunset)} PM`);
-      }
-    }
-  }, [weatherData, temperature]);
-
+  const weatherData = useSelector((state) => state.weatherData.weatherData);
   function formatTimeStamp(timeStamp: string) {
     const date = new Date(timeStamp);
     return date.toLocaleTimeString();
@@ -28,9 +12,9 @@ function Sunrise() {
       <img src="/images/gifs/sunrise.gif" />
       <h3>
         Sunrise <span className="text-xl">↑</span>: <br />
-        {/* <span className="text-orange-500 font-bold">
-      {formatTimeStamp(weatherData.currentConditions.sunrise)} AM
-    </span> */}
+        <span className="text-orange-500 font-bold">
+          {formatTimeStamp(weatherData.currentConditions.sunrise)} AM
+        </span>
       </h3>
     </div>
   );

@@ -1,27 +1,15 @@
-import { useEffect } from "react";
-
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
 function Temperature() {
-  useEffect(() => {
-    if (weatherData && weatherData.currentConditions) {
-      const { sunrise, sunset, temp } = weatherData.currentConditions;
-      const fahrenheitToCelcius = ((temp - 32) * 5) / 9;
-      const celcius = fahrenheitToCelcius.toFixed(1);
-      if (temperature !== celcius) {
-        setTemperature(celcius);
-      }
-      if (sunrise) {
-        console.log(`Sunrise: ${formatTimeStamp(sunrise)} AM`);
-      }
-      if (sunset) {
-        console.log(`Sunset: ${formatTimeStamp(sunset)} PM`);
-      }
-    }
-  }, [weatherData, temperature]);
+  const weatherData = useSelector((state) => state.weatherData.weatherData);
+  const [temperature, setTemperature] = useState(0);
 
-  function formatTimeStamp(timeStamp: string) {
-    const date = new Date(timeStamp);
-    return date.toLocaleTimeString();
+  if (weatherData && weatherData.currentConditions) {
+    const { temp } = weatherData.currentConditions;
+    const fahrenheitToCelcius = ((temp - 32) * 5) / 9;
+    const celcius = fahrenheitToCelcius.toFixed(1);
+    setTemperature(celcius);
   }
 
   return (
@@ -33,4 +21,4 @@ function Temperature() {
   );
 }
 
-export default temperature;
+export default Temperature;

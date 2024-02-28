@@ -1,4 +1,8 @@
+import { useSelector } from "react-redux";
+import { getWeatherImages } from "../../helpers/weatherImageHelper";
+
 function weathertype() {
+  const weatherData = useSelector((state) => state.weatherData.weatherData);
   let weatherImage = "";
 
   if (weatherData && weatherData.currentConditions) {
