@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 
 function WindSpeed() {
   const weatherData = useSelector((state) => state.weatherData.weatherData);
+
   return (
     <div className="flex flex-row gap-2 items-center">
       <img src="/images/gifs/wind.gif" />
