@@ -17,8 +17,7 @@ function WeatherType({ weatherData }) {
       console.log(newWeatherImage);
       dispatch(setIconData(newWeatherImage));
     }
-  }, [weatherData, weatherType]);
-  console.log(weatherType);
+  }, [weatherData]);
 
   return (
     <div className="flex flex-col items-center text-center mb-10 text-xl">
