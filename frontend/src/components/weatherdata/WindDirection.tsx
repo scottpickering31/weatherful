@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 
-function WindDirection() {
-  const weatherData = useSelector((state) => state.weatherData.weatherData);
+function WindDirection({ weatherData }) {
+  const windDirection =
+    weatherData.locations[Object.keys(weatherData.locations)[0]]
+      .currentConditions;
   const [windDigit, setWindDigit] = useState("");
   const [windArrow, setWindArrow] = useState("");
 
-  if (weatherData && weatherData.currentConditions) {
-    let direction = weatherData.currentConditions.wdir;
-    console.log(direction);
+  useEffect(() => {
+    let direction = windDirection.wdir;
     switch (true) {
       case direction <= 20:
         setWindDigit("North");
@@ -38,7 +38,7 @@ function WindDirection() {
         setWindDigit("North");
     }
     setWindArrow(direction.toString());
-  }
+  }, [weatherData]);
 
   return (
     <div className="flex flex-row gap-2 items-center">
@@ -47,8 +47,8 @@ function WindDirection() {
         style={{ transform: `rotate(${windArrow}deg)` }}
       />
       <h3>
-        Wind Direction:{" "}
-        <span className="text-orange-500 font-bold">{windDigit}</span>
+        Wind Direction:
+        <span className="text-orange-500 font-bold"> {windDigit}</span>
       </h3>
     </div>
   );

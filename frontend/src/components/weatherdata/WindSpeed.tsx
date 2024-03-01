@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
-
-function WindSpeed() {
-  const weatherData = useSelector((state) => state.weatherData.weatherData);
+function WindSpeed({ weatherData }) {
+  const windSpeed =
+    weatherData.locations[Object.keys(weatherData.locations)[0]]
+      .currentConditions;
 
   return (
     <div className="flex flex-row gap-2 items-center">
@@ -9,7 +9,7 @@ function WindSpeed() {
       <h3>
         Wind Speed:{" "}
         <span className="text-orange-500 font-bold">
-          {weatherData.currentConditions.wspd}
+          {windSpeed.wspd}
           km/h
         </span>{" "}
       </h3>

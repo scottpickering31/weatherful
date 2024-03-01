@@ -1,21 +1,32 @@
-import { useSelector } from "react-redux";
-import { getWeatherImages } from "../../helpers/weatherImageHelper";
+import { getWeatherImages } from "../../utils/weatherImageHelper";
+import { setIconData } from "../../state/reducers/iconDataSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
-function weathertype() {
-  const weatherData = useSelector((state) => state.weatherData.weatherData);
-  let weatherImage = "";
+function WeatherType({ weatherData }) {
+  const dispatch = useDispatch();
+  const iconData = useSelector((state) => state.iconData.iconData);
+  const weatherType =
+    weatherData.locations[Object.keys(weatherData.locations)[0]]
+      .currentConditions;
 
-  if (weatherData && weatherData.currentConditions) {
-    const icons = weatherData.currentConditions.icon;
-    weatherImage = getWeatherImages(icons);
-  }
+  useEffect(() => {
+    if (weatherData && weatherData.currentConditions) {
+      const icons = weatherType.icon;
+      const newWeatherImage = getWeatherImages(icons);
+      console.log(newWeatherImage);
+      dispatch(setIconData(newWeatherImage));
+    }
+  }, [weatherData, weatherType]);
+  console.log(weatherType);
+
   return (
     <div className="flex flex-col items-center text-center mb-10 text-xl">
-      <img src={weatherImage} className="h-16 w-16" />
+      <img src={iconData} className="h-16 w-16" />
       <h2 className="font-bold">Current Weather:</h2>
-      <h2 className="text-4xl font-bold text-orange-500"></h2>
+      <h2 className="text-4xl font-bold text-orange-500">{weatherType.icon}</h2>
     </div>
   );
 }
 
-export default weathertype;
+export default WeatherType;

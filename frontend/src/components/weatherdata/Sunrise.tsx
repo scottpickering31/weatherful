@@ -1,19 +1,17 @@
-import { useSelector } from "react-redux";
+import { formatTimeStamp } from "../../utils/formatTimeStamp";
 
-function Sunrise() {
-  const weatherData = useSelector((state) => state.weatherData.weatherData);
-  function formatTimeStamp(timeStamp: string) {
-    const date = new Date(timeStamp);
-    return date.toLocaleTimeString();
-  }
+function Sunrise({ weatherData }) {
+  const sunriseTime =
+    weatherData.locations[Object.keys(weatherData.locations)[0]]
+      .currentConditions.sunrise;
 
   return (
     <div className="flex flex-row gap-2 items-center">
-      <img src="/images/gifs/sunrise.gif" />
+      <img src="/images/gifs/sunrise.gif" alt="Sunrise GIF" />
       <h3>
         Sunrise <span className="text-xl">↑</span>: <br />
         <span className="text-orange-500 font-bold">
-          {formatTimeStamp(weatherData.currentConditions.sunrise)} AM
+          {sunriseTime ? formatTimeStamp(sunriseTime) + " AM" : "Loading..."}
         </span>
       </h3>
     </div>

@@ -1,22 +1,29 @@
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function Temperature() {
-  const weatherData = useSelector((state) => state.weatherData.weatherData);
-  const [temperature, setTemperature] = useState(0);
+function Temperature({ weatherData }) {
+  const [convertedTemp, setConvertedTemp] = useState(0);
 
-  if (weatherData && weatherData.currentConditions) {
-    const { temp } = weatherData.currentConditions;
-    const fahrenheitToCelcius = ((temp - 32) * 5) / 9;
-    const celcius = fahrenheitToCelcius.toFixed(1);
-    setTemperature(celcius);
-  }
+  useEffect(() => {
+    if (weatherData && Object.keys(weatherData.locations).length > 0) {
+      const temperature =
+        weatherData.locations[Object.keys(weatherData.locations)[0]]
+          .currentConditions.temp;
+
+      const fahrenheitToCelcius = ((Number(temperature) - 32) * 5) / 9;
+      const celcius = fahrenheitToCelcius.toFixed(1);
+      setConvertedTemp(celcius);
+    }
+  }, [weatherData]);
 
   return (
     <div className="flex flex-col items-center gap-2 text-xl text-center font-bold">
-      <img src="/images/gifs/temperature.gif" className="h-16 w-16" />
+      <img
+        src="/images/gifs/temperature.gif"
+        className="h-16 w-16"
+        alt="Temperature GIF"
+      />
       <h2>Current Temperature:</h2>
-      <h2 className="text-orange-500 fold-bold text-4xl">{temperature}°C</h2>
+      <h2 className="text-orange-500 font-bold text-4xl">{convertedTemp}°C</h2>
     </div>
   );
 }
