@@ -31,7 +31,7 @@ const weatherDataSlice = createSlice({
   name: "weatherData",
   initialState: {
     weatherData: null,
-    locations: "London",
+    locations: "Brazil",
   },
   reducers: {},
   extraReducers: (builder) => {
