@@ -7,7 +7,6 @@ function WeatherType({ weatherData }) {
   const weatherType =
     weatherData.locations[Object.keys(weatherData.locations)[0]]
       .currentConditions.icon;
-  console.log(weatherType);
 
   const getWeatherImages = {
     snow: "/images/gifs/snow.gif",

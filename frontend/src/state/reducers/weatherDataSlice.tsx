@@ -1,6 +1,14 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 
-export const changeLocation = createAction("weatherData/changeLocation");
+export const changeLocation = createAction(
+  "weatherData/changeLocation",
+  (newLocation) => ({
+    payload: newLocation,
+    meta: {
+      thunk: fetchWeatherData,
+    },
+  }),
+);
 
 export const fetchWeatherData = createAsyncThunk(
   "weatherData/fetchWeatherData",
@@ -17,9 +25,7 @@ export const fetchWeatherData = createAsyncThunk(
 
     try {
       const response = await fetch(url, options);
-      console.log(response);
       const result = await response.json();
-      console.log(result);
       return result;
     } catch (error) {
       console.error(error);
@@ -31,7 +37,7 @@ const weatherDataSlice = createSlice({
   name: "weatherData",
   initialState: {
     weatherData: null,
-    locations: "Brazil",
+    locations: "London",
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -45,7 +51,7 @@ const weatherDataSlice = createSlice({
       state.weatherData = null;
     });
     builder.addCase(changeLocation, (state, action) => {
-      state.weatherData.locations = action.payload;
+      state.locations = action.payload;
     });
   },
 });
