@@ -37,7 +37,7 @@ function WeatherType({ weatherData }) {
   getIcon(weatherType);
 
   return (
-    <div className="flex flex-col items-center text-center mb-10 text-xl">
+    <div className="flex flex-col items-center text-center text-xl">
       <img src={iconData} className="h-16 w-16" />
       <h2 className="font-bold">Current Weather:</h2>
       <h2 className="text-4xl font-bold text-orange-500">{weatherType}</h2>

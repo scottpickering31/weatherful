@@ -1,4 +1,4 @@
 export function formatTimeStamp(timeStamp: string) {
   const date = new Date(timeStamp);
-  return date.toTimeString();
+  return date.toLocaleTimeString();
 }

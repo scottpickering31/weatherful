@@ -17,7 +17,7 @@ function SearchBar() {
       <input
         type="search"
         name="searchbar"
-        className="rounded-2xl border-2 border-orange-500 outline-none w-50 p-2 laptop:w-96 desktop:w-96"
+        className="rounded-2xl border-2 border-orange-500 outline-none w-50 p-2 laptop:w-96 desktop:w-96 cursor-pointer"
         placeholder="Search by location..."
         onChange={(e) => setInputField(e.target.value)}
       />

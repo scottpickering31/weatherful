@@ -4,8 +4,7 @@ function Sunrise({ weatherData }) {
   const sunriseTime =
     weatherData.locations[Object.keys(weatherData.locations)[0]]
       .currentConditions.sunrise;
-
-  console.log(sunriseTime);
+  const sunriseTimeFormatted = sunriseTime.slice(0, 16);
 
   return (
     <div className="flex flex-row gap-2 items-center">
@@ -13,7 +12,9 @@ function Sunrise({ weatherData }) {
       <h3>
         Sunrise <span className="text-xl">↑</span>: <br />
         <span className="text-orange-500 font-bold">
-          {sunriseTime ? formatTimeStamp(sunriseTime) + " AM" : "Loading..."}
+          {sunriseTime
+            ? formatTimeStamp(sunriseTimeFormatted) + " AM"
+            : "Loading..."}
         </span>
       </h3>
     </div>

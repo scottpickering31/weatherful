@@ -5,7 +5,7 @@ function Sunset({ weatherData }) {
     weatherData.locations[Object.keys(weatherData.locations)[0]]
       .currentConditions.sunset;
 
-  console.log(sunsetTime);
+  const sunsetTimeFormatted = sunsetTime.slice(0, 16);
 
   return (
     <div className="flex flex-row gap-2 items-center">
@@ -13,7 +13,9 @@ function Sunset({ weatherData }) {
       <h3>
         Sunset <span className="text-xl">↓</span>: <br />
         <span className="text-orange-500 font-bold">
-          {sunsetTime ? formatTimeStamp(sunsetTime) + " PM" : "Loading..."}
+          {sunsetTime
+            ? formatTimeStamp(sunsetTimeFormatted) + " PM"
+            : "Loading..."}
         </span>
       </h3>
     </div>
