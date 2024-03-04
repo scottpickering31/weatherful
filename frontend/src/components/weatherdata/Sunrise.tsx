@@ -5,6 +5,8 @@ function Sunrise({ weatherData }) {
     weatherData.locations[Object.keys(weatherData.locations)[0]]
       .currentConditions.sunrise;
 
+  console.log(sunriseTime);
+
   return (
     <div className="flex flex-row gap-2 items-center">
       <img src="/images/gifs/sunrise.gif" alt="Sunrise GIF" />

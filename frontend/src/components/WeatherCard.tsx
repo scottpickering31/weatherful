@@ -11,7 +11,6 @@ import { fetchWeatherData } from "../state/reducers/weatherDataSlice";
 function WeatherCard() {
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weatherData.weatherData);
-  const iconData = useSelector((state) => state.iconData.iconData);
 
   useEffect(() => {
     dispatch(fetchWeatherData());
@@ -26,7 +25,7 @@ function WeatherCard() {
       {weatherData && (
         <div className="flex flex-row items-center w-full">
           <div className="border-r-2 p-5 flex flex-col gap-5 w-1/2">
-            <WeatherType weatherData={weatherData} iconData={iconData} />
+            <WeatherType weatherData={weatherData} />
             <Temperature weatherData={weatherData} />
           </div>
           <div className="p-5 w-1/2 text-center flex justify-around font-bold items-start flex-col gap-10">

@@ -2,8 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchWeatherData = createAsyncThunk(
   "weatherData/fetchWeatherData",
-  async (newLocation, { getState }) => {
-    const locations = newLocation || getState().weatherData.locations;
+  async (newLocation, { dispatch }) => {
+    const locations = newLocation || "London";
+    console.log(locations);
     const url = `https://visual-crossing-weather.p.rapidapi.com/forecast?aggregateHours=24&location=${locations}&contentType=json&shortColumnNames=0`;
     const options = {
       method: "GET",
@@ -28,7 +29,6 @@ const weatherDataSlice = createSlice({
   name: "weatherData",
   initialState: {
     weatherData: null,
-    locations: "London",
   },
   reducers: {},
   extraReducers: (builder) => {

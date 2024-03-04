@@ -48,7 +48,10 @@ function WindDirection({ weatherData }) {
       />
       <h3>
         Wind Direction:
-        <span className="text-orange-500 font-bold"> {windDigit}</span>
+        <span className="text-orange-500 font-bold">
+          <br />
+          {windDirection.wdir}° {windDigit}
+        </span>
       </h3>
     </div>
   );
