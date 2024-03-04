@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { changeLocation } from "../state/reducers/weatherDataSlice";
+import { fetchWeatherData } from "../state/reducers/weatherDataSlice";
 import { useState } from "react";
 
 function SearchBar() {
@@ -8,7 +8,7 @@ function SearchBar() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(changeLocation(locations));
+    dispatch(fetchWeatherData(locations));
     setLocations("");
   };
 

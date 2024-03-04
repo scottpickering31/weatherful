@@ -1,19 +1,9 @@
-import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
-
-export const changeLocation = createAction(
-  "weatherData/changeLocation",
-  (newLocation) => ({
-    payload: newLocation,
-    meta: {
-      thunk: fetchWeatherData,
-    },
-  }),
-);
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchWeatherData = createAsyncThunk(
   "weatherData/fetchWeatherData",
-  async (_, { getState }) => {
-    const locations = getState().weatherData.locations;
+  async (newLocation, { getState }) => {
+    const locations = newLocation || getState().weatherData.locations;
     const url = `https://visual-crossing-weather.p.rapidapi.com/forecast?aggregateHours=24&location=${locations}&contentType=json&shortColumnNames=0`;
     const options = {
       method: "GET",
@@ -29,6 +19,7 @@ export const fetchWeatherData = createAsyncThunk(
       return result;
     } catch (error) {
       console.error(error);
+      throw error;
     }
   },
 );
@@ -49,9 +40,6 @@ const weatherDataSlice = createSlice({
     });
     builder.addCase(fetchWeatherData.pending, (state) => {
       state.weatherData = null;
-    });
-    builder.addCase(changeLocation, (state, action) => {
-      state.locations = action.payload;
     });
   },
 });
