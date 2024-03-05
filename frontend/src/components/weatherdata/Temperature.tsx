@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function Temperature({ weatherData }) {
+function Temperature({ weatherData}) {
   const [convertedTemp, setConvertedTemp] = useState(0);
 
   useEffect(() => {
