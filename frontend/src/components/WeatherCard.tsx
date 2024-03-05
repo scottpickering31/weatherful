@@ -8,21 +8,35 @@ import WeatherType from "./weatherdata/WeatherType";
 import { useEffect } from "react";
 import { fetchWeatherData } from "../state/reducers/weatherDataSlice";
 import Skeleton from "react-loading-skeleton";
+import { format } from "date-fns";
 import "react-loading-skeleton/dist/skeleton.css";
 
 function WeatherCard() {
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weatherData.weatherData);
+  console.log(weatherData);
 
   useEffect(() => {
     dispatch(fetchWeatherData());
   }, []);
+
+  const setDate = () => {
+    const rawDate =
+      weatherData.locations[Object.keys(weatherData.locations)[0]]
+        .currentConditions.datetime;
+    const formattedDate = format(new Date(rawDate), "eee d MMMM y");
+
+    return formattedDate;
+  };
 
   return (
     <div className="border-4 border-slate-300 rounded-xl flex items-center">
       {weatherData ? (
         <div className="flex flex-row items-center">
           <div className="border-r-2 p-5 flex flex-col gap-5 w-1/2">
+            <div className="text-center">
+              <h2 className="font-semibold text-xl">{setDate()}</h2>
+            </div>
             <WeatherType weatherData={weatherData} />
             <Temperature weatherData={weatherData} />
           </div>
