@@ -9,7 +9,15 @@ function FutureForecastCard() {
 
   console.log(futureForecastData);
 
-  return <div></div>;
+  return (
+    <div>
+      {futureForecastData.map((data, index) => (
+        <p key={index}>{data.temp}</p>
+      ))}
+      <p>Future Forecast</p>
+      <p>{futureForecastData && futureForecastData[0].temp}</p>
+    </div>
+  );
 }
 
 export default FutureForecastCard;
