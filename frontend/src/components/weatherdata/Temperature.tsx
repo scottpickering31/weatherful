@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function Temperature({ weatherData}) {
+function Temperature({ weatherData }) {
   const [convertedTemp, setConvertedTemp] = useState(0);
 
   useEffect(() => {
@@ -8,7 +8,6 @@ function Temperature({ weatherData}) {
       const temperature =
         weatherData.locations[Object.keys(weatherData.locations)[0]]
           .currentConditions.temp;
-
       const fahrenheitToCelcius = ((Number(temperature) - 32) * 5) / 9;
       const celcius = fahrenheitToCelcius.toFixed(1);
       setConvertedTemp(celcius);
