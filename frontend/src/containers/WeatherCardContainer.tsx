@@ -1,8 +1,14 @@
+import ToggleTimeframe from "../components/ToggleTimeframe";
 import WeatherCard from "../components/WeatherCard";
 import { useSelector } from "react-redux";
+import HourlyWeatherCard from "../components/HourlyWeatherCard";
+import { setActiveTimeFrame } from "../state/reducers/toggleTimeframeSlice";
 
 function WeatherCardContainer() {
   const weatherData = useSelector((state) => state.weatherData.weatherData);
+  const activeTimeFrame = useSelector(
+    (state) => state.timeFrame.activeTimeFrame,
+  );
 
   const weatherLocation = weatherData
     ? Object.keys(weatherData.locations)[0]
@@ -20,8 +26,17 @@ function WeatherCardContainer() {
           <p>No city name available</p>
         )}
       </div>
+      {activeTimeFrame === "daily" ? (
+        <div>
+          <WeatherCard />
+        </div>
+      ) : (
+        <div>
+          <HourlyWeatherCard />
+        </div>
+      )}
       <div>
-        <WeatherCard />
+        <ToggleTimeframe />
       </div>
     </div>
   );

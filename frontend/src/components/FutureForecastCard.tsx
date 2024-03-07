@@ -16,7 +16,7 @@ function FutureForecastCard({ weatherData }) {
   );
 
   return (
-    <div className="rounded-xl flex items-center w-full ">
+    <div className="rounded-xl flex items-center w-full m-5 ">
       {futureForecastData.map((data, index) => (
         <div
           key={index}
