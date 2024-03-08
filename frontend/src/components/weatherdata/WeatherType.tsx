@@ -1,5 +1,3 @@
-// WeatherType.js
-
 import { useDispatch, useSelector } from "react-redux";
 import { setIconData } from "../../state/reducers/iconDataSlice";
 import weatherImages from "../../utils/formatWeatherImages";

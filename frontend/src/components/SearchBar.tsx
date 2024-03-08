@@ -1,14 +1,14 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchWeatherData } from "../state/reducers/weatherDataSlice";
-import { useState } from "react";
+import { setInputData } from "../state/reducers/inputDataSlice";
 
 function SearchBar() {
   const dispatch = useDispatch();
-  const [inputField, setInputField] = useState("");
+  const inputData = useSelector((state) => state.inputData.city);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(fetchWeatherData(inputField));
+    dispatch(fetchWeatherData(inputData));
   };
 
   return (
@@ -19,7 +19,7 @@ function SearchBar() {
         name="searchbar"
         className="rounded-2xl border-2 border-orange-500 outline-none w-50 p-2 laptop:w-96 desktop:w-96 cursor-pointer"
         placeholder="Search by location..."
-        onChange={(e) => setInputField(e.target.value)}
+        onChange={(e) => dispatch(setInputData(e.target.value))}
       />
       <button
         onClick={handleSubmit}

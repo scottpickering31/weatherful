@@ -14,7 +14,6 @@ import "react-loading-skeleton/dist/skeleton.css";
 function WeatherCard() {
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weatherData.weatherData);
-  console.log(weatherData);
 
   useEffect(() => {
     dispatch(fetchWeatherData());

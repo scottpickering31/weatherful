@@ -5,14 +5,12 @@ function FutureForecastCard({ weatherData }) {
   const futureForecastData =
     weatherData.locations[Object.keys(weatherData.locations)[0]].values;
 
-  console.log(futureForecastData);
-
   const formattedDates = futureForecastData.map((data) =>
-    formatDate(data.datetime),
+    formatDate(data.datetime)
   );
 
   const formattedTemperature = futureForecastData.map((data) =>
-    formatTemperature(data.temp),
+    formatTemperature(data.temp)
   );
 
   return (
@@ -36,36 +34,3 @@ function FutureForecastCard({ weatherData }) {
 }
 
 export default FutureForecastCard;
-
-// // ParentComponent.js
-// import React from "react";
-// import WeatherComponent from "./WeatherComponent";
-
-// const ParentComponent = ({ weatherData }) => {
-//   const futureForecastData =
-//     weatherData.locations[Object.keys(weatherData.locations)[0]].values;
-
-//   return (
-//     <div>
-//       {futureForecastData.map((data, index) => (
-//         <WeatherComponent key={index} data={data} />
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default ParentComponent;
-
-// // WeatherComponent.js
-// import React from "react";
-
-// const WeatherComponent = ({ data }) => {
-//   return (
-//     <div>
-//       <p>Temperature: {data.temp}</p>
-//       <p>Conditions: {data.conditions}</p>
-//     </div>
-//   );
-// };
-
-// export default WeatherComponent;

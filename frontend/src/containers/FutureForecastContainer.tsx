@@ -4,10 +4,6 @@ import { useSelector } from "react-redux";
 function FutureForecastContainer() {
   const weatherData = useSelector((state) => state.weatherData.weatherData);
 
-  if (weatherData) {
-    console.log(weatherData);
-  }
-
   return (
     <div className="flex justify-center items-center h-2/3 w-full flex-col mt-10">
       <h1 className="text-center text-3xl underline underline-offset-8 ">

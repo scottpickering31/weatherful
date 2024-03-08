@@ -1,10 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import Sunset from "./weatherdata/Sunset";
-import Sunrise from "./weatherdata/Sunrise";
-import WindDirection from "./weatherdata/WindDirection";
-import WindSpeed from "./weatherdata/WindSpeed";
-import Temperature from "./weatherdata/Temperature";
-import WeatherType from "./weatherdata/WeatherType";
 import { useEffect } from "react";
 import { fetchWeatherData } from "../state/reducers/weatherDataSlice";
 import Skeleton from "react-loading-skeleton";
@@ -14,7 +8,6 @@ import "react-loading-skeleton/dist/skeleton.css";
 function HourlyWeatherCard() {
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weatherData.weatherData);
-  console.log(weatherData);
 
   useEffect(() => {
     dispatch(fetchWeatherData());
@@ -37,14 +30,10 @@ function HourlyWeatherCard() {
             <div className="text-center">
               <h2 className="font-semibold text-xl">{setDate()}</h2>
             </div>
-            <WeatherType weatherData={weatherData} />
             <p>Gerrofff</p>
           </div>
           <div className="p-5 w-1/2 text-center flex justify-around font-bold items-start flex-col gap-10">
-            <Sunrise weatherData={weatherData} />
-            <Sunset weatherData={weatherData} />
-            <WindDirection weatherData={weatherData} />
-            <WindSpeed weatherData={weatherData} />
+            <p>Data</p>
           </div>
         </div>
       ) : (

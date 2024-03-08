@@ -2,9 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchWeatherData = createAsyncThunk(
   "weatherData/fetchWeatherData",
-  async (newLocation) => {
-    const locations = newLocation || "London";
-    const url = `https://visual-crossing-weather.p.rapidapi.com/forecast?aggregateHours=24&location=${locations}&contentType=json&shortColumnNames=0`;
+  async (_, { getState }) => {
+    const state = getState();
+    const activeTimeFrame = state.timeFrame.activeTimeFrame;
+    const locations = state.inputData.city;
+    const time = activeTimeFrame === "daily" ? 24 : 1;
+    const url = `https://visual-crossing-weather.p.rapidapi.com/forecast?aggregateHours=${time}&location=${locations}&contentType=json&shortColumnNames=0`;
     const options = {
       method: "GET",
       headers: {
@@ -16,6 +19,7 @@ export const fetchWeatherData = createAsyncThunk(
     try {
       const response = await fetch(url, options);
       const result = await response.json();
+      console.log(result);
       return result;
     } catch (error) {
       console.error(error);
