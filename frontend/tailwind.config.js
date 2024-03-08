@@ -10,7 +10,17 @@ export default {
       desktop: "1280px",
       widescreen: "1440px",
     },
-    extend: {},
+    extend: {
+      height: {
+        tiny: "30vh",
+        little: "50vh",
+        small: "70vh",
+        medium: "90vh",
+        large: "110vh",
+        extral: "125vh",
+        tariff: "6.5rem",
+      },
+    },
   },
   plugins: [],
 };

@@ -23,7 +23,7 @@ function HourlyWeatherCard() {
   };
 
   return (
-    <div className="border-4 border-slate-300 rounded-xl flex items-center">
+    <div className="border-4 border-slate-300 rounded-xl flex items-center h-small w-full">
       {weatherData ? (
         <div className="flex flex-row items-center">
           <div className="border-r-2 p-5 flex flex-col gap-5 w-1/2">
@@ -42,7 +42,7 @@ function HourlyWeatherCard() {
             <Skeleton height={80} width={160} />
             <Skeleton height={80} width={160} />
           </div>
-          <div className="p-5 text-center flex justify-around font-bold items-start flex-col gap-8">
+          <div className="p-5 w-1/2 text-center flex justify-around font-bold items-start flex-col gap-8">
             <Skeleton height={20} width={160} />
             <Skeleton height={20} width={160} />
             <Skeleton height={20} width={160} />
