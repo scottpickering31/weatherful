@@ -1,4 +1,4 @@
-import WeatherCard from "../components/WeatherCard";
+import DailyWeatherCard from "../components/DailyWeatherCard";
 import { useSelector } from "react-redux";
 import HourlyWeatherCard from "../components/HourlyWeatherCard";
 import ToggleHours from "../components/buttons/ToggleHours";
@@ -22,12 +22,12 @@ function WeatherCardContainer() {
             {weatherLocation}
           </h1>
         ) : (
-          <p className="text-3xl">No city name available</p>
+          <p className="text-3xl">Loading Forecast...</p>
         )}
       </div>
       {activeTimeFrame === "daily" ? (
         <div className="flex items-center justify-center">
-          <WeatherCard />
+          <DailyWeatherCard />
         </div>
       ) : (
         <div>

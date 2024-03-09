@@ -11,7 +11,7 @@ import Skeleton from "react-loading-skeleton";
 import { format } from "date-fns";
 import "react-loading-skeleton/dist/skeleton.css";
 
-function WeatherCard() {
+function DailyWeatherCard() {
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weatherData.weatherData);
 
@@ -64,4 +64,4 @@ function WeatherCard() {
   );
 }
 
-export default WeatherCard;
+export default DailyWeatherCard;

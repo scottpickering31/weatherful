@@ -13,13 +13,23 @@ function HourlyWeatherCard() {
     dispatch(fetchWeatherData());
   }, []);
 
-  const setDate = () => {
-    const rawDate =
-      weatherData.locations[Object.keys(weatherData.locations)[0]]
-        .currentConditions.datetime;
-    const formattedDate = format(new Date(rawDate), "eee d MMMM y");
+  const hourlyData = weatherData
+    ? weatherData.locations[Object.keys(weatherData.locations)[0]].values
+    : [];
+  console.log(hourlyData);
 
-    return formattedDate;
+  const setDate = () => {
+    const rawDate = weatherData
+      ? weatherData.locations[Object.keys(weatherData.locations)[0]]
+          .currentConditions.datetime
+      : null;
+
+    if (rawDate) {
+      const formattedDate = format(new Date(rawDate), "eee d MMMM y");
+      return formattedDate;
+    }
+
+    return "No Date";
   };
 
   return (
