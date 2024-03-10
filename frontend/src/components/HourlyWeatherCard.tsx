@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import "react-loading-skeleton/dist/skeleton.css";
 
 function HourlyWeatherCard() {
-  const [counter, setCounter] = useState(1);
+  const [counter, setCounter] = useState(0);
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weatherData.weatherData);
 
@@ -50,12 +50,12 @@ function HourlyWeatherCard() {
     <div className="border-4 border-slate-300 rounded-xl flex flex-col items-center h-small w-full">
       {hourlyData ? (
         hourlyDataMap.map((data, index) => (
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center" key={index}>
             <div className="text-center">
               <h2 className="font-semibold text-xl">{setDate()}</h2>
             </div>
             <div className="text-center">
-              <h3 className="font-semibold text-xl">Time</h3>
+              <h3 className="font-semibold text-xl">{data.datetimeStr}</h3>
             </div>
             <div className="p-5 flex flex-row gap-5 w-1/2">
               <div>
