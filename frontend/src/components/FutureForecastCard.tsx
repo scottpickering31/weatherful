@@ -6,15 +6,15 @@ function FutureForecastCard({ weatherData }) {
     weatherData.locations[Object.keys(weatherData.locations)[0]].values;
 
   const formattedDates = futureForecastData.map((data) =>
-    formatDate(data.datetime)
+    formatDate(data.datetime),
   );
 
   const formattedTemperature = futureForecastData.map((data) =>
-    formatTemperature(data.temp)
+    formatTemperature(data.temp),
   );
 
   return (
-    <div className="rounded-xl flex items-center w-full m-5 ">
+    <div className="rounded-xl flex items-center w-full m-2">
       {futureForecastData.map((data, index) => (
         <div
           key={index}

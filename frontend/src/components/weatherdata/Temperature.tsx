@@ -1,19 +1,4 @@
-import { useState, useEffect } from "react";
-
-function Temperature({ weatherData }) {
-  const [convertedTemp, setConvertedTemp] = useState(0);
-
-  useEffect(() => {
-    if (weatherData && Object.keys(weatherData.locations).length > 0) {
-      const temperature =
-        weatherData.locations[Object.keys(weatherData.locations)[0]]
-          .currentConditions.temp;
-      const fahrenheitToCelcius = ((Number(temperature) - 32) * 5) / 9;
-      const celcius = fahrenheitToCelcius.toFixed(1);
-      setConvertedTemp(celcius);
-    }
-  }, [weatherData]);
-
+function Temperature({ convertedTemp }) {
   return (
     <div className="flex flex-col items-center gap-2 text-xl text-center font-bold">
       <img

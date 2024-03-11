@@ -4,7 +4,7 @@ import FutureForecastContainer from "./containers/FutureForecastContainer";
 
 function App() {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center p-10">
       <div className="text-center mt-20 flex flex-row justify-center gap-3">
         <h1 className="text-slate-600 text-6xl mb-20 underline underline-offset-8 relative">
           Weather

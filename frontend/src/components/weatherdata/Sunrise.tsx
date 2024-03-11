@@ -1,20 +1,13 @@
 import { formatTimeStamp } from "../../utils/formatTimeStamp";
 
-function Sunrise({ weatherData }) {
-  const sunriseTime =
-    weatherData.locations[Object.keys(weatherData.locations)[0]]
-      .currentConditions.sunrise;
-  const sunriseTimeFormatted = sunriseTime.slice(0, 16);
-
+function Sunrise({ setSunriseTime }) {
   return (
     <div className="flex flex-row gap-2 items-center">
       <img src="/images/gifs/sunrise.gif" alt="Sunrise GIF" />
       <h3>
         Sunrise <span className="text-xl">↑</span>: <br />
         <span className="text-orange-500 font-bold">
-          {sunriseTime
-            ? formatTimeStamp(sunriseTimeFormatted) + " AM"
-            : "Loading..."}
+          {formatTimeStamp(setSunriseTime()) + " AM"}
         </span>
       </h3>
     </div>
