@@ -1,20 +1,18 @@
-import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import { fetchWeatherData } from "../state/reducers/weatherDataSlice";
+import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { format } from "date-fns";
+import { useSelector } from "react-redux";
 import "react-loading-skeleton/dist/skeleton.css";
 
 function HourlyWeatherCard({ weatherData }) {
   const [counter, setCounter] = useState(0);
   const [hideCounter, setHideCounter] = useState("");
-  const dispatch = useDispatch();
+  const activeData = useSelector((state) => state.timeFrame.activeTimeFrame);
 
-  useEffect(() => {
-    dispatch(fetchWeatherData());
-  }, []);
-
+  console.log(activeData);
   const hourlyData = weatherData ? weatherData.values : null;
+
+  console.log(hourlyData);
 
   const hourlyDataMap = hourlyData
     ? hourlyData.slice(0 + counter, 1 + counter)

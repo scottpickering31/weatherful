@@ -8,7 +8,7 @@ import ToggleHours from "../components/buttons/ToggleHours";
 function WeatherCardContainer() {
   const dispatch = useDispatch();
   const fetchedStateData = useSelector(
-    (state) => state.weatherData.weatherData,
+    (state) => state.weatherData.weatherData
   );
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function WeatherCardContainer() {
   console.log(weatherData && weatherData.id);
 
   const activeTimeFrame = useSelector(
-    (state) => state.timeFrame.activeTimeFrame,
+    (state) => state.timeFrame.activeTimeFrame
   );
 
   return (
@@ -31,7 +31,7 @@ function WeatherCardContainer() {
         <h2 className="mb-5 text-3xl">Today's Weather Forecast in:</h2>
         {weatherData ? (
           <h1 className="text-orange-500 underline underline-offset-1 text-4xl">
-            {weatherData.id}
+            {weatherData.id.toUpperCase()}
           </h1>
         ) : (
           <p className="text-3xl">Loading Forecast...</p>
@@ -42,11 +42,11 @@ function WeatherCardContainer() {
           <DailyWeatherCard weatherData={weatherData} />
         </div>
       ) : weatherData && activeTimeFrame === "hourly" ? (
-        <div className="">
+        <div>
           <HourlyWeatherCard weatherData={weatherData} />
         </div>
       ) : null}
-      <div>
+      <div className="p-3">
         <ToggleHours />
       </div>
     </div>

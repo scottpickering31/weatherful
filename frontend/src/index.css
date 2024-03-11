@@ -7,10 +7,6 @@ body {
   background-color: #a2e5e7;
 }
 
-h1 {
-  font-family: "Pacifico", cursive;
-}
-
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
