@@ -1,21 +1,22 @@
 import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { format } from "date-fns";
-import { useSelector } from "react-redux";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useSelector } from "react-redux";
 
 function HourlyWeatherCard({ weatherData }) {
   const [counter, setCounter] = useState(0);
   const [hideCounter, setHideCounter] = useState("");
-  const activeData = useSelector((state) => state.timeFrame.activeTimeFrame);
+  const toggleTimeFrame = useSelector(
+    (state) => state.timeFrame.activeTimeFrame
+  );
 
-  console.log(activeData);
   const hourlyData = weatherData ? weatherData.values : null;
 
   console.log(hourlyData);
 
   const hourlyDataMap = hourlyData
-    ? hourlyData.slice(0 + counter, 1 + counter)
+    ? hourlyData.slice(counter, counter + 1)
     : null;
 
   console.log(hourlyDataMap);
@@ -46,7 +47,7 @@ function HourlyWeatherCard({ weatherData }) {
 
   return (
     <div className="border-4 border-slate-300 rounded-xl flex flex-col items-center h-small">
-      {hourlyData ? (
+      {hourlyData && toggleTimeFrame ? (
         hourlyDataMap.map((data, index) => (
           <div className="flex flex-col items-center" key={index}>
             <div className="text-center">
