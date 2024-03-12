@@ -14,14 +14,14 @@ function WeatherCardContainer() {
 
   useEffect(() => {
     dispatch(fetchWeatherData());
-    dispatch(setFutureWeatherData(fetchedStateData));
+    dispatch(setFutureWeatherData(fetchedStateData))
   }, []);
 
   const weatherData =
     fetchedStateData &&
     fetchedStateData.locations[Object.keys(fetchedStateData.locations)[0]];
 
-  console.log(fetchedStateData, weatherData);
+  console.log(weatherData && weatherData.id);
 
   const activeTimeFrame = useSelector(
     (state) => state.timeFrame.activeTimeFrame
