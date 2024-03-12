@@ -13,8 +13,6 @@ function ToggleHours() {
     dispatch(fetchWeatherData());
   }, [activeTimeFrame]);
 
-  console.log(activeTimeFrame);
-
   const dailyClassName =
     activeTimeFrame === "daily"
       ? "bg-orange-500 h-full w-1/2 overflow-hidden"

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { fetchWeatherData } from "../state/reducers/weatherDataSlice";
 import HourlyWeatherCard from "../components/HourlyWeatherCard";
 import ToggleHours from "../components/buttons/ToggleHours";
+import { setFutureWeatherData } from "../state/reducers/futureWeatherData";
 
 function WeatherCardContainer() {
   const dispatch = useDispatch();
@@ -13,13 +14,14 @@ function WeatherCardContainer() {
 
   useEffect(() => {
     dispatch(fetchWeatherData());
+    dispatch(setFutureWeatherData(fetchedStateData));
   }, []);
 
   const weatherData =
     fetchedStateData &&
     fetchedStateData.locations[Object.keys(fetchedStateData.locations)[0]];
 
-  console.log(weatherData && weatherData.id);
+  console.log(fetchedStateData, weatherData);
 
   const activeTimeFrame = useSelector(
     (state) => state.timeFrame.activeTimeFrame
@@ -34,15 +36,15 @@ function WeatherCardContainer() {
             {weatherData.id.toUpperCase()}
           </h1>
         ) : (
-          <p className="text-3xl">Loading Forecast...</p>
+          <p className="text-3xl h-small w-small">Loading Forecast...</p>
         )}
       </div>
       {weatherData && activeTimeFrame === "daily" ? (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center h-small w-small">
           <DailyWeatherCard weatherData={weatherData} />
         </div>
       ) : weatherData && activeTimeFrame === "hourly" ? (
-        <div>
+        <div className="h-small w-small">
           <HourlyWeatherCard weatherData={weatherData} />
         </div>
       ) : null}

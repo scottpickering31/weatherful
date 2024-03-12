@@ -20,10 +20,6 @@ function DailyWeatherCard({ weatherData }) {
   const [windArrow, setWindArrow] = useState("");
   const iconData = useSelector((state) => state.iconData.iconData);
 
-  if (weatherData) {
-    console.log(weatherData);
-  }
-
   // Logic for WeatherDate Component
 
   const setDate = () => {
@@ -113,7 +109,7 @@ function DailyWeatherCard({ weatherData }) {
   const windSpeed = weatherData.currentConditions.wspd;
 
   return (
-    <div className="border-4 border-slate-300 rounded-xl flex items-center w-tiny justify-center">
+    <div className="border-4 border-slate-300 rounded-xl flex items-center h-small w-small justify-center">
       {weatherData ? (
         <div className="flex flex-col items-center w-full">
           <div className="p-5 underline underline-offset-4 w-full">
@@ -137,7 +133,7 @@ function DailyWeatherCard({ weatherData }) {
           </div>
         </div>
       ) : (
-        <div className="flex flex-row items-center m-12">
+        <div className="flex flex-row items-center m-12 h-small w-small">
           <div className="p-5 flex flex-col gap-10 w-1/2">
             <Skeleton height={80} width={160} />
             <Skeleton height={80} width={160} />

@@ -46,7 +46,7 @@ function HourlyWeatherCard({ weatherData }) {
   };
 
   return (
-    <div className="border-4 border-slate-300 rounded-xl flex flex-col items-center h-small">
+    <div className="border-4 border-slate-300 rounded-xl flex flex-col items-center h-small w-small">
       {hourlyData && toggleTimeFrame ? (
         hourlyDataMap.map((data, index) => (
           <div className="flex flex-col items-center" key={index}>

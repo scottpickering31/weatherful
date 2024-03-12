@@ -3,6 +3,7 @@ import weatherDataSlice from "../reducers/weatherDataSlice";
 import iconDataSlice from "../reducers/iconDataSlice";
 import toggleTimeframeSlice from "../reducers/toggleTimeframeSlice";
 import inputDataSlice from "../reducers/inputDataSlice";
+import futureWeatherDataSlice from "../reducers/futureWeatherData";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     iconData: iconDataSlice,
     timeFrame: toggleTimeframeSlice,
     inputData: inputDataSlice,
+    futureWeatherData: futureWeatherDataSlice,
   },
 });
 
