@@ -17,7 +17,7 @@ function SearchBar() {
 
   return (
     <div className="flex flex-row justify-center items-center mb-5 mt-3 px-5 gap-2">
-      <img src="/images/placeholder-image.webp" className="h-10 w-10" />
+      <img src="/images/icons/magnifying-glass.svg" className="h-10 w-10" />
       <input
         type="search"
         name="searchbar"

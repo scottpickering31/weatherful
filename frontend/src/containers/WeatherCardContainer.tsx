@@ -11,7 +11,7 @@ import ToggleHours from "../components/buttons/ToggleHours";
 function WeatherCardContainer() {
   const dispatch = useDispatch();
   const fetchedStateData = useSelector(
-    (state) => state.weatherData.weatherData,
+    (state) => state.weatherData.weatherData
   );
 
   console.log(fetchedStateData);
@@ -30,7 +30,7 @@ function WeatherCardContainer() {
   console.log(weatherData);
 
   const activeTimeFrame = useSelector(
-    (state) => state.timeFrame.activeTimeFrame,
+    (state) => state.timeFrame.activeTimeFrame
   );
 
   return (
@@ -38,9 +38,12 @@ function WeatherCardContainer() {
       <div className="flex flex-col items-center mb-10 text-center">
         <h2 className="mb-5 text-3xl">Today's Weather Forecast in:</h2>
         {weatherData ? (
-          <h1 className="text-orange-500 underline underline-offset-1 text-4xl">
-            {weatherData.id.toUpperCase()}
-          </h1>
+          <div className="flex flex-row items-center gap-5">
+            <h1 className="text-orange-500 underline underline-offset-1 text-4xl">
+              {weatherData.id.toUpperCase()}
+            </h1>
+            <img src="/images/icons/star.svg" className="w-10 h-10" />
+          </div>
         ) : (
           <p className="text-3xl h-small w-small">Loading Forecast...</p>
         )}
