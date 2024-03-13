@@ -64,11 +64,17 @@ const weatherDataSlice = createSlice({
     builder.addCase(fetchWeatherData.fulfilled, (state, action) => {
       state.weatherData = action.payload;
     });
+    builder.addCase(fetchWeatherData.pending, (state) => {
+      state.weatherData = null;
+    });
     builder.addCase(fetchWeatherData.rejected, (state) => {
       state.weatherData = null;
     });
     builder.addCase(fetchFutureForecastData.fulfilled, (state, action) => {
       state.futureWeatherData = action.payload;
+    });
+    builder.addCase(fetchFutureForecastData.pending, (state) => {
+      state.futureWeatherData = null;
     });
     builder.addCase(fetchFutureForecastData.rejected, (state) => {
       state.futureWeatherData = null;
