@@ -4,17 +4,19 @@ import { useEffect } from "react";
 import { fetchWeatherData } from "../state/reducers/weatherDataSlice";
 import HourlyWeatherCard from "../components/HourlyWeatherCard";
 import ToggleHours from "../components/buttons/ToggleHours";
-import { setFutureWeatherData } from "../state/reducers/futureWeatherData";
+import { setFutureWeatherData } from "../state/reducers/weatherDataSlice";
 
 function WeatherCardContainer() {
   const dispatch = useDispatch();
   const fetchedStateData = useSelector(
-    (state) => state.weatherData.weatherData
+    (state) => state.weatherData.weatherData,
   );
+
+  console.log(fetchedStateData);
 
   useEffect(() => {
     dispatch(fetchWeatherData());
-    dispatch(setFutureWeatherData(fetchedStateData))
+    dispatch(setFutureWeatherData(fetchedStateData));
   }, []);
 
   const weatherData =
@@ -24,7 +26,7 @@ function WeatherCardContainer() {
   console.log(weatherData && weatherData.id);
 
   const activeTimeFrame = useSelector(
-    (state) => state.timeFrame.activeTimeFrame
+    (state) => state.timeFrame.activeTimeFrame,
   );
 
   return (

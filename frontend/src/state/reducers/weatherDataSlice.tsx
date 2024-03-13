@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import futureWeatherData from "./futureWeatherData";
 
 export const fetchWeatherData = createAsyncThunk(
   "weatherData/fetchWeatherData",
@@ -24,15 +25,20 @@ export const fetchWeatherData = createAsyncThunk(
       console.error(error);
       throw error;
     }
-  }
+  },
 );
 
 const weatherDataSlice = createSlice({
   name: "weatherData",
   initialState: {
     weatherData: null,
+    futureWeatherData: null,
   },
-  reducers: {},
+  reducers: {
+    setFutureWeatherData: (state, action) => {
+      state.futureWeatherData = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchWeatherData.fulfilled, (state, action) => {
       state.weatherData = action.payload;
@@ -46,4 +52,5 @@ const weatherDataSlice = createSlice({
   },
 });
 
+export const { setFutureWeatherData } = weatherDataSlice.actions;
 export default weatherDataSlice.reducer;

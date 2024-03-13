@@ -2,12 +2,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setActiveTimeFrame } from "../../state/reducers/toggleTimeframeSlice";
 import { fetchWeatherData } from "../../state/reducers/weatherDataSlice";
-import { setFutureWeatherData } from "../../state/reducers/futureWeatherData";
+import { setFutureWeatherData } from "../../state/reducers/weatherDataSlice";
 
 function ToggleHours() {
   const dispatch = useDispatch();
   const activeTimeFrame = useSelector(
-    (state) => state.timeFrame.activeTimeFrame
+    (state) => state.timeFrame.activeTimeFrame,
   );
   const weatherData = useSelector((state) => state.weatherData.weatherData);
 
