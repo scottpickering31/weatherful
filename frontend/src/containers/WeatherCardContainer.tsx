@@ -1,10 +1,12 @@
-import DailyWeatherCard from "../components/DailyWeatherCard";
-import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchWeatherData } from "../state/reducers/weatherDataSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchWeatherData,
+  fetchFutureForecastData,
+} from "../state/reducers/weatherDataSlice";
+import DailyWeatherCard from "../components/DailyWeatherCard";
 import HourlyWeatherCard from "../components/HourlyWeatherCard";
 import ToggleHours from "../components/buttons/ToggleHours";
-import { setFutureWeatherData } from "../state/reducers/weatherDataSlice";
 
 function WeatherCardContainer() {
   const dispatch = useDispatch();
@@ -14,16 +16,18 @@ function WeatherCardContainer() {
 
   console.log(fetchedStateData);
 
+  // Fetch weather data when component mounts or activeTimeFrame changes
   useEffect(() => {
     dispatch(fetchWeatherData());
-    dispatch(setFutureWeatherData(fetchedStateData));
+    dispatch(fetchFutureForecastData());
   }, []);
 
+  // Render weather data based on activeTimeFrame
   const weatherData =
     fetchedStateData &&
     fetchedStateData.locations[Object.keys(fetchedStateData.locations)[0]];
 
-  console.log(weatherData && weatherData.id);
+  console.log(weatherData);
 
   const activeTimeFrame = useSelector(
     (state) => state.timeFrame.activeTimeFrame,

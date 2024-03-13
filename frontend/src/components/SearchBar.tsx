@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchWeatherData } from "../state/reducers/weatherDataSlice";
+import {
+  fetchWeatherData,
+  fetchFutureForecastData,
+} from "../state/reducers/weatherDataSlice";
 import { setInputData } from "../state/reducers/inputDataSlice";
 
 function SearchBar() {
@@ -9,6 +12,7 @@ function SearchBar() {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(fetchWeatherData(inputData));
+    dispatch(fetchFutureForecastData(inputData));
   };
 
   return (

@@ -1,16 +1,19 @@
 import { formatDate } from "../utils/formateDate";
 import { formatTemperature } from "../utils/formatTemperature";
 
-function FutureForecastCard({ weatherData }) {
+function FutureForecastCard({ futureWeatherData }) {
   const futureForecastData =
-    weatherData.locations[Object.keys(weatherData.locations)[0]].values;
+    futureWeatherData.locations[Object.keys(futureWeatherData.locations)[0]]
+      .values;
+
+  console.log(futureForecastData);
 
   const formattedDates = futureForecastData.map((data) =>
-    formatDate(data.datetime)
+    formatDate(data.datetime),
   );
 
   const formattedTemperature = futureForecastData.map((data) =>
-    formatTemperature(data.temp)
+    formatTemperature(data.temp),
   );
 
   return (
