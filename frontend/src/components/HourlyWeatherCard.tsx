@@ -8,7 +8,7 @@ function HourlyWeatherCard({ weatherData }) {
   const [counter, setCounter] = useState(0);
   const [hideCounter, setHideCounter] = useState("");
   const toggleTimeFrame = useSelector(
-    (state) => state.timeFrame.activeTimeFrame
+    (state) => state.timeFrame.activeTimeFrame,
   );
 
   const hourlyData = weatherData ? weatherData.values : null;
