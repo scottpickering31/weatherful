@@ -3,9 +3,36 @@ import App from "./App.tsx";
 import { store } from "./state/store/store.tsx";
 import { Provider } from "react-redux";
 import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import LoginPage from "./pages/loginpage.tsx";
+import SignupPage from "./pages/signuppage.tsx";
+import ErrorPage from "./pages/errorpage.tsx";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/signup",
+    element: <SignupPage />,
+    errorElement: <ErrorPage />,
+  },
+
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/weather",
+    element: <App />,
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
-    <App />
+    <RouterProvider router={router}>
+      <App />
+    </RouterProvider>
   </Provider>
 );
