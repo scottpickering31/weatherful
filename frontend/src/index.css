@@ -5,6 +5,8 @@
 body {
   font-family: "Kanit", sans-serif;
   background-color: #a2e5e7;
+  margin: 0;
+  padding: 0;
 }
 
 /* width */

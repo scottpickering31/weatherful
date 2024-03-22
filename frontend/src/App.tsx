@@ -1,4 +1,3 @@
-import "./App.css";
 import SearchContainer from "./containers/SearchContainer";
 import FutureForecastContainer from "./containers/FutureForecastContainer";
 import NavBar from "./components/NavBar";
@@ -9,7 +8,7 @@ function App() {
   const loggedInToggle = useSelector((state) => state.loggedIn.loggedIn);
 
   return (
-    <div className="flex flex-col items-center p-10">
+    <div className="flex flex-col items-center p-10 h-full">
       {loggedInToggle ? (
         <div className="text-center mt-20 flex flex-row justify-center gap-3">
           <NavBar />
