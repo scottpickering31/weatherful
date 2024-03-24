@@ -7,11 +7,10 @@ import {
 import DailyWeatherCard from "../components/DailyWeatherCard";
 import HourlyWeatherCard from "../components/HourlyWeatherCard";
 import ToggleHours from "../components/buttons/ToggleHours";
-import { fetchWeatherDataResponse } from "../types/fetchedApiDataTypes";
 
 function WeatherCardContainer() {
   const dispatch = useAppDispatch();
-  const fetchedStateData: fetchWeatherDataResponse | null = useAppSelector(
+  const fetchedStateData = useAppSelector(
     (state) => state.weatherData.weatherData
   );
   const activeTimeFrame = useAppSelector(
