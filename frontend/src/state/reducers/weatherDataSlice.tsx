@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { RootState } from "@reduxjs/toolkit/query";
-
+import { RootState } from "../store/store";
 // Async thunk for fetching current weather data
 export const fetchWeatherData = createAsyncThunk(
   "weatherData/fetchWeatherData",
@@ -47,6 +46,7 @@ export const fetchFutureForecastData = createAsyncThunk(
     try {
       const response = await fetch(url, options);
       const result = await response.json();
+      console.log(result);
       return result;
     } catch (error) {
       console.error(error);
