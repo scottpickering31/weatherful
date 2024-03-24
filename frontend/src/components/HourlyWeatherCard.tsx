@@ -2,13 +2,13 @@ import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { format } from "date-fns";
 import "react-loading-skeleton/dist/skeleton.css";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../hooks/useReduxState";
 
 function HourlyWeatherCard({ weatherData }) {
   const [counter, setCounter] = useState(0);
   const [hideCounter, setHideCounter] = useState("");
-  const toggleTimeFrame = useSelector(
-    (state) => state.timeFrame.activeTimeFrame,
+  const toggleTimeFrame = useAppSelector(
+    (state) => state.timeFrame.activeTimeFrame
   );
 
   const hourlyData = weatherData ? weatherData.values : null;

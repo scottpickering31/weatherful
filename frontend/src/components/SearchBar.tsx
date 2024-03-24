@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../hooks/useReduxState";
 import {
   fetchWeatherData,
   fetchFutureForecastData,
@@ -6,8 +6,8 @@ import {
 import { setInputData } from "../state/reducers/inputDataSlice";
 
 function SearchBar() {
-  const dispatch = useDispatch();
-  const inputData = useSelector((state) => state.inputData.city);
+  const dispatch = useAppDispatch();
+  const inputData = useAppSelector((state) => state.inputData.city);
 
   const handleSubmit = (event) => {
     event.preventDefault();
