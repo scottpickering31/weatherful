@@ -8,8 +8,8 @@ const loggedInSlice = createSlice({
   name: "loggedIn",
   initialState,
   reducers: {
-    setLoggedIn: (state, action) => {
-      state.loggedIn = action.payload;
+    setLoggedIn: (state) => {
+      state.loggedIn = !state.loggedIn;
     },
   },
 });

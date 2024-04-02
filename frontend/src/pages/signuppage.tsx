@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 function SignupPage() {
   const {
@@ -48,8 +49,16 @@ function SignupPage() {
         <div>
           <input
             type="submit"
-            className="mt-5 border rounded-2xl text-2xl font-bold p-5 shadow-2xl active:scale-90 hover:bg-slate-200"
+            className="cursor-pointer mt-5 border rounded-2xl text-2xl font-bold p-5 shadow-2xl active:scale-90 hover:bg-slate-200"
           />
+        </div>
+        <div className="flex flex-col gap-2 mt-5">
+          <p>Already have an account?</p>
+          <Link to="/login">
+            <p className="text-xl text-blue-600 underline underline-offset-4 font-bold cursor-pointer">
+              Login
+            </p>
+          </Link>
         </div>
       </form>
     </div>
