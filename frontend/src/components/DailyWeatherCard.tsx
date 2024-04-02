@@ -11,14 +11,14 @@ import { format } from "date-fns";
 import "react-loading-skeleton/dist/skeleton.css";
 import { setIconData } from "../state/reducers/iconDataSlice";
 import weatherImages from "../utils/formatWeatherImages";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../hooks/useReduxState";
 
 function DailyWeatherCard({ weatherData }) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [convertedTemp, setConvertedTemp] = useState(0);
   const [windDigit, setWindDigit] = useState("");
   const [windArrow, setWindArrow] = useState("");
-  const iconData = useSelector((state) => state.iconData.iconData);
+  const iconData = useAppSelector((state) => state.iconData.iconData);
 
   // Logic for WeatherDate Component
 

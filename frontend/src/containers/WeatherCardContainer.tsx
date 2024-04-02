@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../hooks/useReduxState";
 import {
   fetchWeatherData,
   fetchFutureForecastData,
@@ -9,9 +9,12 @@ import HourlyWeatherCard from "../components/HourlyWeatherCard";
 import ToggleHours from "../components/buttons/ToggleHours";
 
 function WeatherCardContainer() {
-  const dispatch = useDispatch();
-  const fetchedStateData = useSelector(
+  const dispatch = useAppDispatch();
+  const fetchedStateData = useAppSelector(
     (state) => state.weatherData.weatherData
+  );
+  const activeTimeFrame = useAppSelector(
+    (state) => state.timeFrame.activeTimeFrame
   );
 
   console.log(fetchedStateData);
@@ -23,15 +26,11 @@ function WeatherCardContainer() {
   }, []);
 
   // Render weather data based on activeTimeFrame
-  const weatherData =
-    fetchedStateData &&
-    fetchedStateData.locations[Object.keys(fetchedStateData.locations)[0]];
+  const weatherData = fetchedStateData?.locations
+    ? fetchedStateData.locations[Object.keys(fetchedStateData.locations)[0]]
+    : null;
 
   console.log(weatherData);
-
-  const activeTimeFrame = useSelector(
-    (state) => state.timeFrame.activeTimeFrame
-  );
 
   return (
     <div className="flex justify-center items-center flex-col">

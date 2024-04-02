@@ -1,6 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
+type TimeFrame = "hourly" | "daily";
+
+const initialState: { activeTimeFrame: TimeFrame } = {
   activeTimeFrame: "daily",
 };
 
@@ -8,7 +10,7 @@ const toggleTimeframeSlice = createSlice({
   name: "timeFrame",
   initialState,
   reducers: {
-    setActiveTimeFrame: (state, action) => {
+    setActiveTimeFrame: (state, action: PayloadAction<TimeFrame>) => {
       state.activeTimeFrame = action.payload;
     },
   },

@@ -1,6 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
+interface InputData {
+  city: string;
+}
+
+const initialState: InputData = {
   city: "London",
 };
 
@@ -8,7 +12,7 @@ const inputDataSlice = createSlice({
   name: "inputData",
   initialState,
   reducers: {
-    setInputData: (state, action) => {
+    setInputData: (state, action: PayloadAction<string>) => {
       state.city = action.payload;
     },
   },

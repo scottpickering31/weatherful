@@ -1,12 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
+interface IconData {
+  iconData: string;
+}
+
+const initialState: IconData = {
+  iconData: "/images/placeholder-image.webp",
+};
 
 const iconDataSlice = createSlice({
   name: "iconData",
-  initialState: {
-    iconData: "/images/placeholder-image.webp",
-  },
+  initialState,
   reducers: {
-    setIconData: (state, action) => {
+    setIconData: (state, action: PayloadAction<string>) => {
       state.iconData = action.payload;
     },
   },

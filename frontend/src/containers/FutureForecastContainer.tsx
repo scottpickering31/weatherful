@@ -1,9 +1,9 @@
 import FutureForecastCard from "../components/FutureForecastCard";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../hooks/useReduxState";
 
 function FutureForecastContainer() {
-  const futureWeatherData = useSelector(
-    (state) => state.weatherData.futureWeatherData,
+  const futureWeatherData = useAppSelector(
+    (state) => state.weatherData.futureWeatherData
   );
 
   return (

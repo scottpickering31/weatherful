@@ -2,10 +2,10 @@ import SearchContainer from "./containers/SearchContainer";
 import FutureForecastContainer from "./containers/FutureForecastContainer";
 import NavBar from "./components/NavBar";
 import SignupPage from "./pages/signuppage";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "./hooks/useReduxState";
 
 function App() {
-  const loggedInToggle = useSelector((state) => state.loggedIn.loggedIn);
+  const loggedInToggle = useAppSelector((state) => state.loggedIn.loggedIn);
 
   return (
     <div className="flex flex-col items-center p-10 h-full">
