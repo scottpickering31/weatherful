@@ -1,14 +1,22 @@
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { setSignUpData } from "../state/reducers/SignUpDataSlice";
 
 function SignupPage() {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
-  console.log(errors);
+
+  const onSubmit = (data) => {
+    const { firstName, lastName, email, confirmEmail } = data;
+
+    dispatch(setSignUpData([firstName, lastName, email, confirmEmail]));
+    console.log(data);
+  };
 
   return (
     <div className="flex h-screen place-content-center">
@@ -25,25 +33,25 @@ function SignupPage() {
             className="h-14 shadow-2xl rounded-2xl p-5"
             type="text"
             placeholder="First name"
-            {...register("First name", { required: true, maxLength: 80 })}
+            {...register("firstName", { required: true, maxLength: 80 })}
           />
           <input
             className="h-14 shadow-2xl rounded-2xl p-5"
             type="text"
             placeholder="Last name"
-            {...register("Last name", { required: true, maxLength: 100 })}
+            {...register("lastName", { required: true, maxLength: 100 })}
           />
           <input
             className="h-14 shadow-2xl rounded-2xl p-5"
             type="text"
             placeholder="Email"
-            {...register("Email", { required: true, pattern: /^\S+@\S+$/i })}
+            {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
           />
           <input
             className="h-14 mb-5 shadow-2xl rounded-2xl p-5"
             type="text"
             placeholder="Confirm Email"
-            {...register("Confirm Email", { required: true })}
+            {...register("confirmEmail", { required: true })}
           />
         </div>
         <div>

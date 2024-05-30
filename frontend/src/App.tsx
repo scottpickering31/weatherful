@@ -5,7 +5,7 @@ import SignupPage from "./pages/signuppage";
 import { useAppSelector } from "./hooks/useReduxState";
 
 function App() {
-  const loggedInToggle = useAppSelector((state) => state.loggedIn.loggedIn);
+  const loggedInToggle = useAppSelector((state) => state.loggedIn);
 
   return (
     <div className="flex flex-col items-center p-10 h-full">
