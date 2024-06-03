@@ -2,8 +2,17 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "../state/reducers/loggedInSlice";
+import { useState, useEffect } from "react";
 
 function SignupPage() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/users")
+      .then((response) => response.json())
+      .then((data) => setUsers(data));
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -54,6 +63,12 @@ function SignupPage() {
           </Link>
         </div>
       </form>
+      <div>
+        <h1>Users:</h1>
+        {users.map((user) => (
+          <li key={user.id}>{user.email}</li>
+        ))}
+      </div>
     </div>
   );
 }
