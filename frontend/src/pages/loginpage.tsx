@@ -1,76 +1,62 @@
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setLoggedIn } from "../state/reducers/loggedInSlice";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import FormInput from "../components/FormInput";
 
-function SignupPage() {
-  const [users, setUsers] = useState([]);
+function Loginpage() {
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    date: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  useEffect(() => {
-    fetch("http://localhost:3001/users")
-      .then((response) => response.json())
-      .then((data) => setUsers(data));
-  }, []);
+  const inputs = [
+    {
+      id: 1,
+      name: "email",
+      type: "email",
+      placeholder: "Email",
+      errorMessage: "Please enter a valid email address",
+      label: "Email",
+      required: true,
+    },
+    {
+      id: 2,
+      name: "password",
+      type: "password",
+      placeholder: "Password",
+      errorMessage:
+        "Password should be between 8-20 characters and include at least 1 letter, 1 number and 1 special character",
+      label: "Password",
+      pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+      required: true,
+    },
+  ];
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => console.log(data);
-  console.log(errors);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
-  const dispatch = useDispatch();
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
 
   return (
-    <div className="flex h-screen place-content-center">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex full items-center justify-center w-tiny flex-col border rounded-2xl text-center bg-slate-50"
-      >
-        <h1 className="text-4xl underline underline-offset-8 text-slate-600 font-bold mb-20">
-          Login Page
-        </h1>
-
-        <div className="flex flex-col gap-10 px-20 w-full">
-          <input
-            className="h-14 shadow-2xl rounded-2xl p-5"
-            type="text"
-            placeholder="Email"
-            {...register("Email", { required: true, pattern: /^\S+@\S+$/i })}
+    <div className="flex h-screen items-center justify-center p-4 flex-col">
+      <form onSubmit={handleSubmit} className="flex flex-col items-center">
+        <h1>Login</h1>
+        {inputs.map((input) => (
+          <FormInput
+            key={input.id}
+            {...input}
+            value={values[input.name]}
+            onChange={onChange}
           />
-          <input
-            className="h-14 mb-5 shadow-2xl rounded-2xl p-5 "
-            type="password"
-            placeholder="Password"
-            {...register("Password", { required: true })}
-          />
-        </div>
-        <div>
-          <input
-            type="submit"
-            className="mt-5 border-4 border-orange-500 rounded-2xl text-2xl font-bold p-5 shadow-2xl active:scale-90 hover:bg-orange-400 hover:text-white"
-            onClick={() => dispatch(setLoggedIn(true))}
-          />
-        </div>
-        <div className="flex flex-col gap-2 mt-5">
-          <p>Don't have an account?</p>
-          <Link to="/signup">
-            <p className="text-xl text-blue-600 underline underline-offset-4 font-bold cursor-pointer">
-              Sign Up
-            </p>
-          </Link>
-        </div>
-      </form>
-      <div>
-        <h1>Users:</h1>
-        {users.map((user) => (
-          <li key={user.id}>{user.email}</li>
         ))}
-      </div>
+        <button>Submit</button>
+      </form>
     </div>
   );
 }
 
-export default SignupPage;
+export default Loginpage;
