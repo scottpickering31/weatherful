@@ -10,7 +10,7 @@ const FormInput = (props) => {
   };
 
   return (
-    <div className="flex items-center justify-center w-full flex-col border text-center p-2">
+    <div className="flex items-center justify-center w-full flex-col text-center p-2">
       <label>{label}</label>
       <input
         {...inputProps}
@@ -21,7 +21,7 @@ const FormInput = (props) => {
         }
         focused={focused.toString()}
         required
-        className="rounded-2xl p-3"
+        className={`${props.className} rounded-2xl p-3 w-2/3`}
       />
       <span className="text-red-600 text-sm hidden">{errorMessage}</span>
     </div>

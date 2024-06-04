@@ -21,6 +21,7 @@ function SignupPage() {
       label: "Name",
       pattern: "/^[a-z ,.'-]+$/i",
       required: true,
+      className: "input",
     },
     {
       id: 2,
@@ -31,6 +32,7 @@ function SignupPage() {
       label: "Email",
       pattern: "/^[w-.]+@([w-]+.)+[w-]{2,4}$",
       required: true,
+      className: "input",
     },
     {
       id: 3,
@@ -39,6 +41,7 @@ function SignupPage() {
       placeholder: "Date of Birth",
       label: "Date of Birth",
       required: true,
+      className: "cursor-pointer input",
     },
     {
       id: 4,
@@ -50,6 +53,7 @@ function SignupPage() {
       label: "Password",
       pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
       required: true,
+      className: "input",
     },
     {
       id: 5,
@@ -60,12 +64,33 @@ function SignupPage() {
       label: "Confirm Password",
       pattern: values.password,
       required: true,
+      className: "input",
     },
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3000/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+  
+      const data = await response.json();
+      if (response.status === 201) {
+        alert("User created successfully");
+      } else {
+        alert(data.error);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred. Please try again.");
+    }
   };
+
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -75,10 +100,21 @@ function SignupPage() {
     <div className="flex h-screen items-center justify-center p-4 flex-col">
       <form
         onSubmit={handleSubmit}
-        className="w-full flex flex-col items-center"
+        className="w-full flex flex-col items-center h-full"
       >
-        <h1>Signup</h1>
-        <div className="flex flex-col items-center bg-slate-100 w-1/3">
+        <h1 className="text-slate-600 text-6xl mb-5 underline underline-offset-8 flex flex-row">
+          Weather
+          <p className="text-orange-500 underline underline-offset-2">ful</p>
+        </h1>
+        <img
+          src="./public/images/weatherful-app-logo.png"
+          alt="weatherful logo"
+          className="w-20 h-20 absolute left-5 right-100 top-5"
+        />
+        <h1 className="p-2 text-4xl underline underline-offset-4 tracking-widest opacity-90 text-gray-400">
+          Sign up
+        </h1>
+        <div className="flex flex-col items-center bg-slate-100 w-1/4 rounded-2xl">
           {inputs.map((input) => (
             <FormInput
               key={input.id}
@@ -87,7 +123,9 @@ function SignupPage() {
               onChange={onChange}
             />
           ))}
-          <button>Submit</button>
+          <button className="bg-slate-500 p-5 rounded-full m-5">Submit</button>
+          <p>Already have an account?</p>
+          <p className="underline text-blue-600 cursor-pointer">Login here!</p>
         </div>
       </form>
     </div>

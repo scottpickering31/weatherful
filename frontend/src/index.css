@@ -4,7 +4,8 @@
 
 body {
   font-family: "Kanit", sans-serif;
-  background-color: #a2e5e7;
+  background-image: url("../public/images/weatherful-background.png");
+  background-size: cover;
   margin: 0;
   padding: 0;
 }
