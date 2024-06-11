@@ -1,13 +1,14 @@
 import { useState } from "react";
 import FormInput from "../components/FormInput";
+import { useAppDispatch } from "../hooks/useReduxState";
+import { setUserInfo } from "../state/reducers/userInfoSlice";
+import { setLoggedIn } from "../state/reducers/loggedInSlice";
 
 function Loginpage() {
+  const dispatch = useAppDispatch();
   const [values, setValues] = useState({
-    name: "",
     email: "",
-    date: "",
     password: "",
-    confirmPassword: "",
   });
 
   const inputs = [
@@ -25,16 +26,47 @@ function Loginpage() {
       name: "password",
       type: "password",
       placeholder: "Password",
-      errorMessage:
-        "Password should be between 8-20 characters and include at least 1 letter, 1 number and 1 special character",
+      errorMessage: "Password should be between 8-20 characters",
+      patern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
       label: "Password",
-      pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
       required: true,
     },
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Login successful:", data.message);
+        console.log("User data:", {
+          email: values.email,
+          password: values.password,
+        });
+
+        // Save user info to localStorage
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify([values.email, values.password])
+        );
+
+        dispatch(setUserInfo([values.email, values.password]));
+        dispatch(setLoggedIn(true));
+        window.location.href = "/weather";
+      } else {
+        alert("Invalid email or password, please try again");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const onChange = (e) => {
@@ -70,9 +102,9 @@ function Loginpage() {
           ))}
           <button className="bg-slate-500 p-5 rounded-full m-5">Submit</button>
           <p>Don't have an account?</p>
-          <p className="underline text-blue-600 cursor-pointer">
+          <a href="/signup" className="underline text-blue-600 cursor-pointer">
             Sign up here!
-          </p>
+          </a>
         </div>
       </form>
     </div>

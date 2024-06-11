@@ -4,6 +4,8 @@ import iconDataSlice from "../reducers/iconDataSlice";
 import toggleTimeframeSlice from "../reducers/toggleTimeframeSlice";
 import inputDataSlice from "../reducers/inputDataSlice";
 import loggedInSlice from "../reducers/loggedInSlice";
+import userInfoSlice from "../reducers/userInfoSlice";
+
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +14,7 @@ export const store = configureStore({
     iconData: iconDataSlice,
     timeFrame: toggleTimeframeSlice,
     inputData: inputDataSlice,
+    userInfo: userInfoSlice,
   },
 });
 

@@ -5,7 +5,6 @@ function SignupPage() {
   const [values, setValues] = useState({
     name: "",
     email: "",
-    date: "",
     password: "",
     confirmPassword: "",
   });
@@ -36,15 +35,6 @@ function SignupPage() {
     },
     {
       id: 3,
-      name: "date",
-      type: "date",
-      placeholder: "Date of Birth",
-      label: "Date of Birth",
-      required: true,
-      className: "cursor-pointer input",
-    },
-    {
-      id: 4,
       name: "password",
       type: "password",
       placeholder: "Password",
@@ -56,7 +46,7 @@ function SignupPage() {
       className: "input",
     },
     {
-      id: 5,
+      id: 4,
       name: "confirmPassword",
       type: "password",
       placeholder: "Confirm Password",
@@ -78,9 +68,9 @@ function SignupPage() {
         },
         body: JSON.stringify(values),
       });
-  
+
       const data = await response.json();
-      if (response.status === 201) {
+      if (response.status === 200) {
         alert("User created successfully");
       } else {
         alert(data.error);
@@ -90,7 +80,6 @@ function SignupPage() {
       alert("An error occurred. Please try again.");
     }
   };
-
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -125,7 +114,9 @@ function SignupPage() {
           ))}
           <button className="bg-slate-500 p-5 rounded-full m-5">Submit</button>
           <p>Already have an account?</p>
-          <p className="underline text-blue-600 cursor-pointer">Login here!</p>
+          <a href="/login" className="underline text-blue-600 cursor-pointer">
+            Login here!
+          </a>
         </div>
       </form>
     </div>
