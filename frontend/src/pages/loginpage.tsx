@@ -52,7 +52,6 @@ function Loginpage() {
           password: values.password,
         });
 
-        // Save user info to localStorage
         localStorage.setItem(
           "userInfo",
           JSON.stringify([values.email, values.password])
@@ -62,7 +61,7 @@ function Loginpage() {
         dispatch(setLoggedIn(true));
         window.location.href = "/weather";
       } else {
-        alert("Invalid email or password, please try again");
+        alert("Email & Password not recognised, try again");
       }
     } catch (err) {
       console.log(err);

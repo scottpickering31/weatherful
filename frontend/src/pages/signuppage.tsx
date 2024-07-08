@@ -7,6 +7,8 @@ function SignupPage() {
     email: "",
     password: "",
   });
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [spinner, setSpinner] = useState(false);
 
   const inputs = [
     {
@@ -48,6 +50,7 @@ function SignupPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSpinner(true);
     try {
       const response = await fetch("http://localhost:3000/signup", {
         method: "POST",
@@ -58,8 +61,10 @@ function SignupPage() {
       });
 
       const data = await response.json();
-      if (response.status === 200) {
+      if (response.status === 201) {
         alert("User created successfully");
+        setLoggedIn(true);
+        setSpinner(false);
       } else {
         alert(data.error);
       }
@@ -75,38 +80,50 @@ function SignupPage() {
 
   return (
     <div className="flex h-screen items-center justify-center p-4 flex-col">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full flex flex-col items-center h-full"
-      >
-        <h1 className="text-slate-600 text-6xl mb-5 underline underline-offset-8 flex flex-row">
-          Weather
-          <p className="text-orange-500 underline underline-offset-2">ful</p>
-        </h1>
-        <img
-          src="./public/images/weatherful-app-logo.png"
-          alt="weatherful logo"
-          className="w-20 h-20 absolute left-5 right-100 top-5"
-        />
-        <h1 className="p-2 text-4xl underline underline-offset-4 tracking-widest opacity-90 text-gray-400">
-          Sign up
-        </h1>
-        <div className="flex flex-col items-center bg-slate-100 w-1/4 rounded-2xl">
-          {inputs.map((input) => (
-            <FormInput
-              key={input.id}
-              {...input}
-              value={values[input.name]}
-              onChange={onChange}
-            />
-          ))}
-          <button className="bg-slate-500 p-5 rounded-full m-5">Submit</button>
-          <p>Already have an account?</p>
-          <a href="/login" className="underline text-blue-600 cursor-pointer">
-            Login here!
-          </a>
+      {!loggedIn ? (
+        <form
+          onSubmit={handleSubmit}
+          className="w-full flex flex-col items-center h-full"
+        >
+          <h1 className="text-slate-600 text-6xl mb-5 underline underline-offset-8 flex flex-row">
+            Weather
+            <p className="text-orange-500 underline underline-offset-2">ful</p>
+          </h1>
+          <img
+            src="./public/images/weatherful-app-logo.png"
+            alt="weatherful logo"
+            className="w-20 h-20 absolute left-5 right-100 top-5"
+          />
+          <h1 className="p-2 text-4xl underline underline-offset-4 tracking-widest opacity-90 text-gray-400">
+            Sign up
+          </h1>
+          <div className="flex flex-col items-center bg-slate-100 w-1/4 rounded-2xl">
+            {inputs.map((input) => (
+              <FormInput
+                key={input.id}
+                {...input}
+                value={values[input.name]}
+                onChange={onChange}
+              />
+            ))}
+            <button className="bg-slate-500 p-5 rounded-full m-5">
+              Submit
+            </button>
+            {spinner && (
+              <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" />
+            )}
+            <p>Already have an account?</p>
+            <a href="/login" className="underline text-blue-600 cursor-pointer">
+              Login here!
+            </a>
+          </div>
+        </form>
+      ) : (
+        <div>
+          <p>user created sucessfully!</p>
+          <a>Login Here!</a>
         </div>
-      </form>
+      )}
     </div>
   );
 }
