@@ -5,7 +5,7 @@ interface LoggedIn {
 }
 
 const initialState: LoggedIn = {
-  loggedIn: true,
+  loggedIn: false,
 };
 
 const loggedInSlice = createSlice({

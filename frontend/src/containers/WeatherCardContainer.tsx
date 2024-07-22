@@ -19,11 +19,11 @@ function WeatherCardContainer() {
 
   console.log(fetchedStateData);
 
-  // Fetch weather data when component mounts or activeTimeFrame changes
-  useEffect(() => {
-    dispatch(fetchWeatherData());
-    dispatch(fetchFutureForecastData());
-  }, []);
+  //Fetch weather data when component mounts or activeTimeFrame changes
+  // useEffect(() => {
+  //   dispatch(fetchWeatherData());
+  //   dispatch(fetchFutureForecastData());
+  // }, []);
 
   // Render weather data based on activeTimeFrame
   const weatherData = fetchedStateData?.locations

@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./pages/loginpage.tsx";
 import SignupPage from "./pages/signuppage.tsx";
 import ErrorPage from "./pages/errorpage.tsx";
+import PrivateRoute from "./routes/PrivateRoute.tsx";
 
 const router = createBrowserRouter([
   {
@@ -18,21 +19,24 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <SignupPage />,
   },
-
   {
     path: "/login",
     element: <LoginPage />,
   },
   {
     path: "/weather",
-    element: <App />,
+    element: <PrivateRoute />,
+    children: [
+      {
+        path: "/weather",
+        element: <App />,
+      },
+    ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
-  </Provider>,
+    <RouterProvider router={router} />
+  </Provider>
 );

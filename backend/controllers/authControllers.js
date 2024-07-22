@@ -1,6 +1,11 @@
-const test = (req, res) => {
-  res.json({ message: "Hi Jemma, you are beautiful!" });
-};
+const mysql = require("mysql");
+
+const db = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+});
 
 const signUp = (req, res) => {
   const { name, email, password } = req.body;
@@ -29,4 +34,4 @@ const login = (req, res) => {
   });
 };
 
-module.exports = { test, signUp, login };
+module.exports = { signUp, login };

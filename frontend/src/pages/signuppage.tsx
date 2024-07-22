@@ -1,5 +1,9 @@
 import FormInput from "../components/FormInput";
+import SignUpSuccess from "./signUpSuccess";
 import { useState } from "react";
+import { signUpInputs } from "../utils/userAuthData";
+import { useAppDispatch } from "../hooks/useReduxState";
+import { setLoggedIn } from "../state/reducers/loggedInSlice";
 
 function SignupPage() {
   const [values, setValues] = useState({
@@ -7,46 +11,11 @@ function SignupPage() {
     email: "",
     password: "",
   });
-  const [loggedIn, setLoggedIn] = useState(false);
   const [spinner, setSpinner] = useState(false);
+  const [name, setName] = useState("");
+  const [signedUp, setSignedUp] = useState(false);
 
-  const inputs = [
-    {
-      id: 1,
-      name: "name",
-      type: "text",
-      placeholder: "Name",
-      errorMessage:
-        "Name should be 3-16 characters and shouldn't include any special characters",
-      label: "Name",
-      pattern: "/^[a-z ,.'-]+$/i",
-      required: true,
-      className: "input",
-    },
-    {
-      id: 2,
-      name: "email",
-      type: "email",
-      placeholder: "Email",
-      errorMessage: "Please enter a valid email address",
-      label: "Email",
-      pattern: "/^[w-.]+@([w-]+.)+[w-]{2,4}$",
-      required: true,
-      className: "input",
-    },
-    {
-      id: 3,
-      name: "password",
-      type: "password",
-      placeholder: "Password",
-      errorMessage:
-        "Password should be between 8-20 characters and include at least 1 letter, 1 number and 1 special character",
-      label: "Password",
-      pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
-      required: true,
-      className: "input",
-    },
-  ];
+  const dispatch = useAppDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,9 +31,10 @@ function SignupPage() {
 
       const data = await response.json();
       if (response.status === 201) {
-        alert("User created successfully");
-        setLoggedIn(true);
+        dispatch(setLoggedIn(true));
         setSpinner(false);
+        setName(values.name);
+        setSignedUp(true);
       } else {
         alert(data.error);
       }
@@ -80,7 +50,7 @@ function SignupPage() {
 
   return (
     <div className="flex h-screen items-center justify-center p-4 flex-col">
-      {!loggedIn ? (
+      {!signedUp ? (
         <form
           onSubmit={handleSubmit}
           className="w-full flex flex-col items-center h-full"
@@ -98,7 +68,7 @@ function SignupPage() {
             Sign up
           </h1>
           <div className="flex flex-col items-center bg-slate-100 w-1/4 rounded-2xl">
-            {inputs.map((input) => (
+            {signUpInputs.map((input) => (
               <FormInput
                 key={input.id}
                 {...input}
@@ -120,8 +90,7 @@ function SignupPage() {
         </form>
       ) : (
         <div>
-          <p>user created sucessfully!</p>
-          <a>Login Here!</a>
+          <SignUpSuccess name={name} />
         </div>
       )}
     </div>

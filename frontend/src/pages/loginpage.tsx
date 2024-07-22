@@ -1,38 +1,18 @@
 import { useState } from "react";
 import FormInput from "../components/FormInput";
+import { loginInputs } from "../utils/userAuthData";
 import { useAppDispatch } from "../hooks/useReduxState";
-import { setUserInfo } from "../state/reducers/userInfoSlice";
 import { setLoggedIn } from "../state/reducers/loggedInSlice";
+import { useNavigate } from "react-router-dom";
 
 function Loginpage() {
-  const dispatch = useAppDispatch();
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
 
-  const inputs = [
-    {
-      id: 1,
-      name: "email",
-      type: "email",
-      placeholder: "Email",
-      errorMessage: "Please enter a valid email address",
-      label: "Email",
-      required: true,
-    },
-    {
-      id: 2,
-      name: "password",
-      type: "password",
-      placeholder: "Password",
-      errorMessage: "Password should be between 8-20 characters",
-      patern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
-      label: "Password",
-      required: true,
-    },
-  ];
-
+  const dispatch = useAppDispatch();
+  const navigation = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -46,20 +26,9 @@ function Loginpage() {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Login successful:", data.message);
-        console.log("User data:", {
-          email: values.email,
-          password: values.password,
-        });
-
-        localStorage.setItem(
-          "userInfo",
-          JSON.stringify([values.email, values.password])
-        );
-
-        dispatch(setUserInfo([values.email, values.password]));
         dispatch(setLoggedIn(true));
-        window.location.href = "/weather";
+        navigation("/weather");
+        console.log("Login successful:", data.message);
       } else {
         alert("Email & Password not recognised, try again");
       }
@@ -91,7 +60,7 @@ function Loginpage() {
           Login
         </h1>
         <div className="flex flex-col items-center bg-slate-100 w-1/4 rounded-2xl">
-          {inputs.map((input) => (
+          {loginInputs.map((input) => (
             <FormInput
               key={input.id}
               {...input}
