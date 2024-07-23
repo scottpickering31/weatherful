@@ -16,11 +16,11 @@ function ToggleHours() {
   const dailyClassName =
     activeTimeFrame === "daily"
       ? "bg-orange-500 h-full w-1/2 overflow-hidden"
-      : "w-1/2";
+      : "bg-white h-full w-1/2";
   const hourlyClassName =
     activeTimeFrame === "hourly"
       ? "bg-orange-500 h-full w-1/2 overflow-hidden"
-      : "w-1/2";
+      : "bg-white h-full w-1/2";
 
   function dailyClick() {
     dispatch(setActiveTimeFrame("daily"));

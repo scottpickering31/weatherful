@@ -12,23 +12,25 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col items-center p-10 h-full">
-      <div className="text-center mt-20 flex flex-row justify-center gap-3">
+    <div className="flex flex-row items-center h-full">
+      <div className="w-1/4 mr-3 h-full">
         <NavBar />
-        <h1 className="text-slate-600 text-6xl mb-20 underline underline-offset-8 relative">
+      </div>
+      <div className="text-center gap-3 w-3/4">
+        <h1 className="text-slate-600 text-5xl underline underline-offset-8">
           Weather
           <span className="text-orange-500 underline underline-offset-8">
             ful
           </span>
         </h1>
-        <img
+        {/* <img
           src="./public/images/weatherful-app-logo.png"
           alt="weatherful logo"
           className="w-20 h-20 absolute left-5 right-100 top-5"
-        />
+        /> */}
+        <SearchContainer />
+        <FutureForecastContainer />
       </div>
-      <SearchContainer />
-      <FutureForecastContainer />
     </div>
   );
 }

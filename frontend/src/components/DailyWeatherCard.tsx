@@ -109,9 +109,9 @@ function DailyWeatherCard({ weatherData }) {
   const windSpeed = weatherData.currentConditions.wspd;
 
   return (
-    <div className="border-4 border-slate-300 rounded-xl flex items-center h-small w-small justify-center">
+    <div className="border-4 border-slate-300 bg-white shadow-2xl rounded-xl flex items-center justify-center w-small">
       {weatherData ? (
-        <div className="flex flex-col items-center w-full">
+        <div className="flex flex-col items-center w-full p-5">
           <div className="p-5 underline underline-offset-4 w-full">
             <WeatherDate setDate={setDate} />
           </div>

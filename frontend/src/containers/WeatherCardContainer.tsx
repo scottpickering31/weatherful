@@ -34,8 +34,8 @@ function WeatherCardContainer() {
 
   return (
     <div className="flex justify-center items-center flex-col">
-      <div className="flex flex-col items-center mb-10 text-center">
-        <h2 className="mb-5 text-3xl">Today's Weather Forecast in:</h2>
+      <div className="flex flex-col items-center text-center">
+        <h2 className="text-3xl">Today's Weather Forecast in:</h2>
         {weatherData ? (
           <div className="flex flex-row items-center gap-5">
             <h1 className="text-orange-500 underline underline-offset-1 text-4xl">
@@ -48,11 +48,11 @@ function WeatherCardContainer() {
         )}
       </div>
       {weatherData && activeTimeFrame === "daily" ? (
-        <div className="flex items-center justify-center h-small w-small">
+        <div className="flex items-center justify-center w-3/4">
           <DailyWeatherCard weatherData={weatherData} />
         </div>
       ) : weatherData && activeTimeFrame === "hourly" ? (
-        <div className="h-small w-small">
+        <div className="flex items-center justify-center w-3/4">
           <HourlyWeatherCard weatherData={weatherData} />
         </div>
       ) : null}

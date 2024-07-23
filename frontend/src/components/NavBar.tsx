@@ -1,6 +1,6 @@
 function NavBar() {
   return (
-    <div className="absolute top-0 m-5 right-0">
+    <div className="border-t-2 border-r-2 border-b-2 border-slate-700 bg-slate-200 rounded-r-2xl h-full">
       <div className="gap-5 text-center">
         <div className="cursor-pointer rounded-full flex flex-row items-center gap-2">
           <img
