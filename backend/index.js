@@ -11,9 +11,10 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    // origin: "http://localhost:3000",
+    origin: "https://xsjs2s-5173.csb.app",
     credentials: true,
-  })
+  }),
 );
 
 app.use(express.json());
