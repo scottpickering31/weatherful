@@ -1,4 +1,3 @@
-import FutureForecastContainer from "./containers/FutureForecastContainer";
 import NavBar from "./components/NavBar";
 import { useAppSelector } from "./hooks/useReduxState";
 import LoginPage from "./pages/loginpage";
@@ -26,7 +25,6 @@ function App() {
         <div className="flex items-center bg-slate-100 border-2 border-black flex-col rounded-3xl shadow-2xl m-5 laptop:gap-5 desktop:gap-5">
           <OuterWeatherCardContainer />
         </div>
-        <FutureForecastContainer />
       </div>
     </div>
   );

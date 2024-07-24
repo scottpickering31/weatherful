@@ -1,17 +1,16 @@
-import Sunset from "./weatherdata/Sunset";
-import Sunrise from "./weatherdata/Sunrise";
-import WindDirection from "./weatherdata/WindDirection";
-import WindSpeed from "./weatherdata/WindSpeed";
-import Temperature from "./weatherdata/Temperature";
-import WeatherType from "./weatherdata/WeatherType";
-import WeatherDate from "./weatherdata/WeatherDate";
+import Sunset from "../weatherdata/Sunset";
+import Sunrise from "../weatherdata/Sunrise";
+import WindDirection from "../weatherdata/WindDirection";
+import WindSpeed from "../weatherdata/WindSpeed";
+import Temperature from "../weatherdata/Temperature";
+import WeatherType from "../weatherdata/WeatherType";
+import WeatherDate from "../weatherdata/WeatherDate";
 import { useEffect, useState } from "react";
-import Skeleton from "react-loading-skeleton";
 import { format } from "date-fns";
 import "react-loading-skeleton/dist/skeleton.css";
-import { setIconData } from "../state/reducers/iconDataSlice";
-import weatherImages from "../utils/formatWeatherImages";
-import { useAppDispatch, useAppSelector } from "../hooks/useReduxState";
+import { setIconData } from "../../state/reducers/iconDataSlice";
+import weatherImages from "../../utils/formatWeatherImages";
+import { useAppDispatch, useAppSelector } from "../../hooks/useReduxState";
 
 function DailyWeatherCard({ weatherData }) {
   const dispatch = useAppDispatch();
@@ -113,7 +112,7 @@ function DailyWeatherCard({ weatherData }) {
 
   return (
     <div className="border-4 border-slate-300 bg-white shadow-2xl rounded-xl flex items-center justify-center w-small">
-      {weatherData ? (
+      {weatherData && (
         <div className="flex flex-col items-center w-full p-5">
           <div className="p-5 underline underline-offset-4 w-full">
             <WeatherDate setDate={setDate} />
@@ -133,19 +132,6 @@ function DailyWeatherCard({ weatherData }) {
               />
               <WindSpeed windSpeed={windSpeed} />
             </div>
-          </div>
-        </div>
-      ) : (
-        <div className="flex flex-row items-center m-12 h-small w-small">
-          <div className="p-5 flex flex-col gap-10 w-1/2">
-            <Skeleton height={80} width={160} />
-            <Skeleton height={80} width={160} />
-          </div>
-          <div className="p-5 text-center flex justify-around font-bold items-start flex-col gap-8">
-            <Skeleton height={20} width={160} />
-            <Skeleton height={20} width={160} />
-            <Skeleton height={20} width={160} />
-            <Skeleton height={20} width={160} />
           </div>
         </div>
       )}

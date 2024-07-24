@@ -1,4 +1,4 @@
-import FutureForecastCard from "../components/FutureForecastCard";
+import FutureForecastCard from "../components/cards/FortnightWeatherCard";
 import { useAppSelector } from "../hooks/useReduxState";
 
 function FutureForecastContainer() {

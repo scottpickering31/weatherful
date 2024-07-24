@@ -4,18 +4,15 @@ import {
   fetchWeatherData,
   fetchFutureForecastData,
 } from "../state/reducers/weatherDataSlice";
-import DailyWeatherCard from "../components/DailyWeatherCard";
-import HourlyWeatherCard from "../components/HourlyWeatherCard";
-import ToggleHours from "../components/buttons/ToggleHours";
 import SearchBar from "../components/SearchBar";
+import InnerWeatherCardContainer from "./InnerWeatherCardContainer";
 
 function WeatherCardContainer() {
-  const dispatch = useAppDispatch();
   const fetchedStateData = useAppSelector(
-    (state) => state.weatherData.weatherData,
+    (state) => state.weatherData.weatherData
   );
   const activeTimeFrame = useAppSelector(
-    (state) => state.timeFrame.activeTimeFrame,
+    (state) => state.timeFrame.activeTimeFrame
   );
 
   console.log(fetchedStateData);
@@ -23,7 +20,6 @@ function WeatherCardContainer() {
   // Fetch weather data when component mounts or activeTimeFrame changes
   // useEffect(() => {
   //   dispatch(fetchWeatherData());
-  //   dispatch(fetchFutureForecastData());
   // }, []);
 
   // Render weather data based on activeTimeFrame
@@ -46,23 +42,11 @@ function WeatherCardContainer() {
           <h1 className="text-orange-500 underline underline-offset-1 text-3xl">
             {weatherData.id.toUpperCase()}
           </h1>
-          <img src="/images/icons/star.svg" className="w-10 h-10" />
         </div>
       ) : (
         <p className="text-3xl h-small w-small">Loading Forecast...</p>
       )}
-      {weatherData && activeTimeFrame === "daily" ? (
-        <div className="flex items-center justify-center w-3/4">
-          <DailyWeatherCard weatherData={weatherData} />
-        </div>
-      ) : weatherData && activeTimeFrame === "hourly" ? (
-        <div className="flex items-center justify-center w-3/4">
-          <HourlyWeatherCard weatherData={weatherData} />
-        </div>
-      ) : null}
-      <div className="p-3">
-        <ToggleHours />
-      </div>
+      <InnerWeatherCardContainer />
     </div>
   );
 }

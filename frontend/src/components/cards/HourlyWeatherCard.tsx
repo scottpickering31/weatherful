@@ -1,8 +1,7 @@
 import { useState } from "react";
-import Skeleton from "react-loading-skeleton";
 import { format } from "date-fns";
 import "react-loading-skeleton/dist/skeleton.css";
-import { useAppSelector } from "../hooks/useReduxState";
+import { useAppSelector } from "../../hooks/useReduxState";
 
 function HourlyWeatherCard({ weatherData }) {
   const [counter, setCounter] = useState(0);
@@ -47,7 +46,8 @@ function HourlyWeatherCard({ weatherData }) {
 
   return (
     <div className="border-4 border-slate-300 rounded-xl flex flex-col items-center h-small w-small">
-      {hourlyData && toggleTimeFrame ? (
+      {hourlyData &&
+        toggleTimeFrame &&
         hourlyDataMap.map((data, index) => (
           <div className="flex flex-col items-center" key={index}>
             <div className="text-center">
@@ -76,21 +76,7 @@ function HourlyWeatherCard({ weatherData }) {
               -
             </button>
           </div>
-        ))
-      ) : (
-        <div className="flex flex-row items-center m-12">
-          <div className="p-5 flex flex-col gap-10 w-1/2">
-            <Skeleton height={80} width={160} />
-            <Skeleton height={80} width={160} />
-          </div>
-          <div className="p-5 w-1/2 text-center flex justify-around font-bold items-start flex-col gap-8">
-            <Skeleton height={20} width={160} />
-            <Skeleton height={20} width={160} />
-            <Skeleton height={20} width={160} />
-            <Skeleton height={20} width={160} />
-          </div>
-        </div>
-      )}
+        ))}
     </div>
   );
 }
