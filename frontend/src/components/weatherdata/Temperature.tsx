@@ -7,7 +7,7 @@ function Temperature({ convertedTemp }) {
         alt="Temperature GIF"
       />
       <h2>Current Temperature:</h2>
-      <h2 className="text-orange-500 font-bold text-4xl">{convertedTemp}°C</h2>
+      <h2 className="text-orange-500 font-bold text-3xl">{convertedTemp}°C</h2>
     </div>
   );
 }

@@ -24,7 +24,10 @@ function DailyWeatherCard({ weatherData }) {
 
   const setDate = () => {
     const rawDate = weatherData.currentConditions.datetime;
-    const formattedDate = format(new Date(rawDate), "eee d MMMM y");
+    const formattedDate = format(
+      new Date(rawDate),
+      "eee d MMMM y"
+    ).toUpperCase();
 
     return formattedDate;
   };

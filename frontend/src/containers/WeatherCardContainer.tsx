@@ -7,6 +7,7 @@ import {
 import DailyWeatherCard from "../components/DailyWeatherCard";
 import HourlyWeatherCard from "../components/HourlyWeatherCard";
 import ToggleHours from "../components/buttons/ToggleHours";
+import SearchBar from "../components/SearchBar";
 
 function WeatherCardContainer() {
   const dispatch = useAppDispatch();
@@ -33,20 +34,23 @@ function WeatherCardContainer() {
   console.log(weatherData);
 
   return (
-    <div className="flex justify-center items-center flex-col">
-      <div className="flex flex-col items-center text-center">
-        <h2 className="text-3xl">Today's Weather Forecast in:</h2>
-        {weatherData ? (
-          <div className="flex flex-row items-center gap-5">
-            <h1 className="text-orange-500 underline underline-offset-1 text-4xl">
-              {weatherData.id.toUpperCase()}
-            </h1>
-            <img src="/images/icons/star.svg" className="w-10 h-10" />
-          </div>
-        ) : (
-          <p className="text-3xl h-small w-small">Loading Forecast...</p>
-        )}
+    <div className="flex justify-center items-center flex-col h-medium">
+      <div className="flex flex-row text-center">
+        <div>
+          <SearchBar />
+        </div>
       </div>
+      {weatherData ? (
+        <div className="flex flex-row items-center gap-5">
+          <h2 className="text-2xl ">Today's Weather Forecast in:</h2>
+          <h1 className="text-orange-500 underline underline-offset-1 text-3xl">
+            {weatherData.id.toUpperCase()}
+          </h1>
+          <img src="/images/icons/star.svg" className="w-10 h-10" />
+        </div>
+      ) : (
+        <p className="text-3xl h-small w-small">Loading Forecast...</p>
+      )}
       {weatherData && activeTimeFrame === "daily" ? (
         <div className="flex items-center justify-center w-3/4">
           <DailyWeatherCard weatherData={weatherData} />
