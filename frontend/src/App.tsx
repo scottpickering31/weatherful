@@ -2,7 +2,7 @@ import FutureForecastContainer from "./containers/FutureForecastContainer";
 import NavBar from "./components/NavBar";
 import { useAppSelector } from "./hooks/useReduxState";
 import LoginPage from "./pages/loginpage";
-import WeatherCardContainer from "./containers/WeatherCardContainer";
+import OuterWeatherCardContainer from "./containers/OuterWeatherCardContainer";
 
 function App() {
   const loggedIn = useAppSelector((state) => state.loggedIn.loggedIn);
@@ -12,8 +12,8 @@ function App() {
   }
 
   return (
-    <div className="flex flex-row items-center h-full">
-      <div className="w-1/4 mr-3 h-full">
+    <div className="flex flex-row items-center h-screen">
+      <div className="h-full w-1/5">
         <NavBar />
       </div>
       <div className="text-center gap-3 w-3/4">
@@ -23,13 +23,8 @@ function App() {
             ful
           </span>
         </h1>
-        {/* <img
-          src="./public/images/weatherful-app-logo.png"
-          alt="weatherful logo"
-          className="w-20 h-20 absolute left-5 right-100 top-5"
-        /> */}
         <div className="flex items-center bg-slate-100 border-2 border-black flex-col rounded-3xl shadow-2xl m-5 laptop:gap-5 desktop:gap-5">
-          <WeatherCardContainer />
+          <OuterWeatherCardContainer />
         </div>
         <FutureForecastContainer />
       </div>

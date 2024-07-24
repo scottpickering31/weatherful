@@ -12,7 +12,7 @@ import PrivateRoute from "./routes/PrivateRoute.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <SignupPage />,
+    element: <LoginPage />,
     errorElement: <ErrorPage />,
   },
   {
@@ -24,11 +24,11 @@ const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
-    path: "/weather",
+    path: "/dashboard",
     element: <PrivateRoute />,
     children: [
       {
-        path: "/weather",
+        path: "/dashboard",
         element: <App />,
       },
     ],
@@ -38,5 +38,5 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <RouterProvider router={router} />
-  </Provider>
+  </Provider>,
 );

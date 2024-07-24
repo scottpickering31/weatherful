@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = () => {
   const loggedIn = useAppSelector((state) => state.loggedIn.loggedIn);
-  return loggedIn ? <Outlet /> : <Navigate to="/signup" />;
+  return loggedIn ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;

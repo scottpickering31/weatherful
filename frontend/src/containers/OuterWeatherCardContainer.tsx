@@ -12,15 +12,15 @@ import SearchBar from "../components/SearchBar";
 function WeatherCardContainer() {
   const dispatch = useAppDispatch();
   const fetchedStateData = useAppSelector(
-    (state) => state.weatherData.weatherData
+    (state) => state.weatherData.weatherData,
   );
   const activeTimeFrame = useAppSelector(
-    (state) => state.timeFrame.activeTimeFrame
+    (state) => state.timeFrame.activeTimeFrame,
   );
 
   console.log(fetchedStateData);
 
-  //Fetch weather data when component mounts or activeTimeFrame changes
+  // Fetch weather data when component mounts or activeTimeFrame changes
   // useEffect(() => {
   //   dispatch(fetchWeatherData());
   //   dispatch(fetchFutureForecastData());

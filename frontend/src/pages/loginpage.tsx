@@ -16,8 +16,8 @@ function Loginpage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/login", {
-      // const response = await fetch("https://xsjs2s-3000.csb.app/login", {
+      // const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch("https://xsjs2s-3000.csb.app/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,7 +28,7 @@ function Loginpage() {
       if (response.ok) {
         const data = await response.json();
         dispatch(setLoggedIn(true));
-        navigation("/weather");
+        navigation("/dashboard");
         console.log("Login successful:", data.message);
       } else {
         alert("Email & Password not recognised, try again");
