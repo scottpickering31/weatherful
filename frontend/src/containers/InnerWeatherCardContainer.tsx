@@ -2,16 +2,16 @@ import DailyWeatherCard from "../components/cards/DailyWeatherCard";
 import HourlyWeatherCard from "../components/cards/HourlyWeatherCard";
 import OutfitAiCard from "../components/cards/OutfitAiCard";
 import HistoricWeatherCard from "../components/cards/HistoricWeatherCard";
-import FutureForecastContainer from "./FutureForecastContainer";
+import FortnightWeatherCard from "../components/cards/FortnightWeatherCard";
 import { useAppSelector } from "../hooks/useReduxState";
 
 function InnerWeatherCardContainer() {
   const fetchedStateData = useAppSelector(
-    (state) => state.weatherData.weatherData
+    (state) => state.weatherData.weatherData,
   );
 
   const activeTimeFrame = useAppSelector(
-    (state) => state.timeFrame.activeTimeFrame
+    (state) => state.timeFrame.activeTimeFrame,
   );
 
   const weatherData = fetchedStateData?.locations
@@ -19,7 +19,7 @@ function InnerWeatherCardContainer() {
     : null;
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center">
       {weatherData && activeTimeFrame === "daily" && (
         <div className="flex items-center justify-center w-3/4">
           <DailyWeatherCard weatherData={weatherData} />
@@ -42,7 +42,7 @@ function InnerWeatherCardContainer() {
       )}
       {weatherData && activeTimeFrame === "fortnight" && (
         <div className="flex items-center justify-center w-3/4">
-          <FutureForecastContainer />
+          <FortnightWeatherCard weatherData={weatherData} />
         </div>
       )}
     </div>

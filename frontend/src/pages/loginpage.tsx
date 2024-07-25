@@ -4,6 +4,7 @@ import { loginInputs } from "../utils/userAuthData";
 import { useAppDispatch } from "../hooks/useReduxState";
 import { setLoggedIn } from "../state/reducers/loggedInSlice";
 import { useNavigate } from "react-router-dom";
+import { setuserData } from "../state/reducers/setUserDataSlice";
 
 function Loginpage() {
   const [values, setValues] = useState({
@@ -16,8 +17,7 @@ function Loginpage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/login", {
-      // const response = await fetch("https://xsjs2s-3000.csb.app/login", {
+      const response = await fetch("https://xsjs2s-3000.csb.app/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,9 +27,12 @@ function Loginpage() {
 
       if (response.ok) {
         const data = await response.json();
+        const user = data.user;
         dispatch(setLoggedIn(true));
+        dispatch(setuserData(user));
         navigation("/dashboard");
-        console.log("Login successful:", data.message);
+
+        console.log(user);
       } else {
         alert("Email & Password not recognised, try again");
       }

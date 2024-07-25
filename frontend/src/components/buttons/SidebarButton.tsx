@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 export const SidebarButton = ({
   image,
   text,
@@ -22,12 +20,6 @@ export const SidebarButton = ({
       <p className="text-slate-200 text-xl w-3/5">{text}</p>
     </button>
   );
-};
-
-SidebarButton.propTypes = {
-  image: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
 };
 
 export default SidebarButton;

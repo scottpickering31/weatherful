@@ -1,26 +1,23 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/useReduxState";
-import {
-  fetchWeatherData,
-  fetchFutureForecastData,
-} from "../state/reducers/weatherDataSlice";
+import { fetchWeatherData } from "../state/reducers/weatherDataSlice";
 import SearchBar from "../components/SearchBar";
 import InnerWeatherCardContainer from "./InnerWeatherCardContainer";
+import LoadingCard from "../components/cards/LoadingCard";
 
 function WeatherCardContainer() {
   const fetchedStateData = useAppSelector(
-    (state) => state.weatherData.weatherData
+    (state) => state.weatherData.weatherData,
   );
-  const activeTimeFrame = useAppSelector(
-    (state) => state.timeFrame.activeTimeFrame
-  );
+
+  const dispatch = useAppDispatch();
 
   console.log(fetchedStateData);
 
   // Fetch weather data when component mounts or activeTimeFrame changes
-  // useEffect(() => {
-  //   dispatch(fetchWeatherData());
-  // }, []);
+  useEffect(() => {
+    dispatch(fetchWeatherData());
+  }, []);
 
   // Render weather data based on activeTimeFrame
   const weatherData = fetchedStateData?.locations
@@ -44,7 +41,7 @@ function WeatherCardContainer() {
           </h1>
         </div>
       ) : (
-        <p className="text-3xl h-small w-small">Loading Forecast...</p>
+        <LoadingCard />
       )}
       <InnerWeatherCardContainer />
     </div>

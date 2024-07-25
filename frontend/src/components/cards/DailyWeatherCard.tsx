@@ -25,7 +25,7 @@ function DailyWeatherCard({ weatherData }) {
     const rawDate = weatherData.currentConditions.datetime;
     const formattedDate = format(
       new Date(rawDate),
-      "eee d MMMM y"
+      "eee d MMMM y",
     ).toUpperCase();
 
     return formattedDate;
@@ -111,7 +111,7 @@ function DailyWeatherCard({ weatherData }) {
   const windSpeed = weatherData.currentConditions.wspd;
 
   return (
-    <div className="border-4 border-slate-300 bg-white shadow-2xl rounded-xl flex items-center justify-center w-small">
+    <div className="border-4 border-slate-300 bg-white shadow-2xl rounded-xl flex items-center justify-center w-small h-small">
       {weatherData && (
         <div className="flex flex-col items-center w-full p-5">
           <div className="p-5 underline underline-offset-4 w-full">

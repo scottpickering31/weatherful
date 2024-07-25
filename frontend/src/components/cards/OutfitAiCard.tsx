@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
-function OutfitAiCard() {
+function OutfitAiCard({ weatherData }) {
   return (
-    <div>OutfitAiCard</div>
-  )
+    <div className="border-4 border-slate-300 rounded-xl flex flex-col items-center h-small w-small">
+      {weatherData && <div>OutfitAiCard</div>}
+    </div>
+  );
 }
 
-export default OutfitAiCard
+export default OutfitAiCard;
