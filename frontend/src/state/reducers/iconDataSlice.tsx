@@ -2,10 +2,12 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface IconData {
   iconData: string;
+  iconArrayVisible: boolean;
 }
 
 const initialState: IconData = {
-  iconData: "/images/placeholder-image.webp",
+  iconData: "/avatars/placeholder-image.webp",
+  iconArrayVisible: false,
 };
 
 const iconDataSlice = createSlice({

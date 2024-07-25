@@ -6,6 +6,7 @@ import weatherByFortnight from "/public/images/icons/weather-by-fortnight.svg";
 import weatherByHistory from "/public/images/icons/weather-by-history.svg";
 import { useAppDispatch, useAppSelector } from "../hooks/useReduxState";
 import { setActiveTimeFrame } from "../state/reducers/toggleTimeframeSlice";
+import AvatarList from "./AvatarList";
 
 type TimeFrame = "clothes" | "hourly" | "daily" | "fortnightly" | "historical";
 
@@ -45,20 +46,14 @@ function NavBar() {
     dispatch(setActiveTimeFrame(stateText));
   };
 
-  console.log(user);
-
   return (
     <div className="border-t-2 border-r-2 border-b-2 border-slate-700 bg-slate-500 rounded-br-lg h-full">
       <div className="text-center h-full">
         <div className="rounded-full flex flex-row items-center justify-center h-1/5 gap-2 px-3">
-          <img
-            src="/images/placeholder-image.webp"
-            className="h-16 w-16 rounded-full cursor-pointer"
-          />
+          <AvatarList />
           <div className="bg-slate-50 rounded-full py-3 w-3/4">
             <p className="text-gray-500 opacity-90">Logged in as:</p>
             <p className="font-bold text-xl">{user?.name}</p>
-            <p className="font-bold text-xl">{}</p>
           </div>
         </div>
         <div className="flex flex-col justify-evenly gap-2 h-4/5 items-center">
