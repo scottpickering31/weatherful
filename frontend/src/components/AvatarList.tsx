@@ -46,7 +46,7 @@ function AvatarList() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: user.name,
+          name: user.email,
           avatarIconData: selectedAvatar,
         }),
       });
