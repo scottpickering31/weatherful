@@ -12,12 +12,6 @@ type TimeFrame = "clothes" | "hourly" | "daily" | "fortnightly" | "historical";
 
 export const sidebarButtonsObj = [
   {
-    text: "*NEW* AI Outfit Recommendations",
-    image: weatherByClothes,
-    stateText: "clothes",
-    AIOutline: true,
-  },
-  {
     text: "Weather By Day",
     image: weatherByDay,
     stateText: "daily",
@@ -36,6 +30,12 @@ export const sidebarButtonsObj = [
     text: "Historic Weather Forecasts",
     image: weatherByHistory,
     stateText: "historic",
+  },
+  {
+    text: "*NEW* AI Outfit Recommendations",
+    image: weatherByClothes,
+    stateText: "clothes",
+    AIOutline: true,
   },
 ];
 
