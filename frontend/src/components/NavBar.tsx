@@ -12,19 +12,20 @@ type TimeFrame = "clothes" | "hourly" | "daily" | "fortnightly" | "historical";
 
 export const sidebarButtonsObj = [
   {
-    text: "Outfit Recommendations",
+    text: "*NEW* AI Outfit Recommendations",
     image: weatherByClothes,
     stateText: "clothes",
-  },
-  {
-    text: "Weather By Hour",
-    image: weatherByHour,
-    stateText: "hourly",
+    AIOutline: true,
   },
   {
     text: "Weather By Day",
     image: weatherByDay,
     stateText: "daily",
+  },
+  {
+    text: "Weather By Hour",
+    image: weatherByHour,
+    stateText: "hourly",
   },
   {
     text: "14 Day Weather Forecast",
@@ -41,28 +42,32 @@ export const sidebarButtonsObj = [
 function NavBar() {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.userData.userData);
+  const timeFrame = useAppSelector((state) => state.timeFrame.activeTimeFrame);
 
   const handleClick = (stateText: TimeFrame) => {
     dispatch(setActiveTimeFrame(stateText));
   };
 
   return (
-    <div className="border-t-2 border-r-2 border-b-2 border-slate-700 bg-slate-500 rounded-br-lg h-full">
+    <div className="border-t-2 border-r-2 border-b-2 border-slate-700 bg-slate-500 rounded-br-lg rounded-tr-lg h-full">
       <div className="text-center h-full">
-        <div className="rounded-full flex flex-row items-center justify-center h-1/5 gap-2 px-3">
+        <div className="rounded-2xl flex flex-row items-center justify-center h-1/5 gap-2 px-3">
           <AvatarList />
           <div className="bg-slate-50 rounded-full py-3 w-3/4">
             <p className="text-gray-500 opacity-90">Logged in as:</p>
             <p className="font-bold text-xl">{user?.name}</p>
           </div>
         </div>
-        <div className="flex flex-col justify-evenly gap-2 h-4/5 items-center">
+        <div className="flex flex-col justify-evenly h-4/5 items-center">
           {sidebarButtonsObj.map((button, index) => (
             <SidebarButton
               key={index}
               image={button.image}
               text={button.text}
-              onClick={() => handleClick(button.stateText)}
+              onClick={() => handleClick(button.stateText as TimeFrame)}
+              AIOutline={button.AIOutline}
+              CurrentTimeFrame={timeFrame}
+              stateText={button.stateText}
             />
           ))}
         </div>

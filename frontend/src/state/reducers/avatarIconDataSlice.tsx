@@ -6,7 +6,7 @@ interface avatarIconData {
 }
 
 const initialState: avatarIconData = {
-  avatarIconData: "/avatars/placeholder-image.webp",
+  avatarIconData: "",
   iconArrayVisible: false,
 };
 

@@ -15,7 +15,7 @@ const updateAvatars = (req, res) => {
       console.error("Error updating avatar:", err);
       return res.status(500).json({ error: "Internal Server Error" });
     }
-    console.log(avatarIconData);
+    console.log("Avatar updated successfully:", results);
     res.status(200).json({ message: "Avatar updated successfully" });
   });
 };

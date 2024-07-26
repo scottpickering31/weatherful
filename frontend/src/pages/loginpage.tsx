@@ -1,10 +1,12 @@
 import { useState } from "react";
 import FormInput from "../components/FormInput";
 import { loginInputs } from "../utils/userAuthData";
-import { useAppDispatch } from "../hooks/useReduxState";
+import { useAppDispatch, useAppSelector } from "../hooks/useReduxState";
 import { setLoggedIn } from "../state/reducers/loggedInSlice";
 import { useNavigate } from "react-router-dom";
 import { setuserData } from "../state/reducers/setUserDataSlice";
+import { setAvatarIconData } from "../state/reducers/avatarIconDataSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 function Loginpage() {
   const [values, setValues] = useState({
@@ -17,8 +19,8 @@ function Loginpage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/login", {
-      // const response = await fetch("https://xsjs2s-3000.csb.app/login", {
+      // const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch("https://xsjs2s-3000.csb.app/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,11 +33,11 @@ function Loginpage() {
         const user = data.user;
         dispatch(setLoggedIn(true));
         dispatch(setuserData(user));
+        dispatch(setAvatarIconData(user.avatar));
         navigation("/dashboard");
-
         console.log(user);
       } else {
-        alert("Email & Password not recognised, try again");
+        toast.error(`Email & Password not recognised. Please try again!`);
       }
     } catch (err) {
       console.log(err);
@@ -48,6 +50,13 @@ function Loginpage() {
 
   return (
     <div className="flex h-screen items-center justify-center p-4 flex-col">
+      <Toaster
+        toastOptions={{
+          style: {
+            textAlign: "center",
+          },
+        }}
+      />
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center w-full h-full"
