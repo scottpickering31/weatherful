@@ -15,10 +15,10 @@ function App() {
       <div className="h-full w-1/5">
         <NavBar />
       </div>
-      <div className="text-center gap-3 w-3/4">
-        <h1 className="text-slate-600 text-3xl underline underline-offset-8">
+      <div className="text-center w-3/4">
+        <h1 className="text-slate-600 text-4xl underline underline-offset-8">
           Weather
-          <span className="text-orange-500 underline underline-offset-8">
+          <span className="text-4xl text-orange-500 underline underline-offset-8">
             ful
           </span>
         </h1>

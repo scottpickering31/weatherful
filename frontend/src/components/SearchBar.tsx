@@ -19,7 +19,7 @@ function SearchBar() {
     <div className="flex flex-row justify-center items-center px-5 gap-2">
       <img
         src="/images/icons/magnifying-glass.svg"
-        className="h-14 w-14 cursor-pointer"
+        className="h-14 w-14 cursor-pointer hover:scale-110"
         onClick={handleSubmit}
       />
       <input
@@ -31,7 +31,7 @@ function SearchBar() {
       />
       <button
         onClick={handleSubmit}
-        className="bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 rounded"
+        className="bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 rounded hover:scale-110"
       >
         Search
       </button>

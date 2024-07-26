@@ -3,47 +3,53 @@ import HourlyWeatherCard from "../components/cards/HourlyWeatherCard";
 import OutfitAiCard from "../components/cards/OutfitAiCard";
 import HistoricWeatherCard from "../components/cards/HistoricWeatherCard";
 import FortnightWeatherCard from "../components/cards/FortnightWeatherCard";
+import { useWeatherData } from "../hooks/useWeatherData";
+import LoadingCard from "../components/cards/LoadingCard";
 import { useAppSelector } from "../hooks/useReduxState";
 
+const cardComponents = {
+  daily: DailyWeatherCard,
+  hourly: HourlyWeatherCard,
+  clothes: OutfitAiCard,
+  historic: HistoricWeatherCard,
+  fortnight: FortnightWeatherCard,
+};
+
+const cardTitle = {
+  daily: "Daily Weather Forecast in ",
+  hourly: "Hourly Weather Forecast in ",
+  historic: "Historic Weather Forecast in ",
+  fortnight: "14 Day Weather Forecast in ",
+};
+
 function InnerWeatherCardContainer() {
-  const fetchedStateData = useAppSelector(
-    (state) => state.weatherData.weatherData,
-  );
-
   const activeTimeFrame = useAppSelector(
-    (state) => state.timeFrame.activeTimeFrame,
+    (state) => state.timeFrame.activeTimeFrame
   );
+  const weatherData = useWeatherData();
 
-  const weatherData = fetchedStateData?.locations
-    ? fetchedStateData.locations[Object.keys(fetchedStateData.locations)[0]]
-    : null;
+  const ActiveCardComponent = cardComponents[activeTimeFrame];
 
   return (
     <div className="flex flex-col items-center justify-center">
-      {weatherData && activeTimeFrame === "daily" && (
-        <div className="flex items-center justify-center w-3/4">
-          <DailyWeatherCard weatherData={weatherData} />
-        </div>
-      )}
-      {weatherData && activeTimeFrame === "hourly" && (
-        <div className="flex items-center justify-center w-3/4">
-          <HourlyWeatherCard weatherData={weatherData} />
-        </div>
-      )}
-      {weatherData && activeTimeFrame === "clothes" && (
-        <div className="flex items-center justify-center w-3/4">
-          <OutfitAiCard weatherData={weatherData} />
-        </div>
-      )}
-      {weatherData && activeTimeFrame === "historic" && (
-        <div className="flex items-center justify-center w-3/4">
-          <HistoricWeatherCard weatherData={weatherData} />
-        </div>
-      )}
-      {weatherData && activeTimeFrame === "fortnight" && (
-        <div className="flex items-center justify-center w-3/4">
-          <FortnightWeatherCard weatherData={weatherData} />
-        </div>
+      {weatherData ? (
+        <>
+          {cardTitle[activeTimeFrame] && (
+            <div className="flex flex-row items-center gap-2">
+              <h2 className="text-2xl">{cardTitle[activeTimeFrame]}</h2>
+              <h1 className="text-orange-500 underline underline-offset-1 text-3xl">
+                {weatherData.id.toUpperCase()}
+              </h1>
+            </div>
+          )}
+          {ActiveCardComponent && (
+            <div className="flex items-center justify-center w-3/4">
+              <ActiveCardComponent weatherData={weatherData} />
+            </div>
+          )}
+        </>
+      ) : (
+        <LoadingCard />
       )}
     </div>
   );

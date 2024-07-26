@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./FormInput.css";
+import styles from "./FormInput.module.css"; // Import styles as a module
 
 const FormInput = (props) => {
   const [focused, setFocused] = useState(false);
@@ -23,7 +23,9 @@ const FormInput = (props) => {
         required
         className={`${props.className} rounded-2xl p-3 w-2/3`}
       />
-      <span className="text-red-600 text-sm hidden">{errorMessage}</span>
+      <span className={`text-red-600 text-sm ${styles.errorMessage}`}>
+        {errorMessage}
+      </span>
     </div>
   );
 };

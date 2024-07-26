@@ -7,6 +7,7 @@ import weatherByHistory from "/public/images/icons/weather-by-history.svg";
 import { useAppDispatch, useAppSelector } from "../hooks/useReduxState";
 import { setActiveTimeFrame } from "../state/reducers/toggleTimeframeSlice";
 import AvatarList from "./AvatarList";
+import SettingsIcon from "/public/images/icons/SettingsIcon.png";
 
 type TimeFrame = "clothes" | "hourly" | "daily" | "fortnightly" | "historical";
 
@@ -48,14 +49,28 @@ function NavBar() {
     dispatch(setActiveTimeFrame(stateText));
   };
 
+  const handleSettingsClick = () => {
+    // Add functionality for settings click, e.g., open a modal
+    console.log("Settings clicked");
+  };
+
   return (
     <div className="border-t-2 border-r-2 border-b-2 border-slate-700 bg-slate-500 rounded-br-lg rounded-tr-lg h-full">
       <div className="text-center h-full">
         <div className="rounded-2xl flex flex-row items-center justify-center h-1/5 gap-2 px-3">
           <AvatarList />
-          <div className="bg-slate-50 rounded-full py-3 w-3/4">
-            <p className="text-gray-500 opacity-90">Logged in as:</p>
-            <p className="font-bold text-xl">{user?.name}</p>
+          <div className="w-3/4 flex flex-row items-center justify-center bg-slate-50 rounded-full p-2">
+            <div className="w-3/5">
+              <p className="text-gray-500 opacity-90">Logged in as:</p>
+              <p className="font-bold text-xl">{user?.name}</p>
+            </div>
+            <div className="w-1/4 cursor-pointer" onClick={handleSettingsClick}>
+              <img
+                src={SettingsIcon}
+                alt="Settings Icon"
+                className="transition-transform duration-300 ease-in-out transform hover:rotate-90"
+              />
+            </div>
           </div>
         </div>
         <div className="flex flex-col justify-evenly h-4/5 items-center">

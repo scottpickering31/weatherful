@@ -26,10 +26,10 @@ function AvatarList() {
 
   const dispatch = useAppDispatch();
   const iconArrayVisible = useAppSelector(
-    (state) => state.avatarIconData.iconArrayVisible,
+    (state) => state.avatarIconData.iconArrayVisible
   );
   const currentIcon = useAppSelector(
-    (state) => state.avatarIconData.avatarIconData,
+    (state) => state.avatarIconData.avatarIconData
   );
   const user = useAppSelector((state) => state.userData.userData);
 
@@ -42,19 +42,19 @@ function AvatarList() {
     dispatch(setAvatarIconData(selectedAvatar));
     dispatch(setIconArrayVisible(false));
     try {
-      const response = await fetch(
-        "https://xsjs2s-3000.csb.app/update-avatar",
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: user.email,
-            avatarIconData: selectedAvatar,
-          }),
+      const response = await fetch("http://localhost:3000/update-avatar", {
+        // const response = await fetch(
+        //   "https://xsjs2s-3000.csb.app/update-avatar",
+        //   {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          email: user.email,
+          avatarIconData: selectedAvatar,
+        }),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to update avatar");

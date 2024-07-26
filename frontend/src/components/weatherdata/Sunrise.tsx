@@ -8,8 +8,8 @@ function Sunrise({ setSunriseTime }) {
       </div>
       <div className="w-2/3">
         <h3>
-          Sunrise <span className="text-xl">↑</span>: <br />
-          <span className="text-orange-500 font-bold">
+          Sunrise <span className="inline text-xl">↑</span>: <br />
+          <span className="inline text-orange-500 font-bold">
             {formatTimeStamp(setSunriseTime()) + " AM"}
           </span>
         </h3>
