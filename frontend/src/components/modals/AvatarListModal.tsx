@@ -1,8 +1,8 @@
-import { useAppDispatch, useAppSelector } from "../hooks/useReduxState";
+import { useAppDispatch, useAppSelector } from "../../hooks/useReduxState";
 import {
   setIconArrayVisible,
   setAvatarIconData,
-} from "../state/reducers/avatarIconDataSlice";
+} from "../../state/reducers/avatarIconDataSlice";
 import toast, { Toaster } from "react-hot-toast";
 
 function AvatarList() {

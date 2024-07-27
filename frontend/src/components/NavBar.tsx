@@ -1,3 +1,4 @@
+import { useState } from "react";
 import SidebarButton from "./buttons/SidebarButton";
 import weatherByClothes from "/public/images/icons/weather-by-clothes.svg";
 import weatherByDay from "/public/images/icons/weather-by-day.svg";
@@ -6,8 +7,9 @@ import weatherByFortnight from "/public/images/icons/weather-by-fortnight.svg";
 import weatherByHistory from "/public/images/icons/weather-by-history.svg";
 import { useAppDispatch, useAppSelector } from "../hooks/useReduxState";
 import { setActiveTimeFrame } from "../state/reducers/toggleTimeframeSlice";
-import AvatarList from "./AvatarList";
+import AvatarList from "./modals/AvatarListModal";
 import SettingsIcon from "/public/images/icons/SettingsIcon.png";
+import SettingsModal from "./modals/SettingsModal";
 
 type TimeFrame = "clothes" | "hourly" | "daily" | "fortnightly" | "historical";
 
@@ -41,6 +43,7 @@ export const sidebarButtonsObj = [
 ];
 
 function NavBar() {
+  const [showSettings, setShowSettings] = useState(false);
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.userData.userData);
   const timeFrame = useAppSelector((state) => state.timeFrame.activeTimeFrame);
@@ -50,8 +53,7 @@ function NavBar() {
   };
 
   const handleSettingsClick = () => {
-    // Add functionality for settings click, e.g., open a modal
-    console.log("Settings clicked");
+    setShowSettings(!showSettings);
   };
 
   return (
@@ -64,12 +66,14 @@ function NavBar() {
               <p className="text-gray-500 opacity-90">Logged in as:</p>
               <p className="font-bold text-xl">{user?.name}</p>
             </div>
-            <div className="w-1/4 cursor-pointer" onClick={handleSettingsClick}>
+            <div className="w-1/4">
               <img
+                onClick={handleSettingsClick}
                 src={SettingsIcon}
                 alt="Settings Icon"
-                className="transition-transform duration-300 ease-in-out transform hover:rotate-90"
+                className="transition-transform duration-300 ease-in-out transform hover:rotate-90 cursor-pointer"
               />
+              {showSettings && <SettingsModal handleSettingsClick={handleSettingsClick}/>}
             </div>
           </div>
         </div>
