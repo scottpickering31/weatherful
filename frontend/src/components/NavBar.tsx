@@ -1,50 +1,18 @@
-import { useState } from "react";
-import SidebarButton from "./buttons/SidebarButton";
-import weatherByClothes from "/public/images/icons/weather-by-clothes.svg";
-import weatherByDay from "/public/images/icons/weather-by-day.svg";
-import weatherByHour from "/public/images/icons/weather-by-hour.svg";
-import weatherByFortnight from "/public/images/icons/weather-by-fortnight.svg";
-import weatherByHistory from "/public/images/icons/weather-by-history.svg";
 import { useAppDispatch, useAppSelector } from "../hooks/useReduxState";
+import { setShowSettings } from "../state/reducers/setShowSettingsSlice";
 import { setActiveTimeFrame } from "../state/reducers/toggleTimeframeSlice";
+import { sidebarButtonsObj } from "../utils/sidebarButtonsObj";
+import SidebarButton from "./buttons/SidebarButton";
 import AvatarList from "./modals/AvatarListModal";
 import SettingsIcon from "/public/images/icons/SettingsIcon.png";
-import SettingsModal from "./modals/SettingsModal";
 
 type TimeFrame = "clothes" | "hourly" | "daily" | "fortnightly" | "historical";
 
-export const sidebarButtonsObj = [
-  {
-    text: "Weather By Day",
-    image: weatherByDay,
-    stateText: "daily",
-  },
-  {
-    text: "Weather By Hour",
-    image: weatherByHour,
-    stateText: "hourly",
-  },
-  {
-    text: "14 Day Weather Forecast",
-    image: weatherByFortnight,
-    stateText: "fortnight",
-  },
-  {
-    text: "Historic Weather Forecasts",
-    image: weatherByHistory,
-    stateText: "historic",
-  },
-  {
-    text: "*NEW* AI Outfit Recommendations",
-    image: weatherByClothes,
-    stateText: "clothes",
-    AIOutline: true,
-  },
-];
-
 function NavBar() {
-  const [showSettings, setShowSettings] = useState(false);
   const dispatch = useAppDispatch();
+  const showSettings = useAppSelector(
+    (state) => state.showSettings.showSettings
+  );
   const user = useAppSelector((state) => state.userData.userData);
   const timeFrame = useAppSelector((state) => state.timeFrame.activeTimeFrame);
 
@@ -53,7 +21,7 @@ function NavBar() {
   };
 
   const handleSettingsClick = () => {
-    setShowSettings(!showSettings);
+    dispatch(setShowSettings(!showSettings));
   };
 
   return (
@@ -73,7 +41,6 @@ function NavBar() {
                 alt="Settings Icon"
                 className="transition-transform duration-300 ease-in-out transform hover:rotate-90 cursor-pointer"
               />
-              {showSettings && <SettingsModal handleSettingsClick={handleSettingsClick}/>}
             </div>
           </div>
         </div>

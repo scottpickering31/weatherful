@@ -6,6 +6,7 @@ import inputDataSlice from "../reducers/inputDataSlice";
 import loggedInSlice from "../reducers/loggedInSlice";
 import userDataSlice from "../reducers/setUserDataSlice";
 import avatarIconDataSlice from "../reducers/avatarIconDataSlice";
+import showSettingsSlice from "../reducers/setShowSettingsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     inputData: inputDataSlice,
     userData: userDataSlice,
     avatarIconData: avatarIconDataSlice,
+    showSettings: showSettingsSlice,
   },
 });
 
