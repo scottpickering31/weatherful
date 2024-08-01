@@ -1,4 +1,6 @@
 const mysql = require("mysql");
+const { hashPassword, comparePassword } = require("../helpers/auth");
+
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USERNAME,
@@ -8,22 +10,26 @@ const db = mysql.createConnection({
 
 const signUp = (req, res) => {
   const { name, email, password } = req.body;
-  const query = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-  db.query(query, [name, email, password], (err, results) => {
-    if (err) {
-      if (err.code === "ER_DUP_ENTRY") {
-        return res
-          .status(400)
-          .json({
+  try {
+    const hashedPassword = hashPassword(password);
+    const query = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+    db.query(query, [name, email, hashedPassword], (err, results) => {
+      if (err) {
+        if (err.code === "ER_DUP_ENTRY") {
+          return res.status(400).json({
             error:
               "Email already exists. Please use another, or login instead.",
           });
+        }
+        console.error("Error inserting user:", err);
+        return res.status(500).json({ error: "Internal Server Error" });
       }
-      console.error("Error inserting user:", err);
-      return res.status(500).json({ error: "Internal Server Error" });
-    }
-    res.status(201).json({ message: "User created successfully" });
-  });
+      res.status(201).json({ message: "User created successfully" });
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 const login = (req, res) => {
