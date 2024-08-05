@@ -43,18 +43,19 @@ function AvatarList() {
     dispatch(setIconArrayVisible(false));
     try {
       // const response = await fetch("http://localhost:3000/update-avatar", {
-        const response = await fetch(
-          "https://xsjs2s-3000.csb.app/update-avatar",
-          {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: user.email,
-          avatarIconData: selectedAvatar,
-        }),
-      });
+      const response = await fetch(
+        "https://xsjs2s-3000.csb.app/update-avatar",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: user.email,
+            avatarIconData: selectedAvatar,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to update avatar");
@@ -69,14 +70,22 @@ function AvatarList() {
   };
 
   return (
-    <div>
+    <div className="cursor-pointer">
       <Toaster />
-      <img
-        src={currentIcon}
-        alt="current avatar"
-        className="w-16 h-16 rounded-full cursor-pointer"
-        onClick={handleAvatarClick}
-      />
+      <div className="relative group">
+        <img
+          src={currentIcon}
+          alt="current avatar"
+          className="w-16 h-16 rounded-full"
+          onClick={handleAvatarClick}
+        />
+        <div
+          onClick={handleAvatarClick}
+          className="absolute inset-0 flex items-center rounded-full justify-center bg-gray-800 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        >
+          <p className="text-white text-sm ">Change Avatar</p>
+        </div>
+      </div>
       {iconArrayVisible && (
         <div className="flex flex-row items-center justify-center absolute h-1/4 w-1/5 bg-slate-200 border-2 border-black rounded-2xl flex-wrap overflow-x-auto z-10">
           {Object.keys(avatarArray).map((key) => (
