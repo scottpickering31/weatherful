@@ -2,10 +2,8 @@ import { useState } from "react";
 import FormInput from "../components/FormInput";
 import { signUpInputs } from "../utils/userAuthData";
 import { useAppDispatch } from "../hooks/useReduxState";
-import { setLoggedIn } from "../state/reducers/loggedInSlice";
 import { useNavigate } from "react-router-dom";
 import { setuserData } from "../state/reducers/setUserDataSlice";
-import { setAvatarIconData } from "../state/reducers/avatarIconDataSlice";
 import toast, { Toaster } from "react-hot-toast";
 
 function SignUpPage() {
@@ -21,8 +19,7 @@ function SignUpPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/signup", {
-      // const response = await fetch("https://xsjs2s-3000.csb.app/signup", {
+      const response = await fetch("https://xsjs2s-3000.csb.app/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,11 +29,13 @@ function SignUpPage() {
 
       if (response.ok) {
         const data = await response.json();
+        console.log("Response data:", data);
         const user = data.user;
-        dispatch(setLoggedIn(true));
         dispatch(setuserData(user));
-        dispatch(setAvatarIconData(user.avatar));
-        navigate("/dashboard");
+        toast.success("Sign up successful, please login!");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
       } else {
         const errorData = await response.json();
         toast.error(errorData.error || "Sign up failed");

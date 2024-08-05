@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 const { hashPassword, comparePassword } = require("../helpers/auth");
 
+// Setup the database connection
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USERNAME,
@@ -8,10 +9,11 @@ const db = mysql.createConnection({
   database: process.env.DB_DATABASE,
 });
 
-const signUp = (req, res) => {
+// Asynchronous signUp function
+const signUp = async (req, res) => {
   const { name, email, password } = req.body;
   try {
-    const hashedPassword = hashPassword(password);
+    const hashedPassword = await hashPassword(password);
     const query = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
     db.query(query, [name, email, hashedPassword], (err, results) => {
       if (err) {
@@ -24,7 +26,12 @@ const signUp = (req, res) => {
         console.error("Error inserting user:", err);
         return res.status(500).json({ error: "Internal Server Error" });
       }
-      res.status(201).json({ message: "User created successfully" });
+      const user = { name, email };
+      res.status(201).json({
+        message:
+          "User created successfully, Please log in using your credentials!",
+        user,
+      });
     });
   } catch (error) {
     console.error("Error:", error);
@@ -32,10 +39,11 @@ const signUp = (req, res) => {
   }
 };
 
+// Asynchronous login function
 const login = (req, res) => {
   const { email, password } = req.body;
-  const query = "SELECT * FROM users WHERE email = ? AND password = ?";
-  db.query(query, [email, password], (err, results) => {
+  const query = "SELECT * FROM users WHERE email = ?";
+  db.query(query, [email], async (err, results) => {
     if (err) {
       console.error("Error logging in:", err);
       return res.status(500).json({ error: "Internal Server Error" });
@@ -43,9 +51,14 @@ const login = (req, res) => {
     if (results.length === 0) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
+
     const user = results[0];
+    const isMatch = await comparePassword(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
+
     res.status(200).json({ message: "Login successful", user });
-    console.log("user:", user);
   });
 };
 

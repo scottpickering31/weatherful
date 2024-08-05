@@ -1,15 +1,16 @@
 import { useAppDispatch, useAppSelector } from "../../hooks/useReduxState";
 import { setShowSettings } from "../../state/reducers/setShowSettingsSlice";
+import { makeSelectShowSettings } from "../../utils/selectors";
 
 function SettingsModal() {
   const dispatch = useAppDispatch();
+  const showSettings = useAppSelector(makeSelectShowSettings());
 
-  const showSettings = useAppSelector(
-    (state) => state.showSettings.showSettings
-  );
   const handleSettingsClick = () => {
     dispatch(setShowSettings(!showSettings));
   };
+
+  if (!showSettings) return null;
 
   return (
     <div className="bg-white rounded-2xl border-2 border-gray-300 h-full w-full">

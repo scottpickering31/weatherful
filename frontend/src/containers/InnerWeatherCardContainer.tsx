@@ -6,6 +6,7 @@ import FortnightWeatherCard from "../components/cards/FortnightWeatherCard";
 import { useWeatherData } from "../hooks/useWeatherData";
 import LoadingCard from "../components/cards/LoadingCard";
 import { useAppSelector } from "../hooks/useReduxState";
+import { useState } from "react";
 
 const cardComponents = {
   daily: DailyWeatherCard,
@@ -23,12 +24,17 @@ const cardTitle = {
 };
 
 function InnerWeatherCardContainer() {
+  const [showLocation, setShowLocation] = useState(true);
   const activeTimeFrame = useAppSelector(
     (state) => state.timeFrame.activeTimeFrame
   );
   const weatherData = useWeatherData();
 
   const ActiveCardComponent = cardComponents[activeTimeFrame];
+
+  const handleClick = () => {
+    setShowLocation(!showLocation);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -37,9 +43,24 @@ function InnerWeatherCardContainer() {
           {cardTitle[activeTimeFrame] && (
             <div className="flex flex-row items-center gap-2">
               <h2 className="text-2xl">{cardTitle[activeTimeFrame]}</h2>
-              <h1 className="text-orange-500 underline underline-offset-1 text-3xl">
-                {weatherData.id.toUpperCase()}
-              </h1>
+              <div className="flex flex-row items-end gap-2">
+                {showLocation ? (
+                  <h1 className="text-orange-500 underline underline-offset-1 text-3xl">
+                    {weatherData.id.slice(0, 1).toUpperCase() +
+                      weatherData.id.slice(1)}
+                  </h1>
+                ) : (
+                  <h1 className="text-orange-500 underline underline-offset-1 text-3xl">
+                    {weatherData.address}
+                  </h1>
+                )}
+                <button
+                  onClick={handleClick}
+                  className="text-blue-500 underline-offset-1 text-xs"
+                >
+                  (...{showLocation ? "show" : "hide"} full location)
+                </button>
+              </div>
             </div>
           )}
           {ActiveCardComponent && (

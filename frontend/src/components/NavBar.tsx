@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/useReduxState";
 import { setShowSettings } from "../state/reducers/setShowSettingsSlice";
 import { setActiveTimeFrame } from "../state/reducers/toggleTimeframeSlice";
@@ -5,16 +6,19 @@ import { sidebarButtonsObj } from "../utils/sidebarButtonsObj";
 import SidebarButton from "./buttons/SidebarButton";
 import AvatarList from "./modals/AvatarListModal";
 import SettingsIcon from "/public/images/icons/SettingsIcon.png";
+import {
+  makeSelectShowSettings,
+  makeSelectUserData,
+  makeSelectTimeFrame,
+} from "../utils/selectors";
 
 type TimeFrame = "clothes" | "hourly" | "daily" | "fortnightly" | "historical";
 
-function NavBar() {
+const NavBar = memo(() => {
   const dispatch = useAppDispatch();
-  const showSettings = useAppSelector(
-    (state) => state.showSettings.showSettings
-  );
-  const user = useAppSelector((state) => state.userData.userData);
-  const timeFrame = useAppSelector((state) => state.timeFrame.activeTimeFrame);
+  const showSettings = useAppSelector(makeSelectShowSettings());
+  const user = useAppSelector(makeSelectUserData());
+  const timeFrame = useAppSelector(makeSelectTimeFrame());
 
   const handleClick = (stateText: TimeFrame) => {
     dispatch(setActiveTimeFrame(stateText));
@@ -31,8 +35,10 @@ function NavBar() {
           <AvatarList />
           <div className="w-3/4 flex flex-row items-center justify-center bg-slate-50 rounded-full p-2">
             <div className="w-3/5">
-              <p className="text-gray-500 opacity-90">Logged in as:</p>
-              <p className="font-bold text-xl">{user?.name}</p>
+              <p className="text-gray-500 opacity-90 text-sm">Logged in as:</p>
+              <p className="font-bold text-lg">
+                {user?.name.slice(0, 1).toUpperCase() + user?.name.slice(1)}
+              </p>
             </div>
             <div className="w-1/4">
               <img
@@ -60,6 +66,6 @@ function NavBar() {
       </div>
     </div>
   );
-}
+});
 
 export default NavBar;
