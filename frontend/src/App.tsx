@@ -24,9 +24,9 @@ function App() {
             <NavBar />
           </div>
           <div className="text-center w-4/5">
-            <h1 className="text-slate-600 text-4xl underline underline-offset-8">
+            <h1 className="text-slate-600 text-4xl font-bold underline underline-offset-8">
               Weather
-              <span className="text-4xl text-orange-500 underline underline-offset-8">
+              <span className="text-4xl font-bold text-orange-500 underline underline-offset-8">
                 ful
               </span>
             </h1>
