@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/useReduxState";
 import { setShowSettings } from "../../state/reducers/setShowSettingsSlice";
 import { makeSelectShowSettings } from "../../utils/selectors";
 import { useNavigate } from "react-router-dom";
+import SettingsSelections from "../settings/SettingsSelections";
 
 function SettingsModal() {
   const dispatch = useAppDispatch();
@@ -29,42 +30,16 @@ function SettingsModal() {
           >
             X
           </p>
-          <p className="font-bold text-2xl">User Settings</p>
+          <p className="font-bold text-xl underline-offset-4 underline">
+            User Settings
+          </p>
           <div onClick={handleLogout} className="cursor-pointer">
             <p className="bg-slate-200 rounded-lg px-3 py-1 hover:scale-110">
               Log Out
             </p>
           </div>
         </div>
-        <div className="flex flex-col w-full h-5/6 justify-around items-center">
-          <div className="p-5">
-            <div className="flex flex-row gap-2">
-              <h1>Change Default Location</h1>
-              <p className="bg-slate-200 rounded-full px-1 cursor-pointer">?</p>
-            </div>
-            <h1></h1>
-          </div>
-          <div className="p-5">
-            <div className="flex flex-row gap-2">
-              <h1>Change Default Location</h1>
-              <p className="bg-slate-200 rounded-full px-1 cursor-pointer">?</p>
-            </div>
-            <h1></h1>
-          </div>
-          <div className="p-5">
-            <div className="flex flex-row gap-2">
-              <h1>Change Default Location</h1>
-              <p className="bg-slate-200 rounded-full px-1 cursor-pointer">?</p>
-            </div>
-            <h1></h1>
-          </div>
-          <div className="p-5">
-            <div className="flex flex-row gap-2">
-              <h1>Change Default Location</h1>
-              <p className="bg-slate-200 rounded-full px-1 cursor-pointer">?</p>
-            </div>
-          </div>
-        </div>
+        <SettingsSelections />
       </div>
     </div>
   );
