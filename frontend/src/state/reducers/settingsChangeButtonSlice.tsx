@@ -1,18 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface SettingsChangeButton {
-  settingsChange: string[];
+  settingsChange: string;
 }
 
 const initialState: SettingsChangeButton = {
-  settingsChange: ["name", "email", "password", "timezone"],
+  settingsChange: "",
 };
 
 const SettingsChangeButton = createSlice({
   name: "settingsChange",
   initialState,
   reducers: {
-    setsettingsChange: (state, action: PayloadAction<string[]>) => {
+    setsettingsChange: (state, action: PayloadAction<string>) => {
       state.settingsChange = action.payload;
     },
   },

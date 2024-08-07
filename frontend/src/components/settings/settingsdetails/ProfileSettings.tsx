@@ -10,13 +10,26 @@ function ProfileSettings() {
         <h1>Profile Settings</h1>
       </div>
       <div className="h-5/6 flex flex-col p-5 justify-evenly">
-        <SettingsDetailSections title={"Name"} description={user.name} />
+        <SettingsDetailSections
+          title={"Name"}
+          value={"name"}
+          description={user.name}
+        />
         <SettingsDetailSections
           title={"Email Address"}
           description={user.email}
+          value={"email"}
         />
-        <SettingsDetailSections title={"Password"} description={"●●●●●●●●●●"} />
-        <SettingsDetailSections title={"Local Timezone"} description="GMT" />
+        <SettingsDetailSections
+          title={"Password"}
+          description={"●●●●●●●●●●"}
+          value={"password"}
+        />
+        <SettingsDetailSections
+          title={"Local Timezone"}
+          description="GMT"
+          value={"timezone"}
+        />
       </div>
     </div>
   );

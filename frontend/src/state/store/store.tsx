@@ -8,6 +8,7 @@ import userDataSlice from "../reducers/setUserDataSlice";
 import avatarIconDataSlice from "../reducers/avatarIconDataSlice";
 import showSettingsSlice from "../reducers/setShowSettingsSlice";
 import settingsTextSlice from "../reducers/setSettingsTextSlice";
+import settingsChangeButtonSlice from "../reducers/settingsChangeButtonSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     avatarIconData: avatarIconDataSlice,
     showSettings: showSettingsSlice,
     settingsText: settingsTextSlice,
+    settingsChange: settingsChangeButtonSlice,
   },
 });
 
