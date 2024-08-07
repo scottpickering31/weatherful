@@ -42,19 +42,20 @@ function AvatarList() {
     dispatch(setAvatarIconData(selectedAvatar));
     dispatch(setIconArrayVisible(false));
     try {
-      const response = await fetch("http://localhost:3000/update-avatar", {
-        // const response = await fetch(
-        //   "https://xsjs2s-3000.csb.app/update-avatar",
-        //   {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: user.email,
-          avatarIconData: selectedAvatar,
-        }),
-      });
+      // const response = await fetch("http://localhost:3000/update-avatar", {
+      const response = await fetch(
+        "https://xsjs2s-3000.csb.app/update-avatar",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: user.email,
+            avatarIconData: selectedAvatar,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to update avatar");

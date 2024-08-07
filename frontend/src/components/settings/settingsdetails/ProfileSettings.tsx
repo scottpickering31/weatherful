@@ -6,7 +6,7 @@ function ProfileSettings() {
 
   return (
     <div className="h-full">
-      <div className="flex border-b-2 justify-center p-5 text-2xl w-1/2 font-bold underline-offset-4 underline">
+      <div className="flex border-b-2 justify-center p-5 text-2xl font-bold underline-offset-4 underline">
         <h1>Profile Settings</h1>
       </div>
       <div className="h-5/6 flex flex-col p-5 justify-evenly">
