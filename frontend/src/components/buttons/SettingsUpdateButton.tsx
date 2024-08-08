@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAppSelector } from "../../hooks/useReduxState";
 import bcrypt from "bcryptjs";
+import toast, { Toaster } from "react-hot-toast";
 
 function SettingsUpdateButton({
   inputValue,
@@ -41,8 +42,10 @@ function SettingsUpdateButton({
       }
       const data = await response.json();
       console.log("Update successful", data);
+      toast.success("Update successful");
     } catch (error) {
       console.error(error);
+      toast.error("Error updating settings");
     } finally {
       setIsUpdating(false);
     }
@@ -54,6 +57,7 @@ function SettingsUpdateButton({
       onClick={handleUpdate}
       disabled={isUpdating}
     >
+      <Toaster />
       {isUpdating ? "Updating..." : "Update"}
     </button>
   );
