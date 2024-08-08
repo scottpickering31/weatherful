@@ -25,17 +25,21 @@ function SettingsUpdateButton({
     }
 
     try {
-      const response = await fetch("http://localhost:3000/update-settings", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          field,
-          newValue,
-        }),
-      });
+      // const response = await fetch("http://localhost:3000/update-settings", {
+      const response = await fetch(
+        "https://xsjs2s-3000.csb.app/update-settings",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            field,
+            newValue,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to update settings");
