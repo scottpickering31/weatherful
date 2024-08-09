@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface userData {
   userData: {
-    id: number;
+    user_id: number;
     name: string;
     email: string;
     password: string;
@@ -11,7 +11,7 @@ interface userData {
 
 const initialState: userData = {
   userData: {
-    id: 0,
+    user_id: 0,
     name: "",
     email: "",
     password: "",

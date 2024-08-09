@@ -1,11 +1,15 @@
-import { useAppSelector } from '../hooks/useReduxState';
+import { useAppSelector } from "../hooks/useReduxState";
 
 export const useWeatherData = () => {
-  const fetchedStateData = useAppSelector((state) => state.weatherData.weatherData);
+  const fetchedStateData = useAppSelector(
+    (state) => state.weatherData.weatherData
+  );
 
   const weatherData = fetchedStateData?.locations
     ? fetchedStateData.locations[Object.keys(fetchedStateData.locations)[0]]
     : null;
+
+  console.log(weatherData);
 
   return weatherData;
 };

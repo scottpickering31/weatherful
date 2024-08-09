@@ -27,7 +27,7 @@ export const fetchWeatherData = createAsyncThunk(
       console.error(error);
       throw error;
     }
-  },
+  }
 );
 
 export const fetchFutureForecastData = createAsyncThunk(
@@ -53,7 +53,7 @@ export const fetchFutureForecastData = createAsyncThunk(
       console.error(error);
       throw error;
     }
-  },
+  }
 );
 
 const weatherDataSlice = createSlice({
@@ -62,7 +62,12 @@ const weatherDataSlice = createSlice({
     weatherData: null,
     futureWeatherData: null,
   },
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.weatherData = null;
+      state.futureWeatherData = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchWeatherData.fulfilled, (state, action) => {
       state.weatherData = action.payload;
@@ -84,5 +89,7 @@ const weatherDataSlice = createSlice({
     });
   },
 });
+
+export const { logout } = weatherDataSlice.actions;
 
 export default weatherDataSlice.reducer;

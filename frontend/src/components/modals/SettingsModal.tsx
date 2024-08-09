@@ -2,6 +2,8 @@ import { useAppDispatch, useAppSelector } from "../../hooks/useReduxState";
 import { setShowSettings } from "../../state/reducers/setShowSettingsSlice";
 import { makeSelectShowSettings } from "../../utils/selectors";
 import { useNavigate } from "react-router-dom";
+import { setLoggedIn } from "../../state/reducers/loggedInSlice";
+import { logout } from "../../state/reducers/weatherDataSlice";
 import SettingsSelections from "../settings/SettingsSelections";
 import AccountDefaults from "../settings/settingsdetails/AccountDefaults";
 import Appearance from "../settings/settingsdetails/Appearance";
@@ -30,7 +32,9 @@ function SettingsModal() {
 
   const handleLogout = () => {
     navigation("/login");
+    dispatch(logout());
     dispatch(setShowSettings(false));
+    dispatch(setLoggedIn(false));
   };
 
   if (!showSettings) return null;

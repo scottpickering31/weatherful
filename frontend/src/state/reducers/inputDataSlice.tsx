@@ -5,7 +5,7 @@ interface InputData {
 }
 
 const initialState: InputData = {
-  city: "London",
+  city: "",
 };
 
 const inputDataSlice = createSlice({

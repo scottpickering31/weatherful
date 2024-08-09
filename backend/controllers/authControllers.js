@@ -1,7 +1,6 @@
 const mysql = require("mysql");
 const { hashPassword, comparePassword } = require("../helpers/auth");
 
-// Setup the database connection
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USERNAME,

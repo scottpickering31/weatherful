@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./FormInput.module.css"; // Import styles as a module
+import styles from "./FormInput.module.css"; 
 
 const FormInput = (props) => {
   const [focused, setFocused] = useState(false);

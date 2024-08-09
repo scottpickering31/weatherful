@@ -1,26 +1,64 @@
 import { useAppDispatch, useAppSelector } from "../hooks/useReduxState";
+import { useEffect } from "react";
 import {
   fetchWeatherData,
   fetchFutureForecastData,
 } from "../state/reducers/weatherDataSlice";
 import { setInputData } from "../state/reducers/inputDataSlice";
+import { useWeatherData } from "../hooks/useWeatherData";
 
 function SearchBar() {
   const dispatch = useAppDispatch();
   const inputData = useAppSelector((state) => state.inputData.city);
+  const user = useAppSelector((state) => state.userData.userData);
+  const weatherData = useWeatherData();
 
-  const handleSubmit = (event) => {
+  const handleClick = async (event) => {
     event.preventDefault();
-    dispatch(fetchWeatherData(inputData));
     dispatch(fetchFutureForecastData(inputData));
+    await dispatch(fetchWeatherData(inputData));
   };
+
+  useEffect(() => {
+    if (weatherData) {
+      console.log("Weather data:", weatherData);
+      const data = {
+        location: weatherData.address,
+        temperature: weatherData.currentConditions.temp,
+        user_id: user.user_id,
+      };
+      console.log("data data", data);
+
+      const sendDataToBackend = async () => {
+        const response = await fetch(
+          "https://xsjs2s-3000.csb.app/search-history",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+        if (response.ok) {
+          console.log("Data sent successfully");
+        } else {
+          console.log("Failed to send data");
+        }
+      };
+
+      sendDataToBackend();
+    } else {
+      console.log("Weather data not available");
+    }
+  }, [weatherData]);
 
   return (
     <div className="flex flex-row justify-center items-center px-5 gap-2">
       <img
         src="/images/icons/magnifying-glass.svg"
         className="h-14 w-14 cursor-pointer hover:scale-110"
-        onClick={handleSubmit}
+        onClick={handleClick}
       />
       <input
         type="search"
@@ -30,7 +68,7 @@ function SearchBar() {
         onChange={(e) => dispatch(setInputData(e.target.value))}
       />
       <button
-        onClick={handleSubmit}
+        onClick={handleClick}
         className="bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 rounded hover:scale-110"
       >
         Search
