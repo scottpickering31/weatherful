@@ -22,4 +22,21 @@ const searchHistory = (req, res) => {
   });
 };
 
-module.exports = { searchHistory };
+const getSearchHistory = (req, res) => {
+  const { user_id } = req.body;
+  const sql = "SELECT * FROM search_history WHERE user_id = ?";
+
+  db.query(sql, [user_id], (err, result) => {
+    if (err) {
+      console.error("Error finding search history:", err);
+      return res.status(500).send("Error accessing search history");
+    }
+
+    if (result.length === 0) {
+      return res.status(404).send({ message: "No search history found" });
+    }
+    res.status(200).send({ searchHistory: result });
+  });
+};
+
+module.exports = { searchHistory, getSearchHistory };

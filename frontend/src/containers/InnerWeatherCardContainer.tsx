@@ -28,6 +28,7 @@ function InnerWeatherCardContainer() {
   const activeTimeFrame = useAppSelector(
     (state) => state.timeFrame.activeTimeFrame
   );
+
   const weatherData = useWeatherData();
 
   const ActiveCardComponent = cardComponents[activeTimeFrame];
@@ -41,7 +42,7 @@ function InnerWeatherCardContainer() {
       {weatherData ? (
         <>
           {cardTitle[activeTimeFrame] && (
-            <div className="flex flex-row items-center gap-2">
+            <div className="flex flex-col items-center">
               <h2 className="text-2xl">{cardTitle[activeTimeFrame]}</h2>
               <div className="flex flex-row items-end gap-2">
                 {showLocation ? (
@@ -54,6 +55,7 @@ function InnerWeatherCardContainer() {
                     {weatherData.address}
                   </h1>
                 )}
+
                 <button
                   onClick={handleClick}
                   className="text-blue-500 underline-offset-1 text-xs"
