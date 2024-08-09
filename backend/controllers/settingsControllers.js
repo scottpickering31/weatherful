@@ -9,21 +9,21 @@ const db = mysql.createConnection({
 });
 
 const profileUpdate = async (req, res) => {
-  const { field, newValue, email } = req.body;
+  const { value, newValue, email } = req.body;
 
-  if (!field || !newValue || !email) {
+  if (!value || !newValue || !email) {
     return res.status(400).json({ error: "Invalid input" });
   }
 
-  const validFields = ["name", "email", "password", "timezone"];
-  if (!validFields.includes(field)) {
-    return res.status(400).json({ error: "Invalid field" });
+  const validValues = ["name", "email", "password", "timezone"];
+  if (!validValues.includes(value)) {
+    return res.status(400).json({ error: "Invalid value" });
   }
 
   // Handle password update securely
-  if (field === "password") {
+  if (value === "password") {
     const hashedPassword = newValue;
-    const query = `UPDATE users SET ${field} = ? WHERE email = ?`;
+    const query = `UPDATE users SET ${value} = ? WHERE email = ?`;
 
     db.query(query, [hashedPassword, email], (error, results) => {
       if (error) {
@@ -33,7 +33,7 @@ const profileUpdate = async (req, res) => {
       return res.status(200).json({ message: "Settings updated successfully" });
     });
   } else {
-    const query = `UPDATE users SET ${field} = ? WHERE email = ?`;
+    const query = `UPDATE users SET ${value} = ? WHERE email = ?`;
 
     db.query(query, [newValue, email], (error, results) => {
       if (error) {
