@@ -4,6 +4,7 @@ import {
   setAvatarIconData,
 } from "../../state/reducers/avatarIconDataSlice";
 import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
 
 function AvatarList() {
   const avatarArray = {
@@ -41,31 +42,21 @@ function AvatarList() {
     const selectedAvatar = avatarArray[icon];
     dispatch(setAvatarIconData(selectedAvatar));
     dispatch(setIconArrayVisible(false));
-    try {
-      const response = await fetch("http://localhost:3000/api/update-avatar", {
-        // const response = await fetch(
-        //   "https://xsjs2s-3000.csb.app/api/update-avatar",
-        //   {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: user.email,
-          avatarIconData: selectedAvatar,
-        }),
-      });
 
-      if (!response.ok) {
-        throw new Error("Failed to update avatar");
-      }
-      const result = await response.json();
-      console.log("Avatar updated successfully:", result);
-      toast.success("Avatar updated successfully");
-    } catch (error) {
-      console.error("Error updating avatar:", error);
-      toast.error("Error updating avatar");
-    }
+    axios
+      .patch("http://localhost:3000/api/update-avatar", {
+        // .patch("https://xsjs2s-3000.csb.app/api/update-avatar", {
+        email: user.email,
+        avatarIconData: selectedAvatar,
+      })
+      .then((response) => {
+        console.log("Avatar updated successfully:", response.data);
+        toast.success("Avatar updated successfully");
+      })
+      .catch((error) => {
+        console.error("Error updating avatar:", error);
+        toast.error("Error updating avatar");
+      });
   };
 
   return (

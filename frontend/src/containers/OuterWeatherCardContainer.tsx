@@ -6,6 +6,7 @@ import InnerWeatherCardContainer from "./InnerWeatherCardContainer";
 import SearchHistoryButton from "../components/buttons/SearchHistoryButton";
 import SearchHistoryModal from "../components/modals/SearchHistoryModal";
 import { useState } from "react";
+import axios from "axios";
 
 function WeatherCardContainer() {
   const [showSearchHistoryModal, setShowSearchHistoryModal] = useState(false);
@@ -22,29 +23,17 @@ function WeatherCardContainer() {
   const handleClick = async () => {
     setShowSearchHistoryModal(!showSearchHistoryModal);
     if (showSearchHistoryModal === false) {
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/get-search-history",
-          {
-            // const response = await fetch(
-            //   "https://xsjs2s-3000.csb.app/api/get-search-history",
-            //   {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ user_id: user.user_id }),
-          }
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const searchHistoryData = await response.json();
-        console.log("Search history data:", searchHistoryData);
-        setSearchHistoryData(searchHistoryData);
-      } catch (error) {
-        console.error("Failed to fetch search history data:", error);
-      }
+      axios
+        .post("http://localhost:3000/api/get-search-history", {
+          // .post("https://xsjs2s-3000.csb.app/api/get-search-history", {
+          user_id: user.user_id,
+        })
+        .then((response) => {
+          setSearchHistoryData(response.data);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch search history data:", error);
+        });
     }
   };
 

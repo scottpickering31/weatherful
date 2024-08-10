@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { setuserData } from "../state/reducers/setUserDataSlice";
 import { setAvatarIconData } from "../state/reducers/avatarIconDataSlice";
 import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
 
 function Loginpage() {
   const [values, setValues] = useState({
@@ -18,30 +19,23 @@ function Loginpage() {
   const navigation = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:3000/api/login", {
-      // const response = await fetch("https://xsjs2s-3000.csb.app/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
+    axios
+      .post("http://localhost:3000/api/login", values)
+      // axios.post('https://xsjs2s-3000.csb.app/api/login', values)
+      .then((response) => {
+        const data = response.data;
+        console.log("Response data:", data);
         const user = data.user;
         dispatch(setLoggedIn(true));
         dispatch(setuserData(user));
         dispatch(setAvatarIconData(user.avatar));
         navigation("/dashboard");
         console.log(user);
-      } else {
-        toast.error(`Email & Password not recognised. Please try again!`);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error(error.response.data.error || "Login failed");
+      });
   };
 
   const onChange = (e) => {

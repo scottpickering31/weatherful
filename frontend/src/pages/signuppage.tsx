@@ -5,6 +5,7 @@ import { useAppDispatch } from "../hooks/useReduxState";
 import { useNavigate } from "react-router-dom";
 import { setuserData } from "../state/reducers/setUserDataSlice";
 import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
 
 function SignUpPage() {
   const [values, setValues] = useState({
@@ -18,34 +19,25 @@ function SignUpPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:3000/api/signup", {
-        // const response = await fetch("https://xsjs2s-3000.csb.app/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
+    axios
+      .post("http://localhost:3000/api/signup", values)
+      // .post("https://xsjs2s-3000.csb.app/api/signup", values)
+      .then((response) => {
+        const data = response.data;
         console.log("Response data:", data);
         const user = data.user;
         dispatch(setuserData(user));
         toast.success("Sign up successful, please login!");
         setTimeout(() => {
           navigate("/login");
-        }, 2000);
-      } else {
-        const errorData = await response.json();
-        toast.error(errorData.error || "Sign up failed");
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error("Sign up failed. Please try again later.");
-    }
+        }, 1300);
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error(error.response.data.error || "Sign up failed");
+      });
   };
+
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });

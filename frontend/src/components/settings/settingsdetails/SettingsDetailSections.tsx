@@ -4,6 +4,7 @@ import { useState } from "react";
 import SettingsUpdateButton from "../../buttons/SettingsUpdateButton";
 import bcrypt from "bcryptjs";
 import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
 
 function SettingsDetailSections({
   title,
@@ -32,34 +33,24 @@ function SettingsDetailSections({
       newValue = await bcrypt.hash(inputValue, salt);
     }
 
-    try {
-      const response = await fetch("http://localhost:3000/api/update-settings", {
-        // const response = await fetch(
-        //   "https://xsjs2s-3000.csb.app/api/update-settings",
-        //   {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          value,
-          newValue,
-        }),
+    axios
+      .patch(`http://localhost:3000/api/update-settings`, {
+        // .patch(`https://xsjs2s-3000.csb.app/api/update-settings`, {
+        email,
+        value,
+        newValue,
+      })
+      .then((response) => {
+        console.log("Update successful", response.data);
+        toast.success("Update successful");
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Error updating settings");
+      })
+      .finally(() => {
+        setIsUpdating(false);
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to update settings");
-      }
-      const data = await response.json();
-      console.log("Update successful", data);
-      toast.success("Update successful");
-    } catch (error) {
-      console.error(error);
-      toast.error("Error updating settings");
-    } finally {
-      setIsUpdating(false);
-    }
   };
 
   return (

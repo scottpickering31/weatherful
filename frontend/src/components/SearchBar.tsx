@@ -6,6 +6,7 @@ import {
 } from "../state/reducers/weatherDataSlice";
 import { setInputData } from "../state/reducers/inputDataSlice";
 import { useWeatherData } from "../hooks/useWeatherData";
+import axios from "axios";
 
 function SearchBar() {
   const dispatch = useAppDispatch();
@@ -30,22 +31,15 @@ function SearchBar() {
       console.log("data data", data);
 
       const sendDataToBackend = async () => {
-        const response = await fetch("http://localhost:3000/api/search-history", {
-        // const response = await fetch(
-        //   "https://xsjs2s-3000.csb.app/api/search-history",
-        //   {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          }
-        );
-        if (response.ok) {
-          console.log("Data sent successfully");
-        } else {
-          console.log("Failed to send data");
-        }
+        axios
+          .post("http://localhost:3000/api/search-history", data)
+          // axios.post("https://xsjs2s-3000.csb.app/api/search-history", data);
+          .then((response) => {
+            console.log("Data sent successfully" + response.data);
+          })
+          .catch((error) => {
+            console.log("Failed to send data", error);
+          });
       };
 
       sendDataToBackend();
