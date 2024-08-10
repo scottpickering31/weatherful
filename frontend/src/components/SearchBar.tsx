@@ -30,9 +30,10 @@ function SearchBar() {
       console.log("data data", data);
 
       const sendDataToBackend = async () => {
-        const response = await fetch(
-          "https://xsjs2s-3000.csb.app/search-history",
-          {
+        const response = await fetch("http://localhost:3000/api/search-history", {
+        // const response = await fetch(
+        //   "https://xsjs2s-3000.csb.app/api/search-history",
+        //   {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

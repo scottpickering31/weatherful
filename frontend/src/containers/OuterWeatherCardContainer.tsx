@@ -24,8 +24,11 @@ function WeatherCardContainer() {
     if (showSearchHistoryModal === false) {
       try {
         const response = await fetch(
-          "https://xsjs2s-3000.csb.app/get-search-history",
+          "http://localhost:3000/api/get-search-history",
           {
+            // const response = await fetch(
+            //   "https://xsjs2s-3000.csb.app/api/get-search-history",
+            //   {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

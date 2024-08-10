@@ -19,8 +19,8 @@ function SignUpPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // const response = await fetch("http://localhost:3000/signup", {
-      const response = await fetch("https://xsjs2s-3000.csb.app/signup", {
+      const response = await fetch("http://localhost:3000/api/signup", {
+        // const response = await fetch("https://xsjs2s-3000.csb.app/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

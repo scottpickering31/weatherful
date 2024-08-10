@@ -16,7 +16,9 @@ function LoadingCard() {
         </div>
       ) : (
         <div className={loadingClasses}>
-          <p>Please search for Town, City or Postal Code</p>
+          <p className="text-3xl underline-offset-2 underline">
+            Please search for Town, City or Postal Code
+          </p>
         </div>
       )}
     </div>

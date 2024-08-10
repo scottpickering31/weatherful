@@ -42,20 +42,19 @@ function AvatarList() {
     dispatch(setAvatarIconData(selectedAvatar));
     dispatch(setIconArrayVisible(false));
     try {
-      // const response = await fetch("http://localhost:3000/update-avatar", {
-      const response = await fetch(
-        "https://xsjs2s-3000.csb.app/update-avatar",
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: user.email,
-            avatarIconData: selectedAvatar,
-          }),
-        }
-      );
+      const response = await fetch("http://localhost:3000/api/update-avatar", {
+        // const response = await fetch(
+        //   "https://xsjs2s-3000.csb.app/api/update-avatar",
+        //   {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: user.email,
+          avatarIconData: selectedAvatar,
+        }),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to update avatar");
@@ -87,7 +86,7 @@ function AvatarList() {
         </div>
       </div>
       {iconArrayVisible && (
-        <div className="flex flex-row items-center justify-center absolute h-1/4 w-1/5 bg-slate-200 border-2 border-black rounded-2xl flex-wrap overflow-x-auto z-10">
+        <div className="flex flex-row items-center justify-center absolute h-1/4 w-1/5 bg-slate-200 border-2 border-black rounded-2xl flex-wrap overflow-x-auto">
           {Object.keys(avatarArray).map((key) => (
             <img
               key={key}

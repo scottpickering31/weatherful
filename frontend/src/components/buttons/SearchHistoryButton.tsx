@@ -4,11 +4,12 @@ function SearchHistoryButton({ handleClick, showSearchHistoryModal }) {
   return (
     <div>
       {!showSearchHistoryModal && (
-        <img
-          className="h-10 w-10 cursor-pointer hover:scale-110"
-          src={SearchHistorySVG}
-          onClick={handleClick}
-        ></img>
+        <div className="group relative cursor-pointer " onClick={handleClick}>
+          <img className="h-16 w-16 " src={SearchHistorySVG}></img>
+          <div className="absolute -inset-1.5 flex items-center rounded-full justify-center bg-gray-800 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <p className="text-white text-sm ">Search History</p>
+          </div>
+        </div>
       )}
     </div>
   );

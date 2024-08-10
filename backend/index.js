@@ -11,15 +11,15 @@ const app = express();
 
 app.use(
   cors({
-    // origin: "http://localhost:5173",
-    origin: "https://xsjs2s-5173.csb.app",
+    origin: "http://localhost:5173",
+    // origin: "https://xsjs2s-5173.csb.app",
     credentials: true,
   })
 );
 
 app.use(express.json());
-app.use("/", require("./routes/authRoutes"));
-app.use("/", require("./routes/settingsRoutes"));
+app.use("/api", require("./routes/authRoutes"));
+app.use("/api", require("./routes/settingsRoutes"));
 
 console.log("DB_HOST:", process.env.DB_HOST);
 console.log("DB_USERNAME:", process.env.DB_USERNAME);
