@@ -25,11 +25,6 @@ function ProfileSettings() {
           description={"●●●●●●●●●●"}
           value={"password"}
         />
-        <SettingsDetailSections
-          title={"Local Timezone"}
-          description="GMT"
-          value={"timezone"}
-        />
       </div>
     </div>
   );

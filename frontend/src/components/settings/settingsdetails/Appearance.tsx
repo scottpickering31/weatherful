@@ -1,8 +1,11 @@
-
 function Appearance() {
   return (
-    <div>Appearance</div>
-  )
+    <div>
+      <p>Appearance</p>
+      <p>Dark Mode</p>
+      <p>Theme</p>
+    </div>
+  );
 }
 
-export default Appearance
+export default Appearance;
