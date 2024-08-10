@@ -1,6 +1,6 @@
 import DailyWeatherCard from "../components/cards/DailyWeatherCard";
 import HourlyWeatherCard from "../components/cards/HourlyWeatherCard";
-import OutfitAiCard from "../components/cards/OutfitAiCard";
+import PredictorAiCard from "../components/cards/PredictorAiCard";
 import HistoricWeatherCard from "../components/cards/HistoricWeatherCard";
 import FortnightWeatherCard from "../components/cards/FortnightWeatherCard";
 import { useWeatherData } from "../hooks/useWeatherData";
@@ -11,7 +11,7 @@ import { useState } from "react";
 const cardComponents = {
   daily: DailyWeatherCard,
   hourly: HourlyWeatherCard,
-  clothes: OutfitAiCard,
+  predictor: PredictorAiCard,
   historic: HistoricWeatherCard,
   fortnight: FortnightWeatherCard,
 };

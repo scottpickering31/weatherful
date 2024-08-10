@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type TimeFrame = "clothes" | "hourly" | "daily" | "fortnight" | "historic";
+type TimeFrame = "predictor" | "hourly" | "daily" | "fortnight" | "historic";
 
 const initialState: { activeTimeFrame: TimeFrame } = {
   activeTimeFrame: "daily",

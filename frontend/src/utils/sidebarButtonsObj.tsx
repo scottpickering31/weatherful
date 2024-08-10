@@ -1,4 +1,4 @@
-import weatherByClothes from "/public/images/icons/weather-by-clothes.svg";
+import weatherByPredictor from "/public/images/icons/weather-by-predictor.svg";
 import weatherByDay from "/public/images/icons/weather-by-day.svg";
 import weatherByHour from "/public/images/icons/weather-by-hour.svg";
 import weatherByFortnight from "/public/images/icons/weather-by-fortnight.svg";
@@ -26,9 +26,9 @@ export const sidebarButtonsObj = [
     stateText: "historic",
   },
   {
-    text: "*NEW* AI Outfit Recommendations",
-    image: weatherByClothes,
-    stateText: "clothes",
+    text: "*NEW* AI Weather Predictor",
+    image: weatherByPredictor,
+    stateText: "predictor",
     AIOutline: true,
   },
 ];

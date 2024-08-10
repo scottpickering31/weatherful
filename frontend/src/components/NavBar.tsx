@@ -12,7 +12,7 @@ import {
   makeSelectTimeFrame,
 } from "../utils/selectors";
 
-type TimeFrame = "clothes" | "hourly" | "daily" | "fortnightly" | "historical";
+type TimeFrame = "predictor" | "hourly" | "daily" | "fortnightly" | "historical";
 
 const NavBar = memo(() => {
   const dispatch = useAppDispatch();
