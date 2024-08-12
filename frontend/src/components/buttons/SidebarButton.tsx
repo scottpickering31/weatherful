@@ -1,14 +1,14 @@
 export const SidebarButton = ({
   image,
   text,
-  onClick,
+  handleClick,
   AIOutline,
   CurrentTimeFrame,
   stateText,
 }: {
   image: string;
   text: string;
-  onClick: () => void;
+  handleClick: (stateText: string) => void;
   AIOutline?: boolean;
   CurrentTimeFrame: string;
   stateText: string;
@@ -25,7 +25,7 @@ export const SidebarButton = ({
   return (
     <button
       className={`flex flex-row w-full items-center justify-evenly ${getBackgroundColor()} text-white h-1/5 cursor-pointer transition duration-300`}
-      onClick={onClick}
+      onClick={() => handleClick(stateText)}
     >
       <img
         src={image}

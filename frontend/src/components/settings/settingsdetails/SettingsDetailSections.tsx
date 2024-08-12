@@ -1,10 +1,12 @@
 import SettingsChangeButton from "../../buttons/SettingsChangeButton";
-import { useAppSelector } from "../../../hooks/useReduxState";
+import { useAppSelector, useAppDispatch } from "../../../hooks/useReduxState";
 import { useState } from "react";
 import SettingsUpdateButton from "../../buttons/SettingsUpdateButton";
 import bcrypt from "bcryptjs";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
+
+import { updateUserField } from "../../../state/reducers/setUserDataSlice";
 
 function SettingsDetailSections({
   title,
@@ -21,6 +23,8 @@ function SettingsDetailSections({
     (state) => state.settingsChange.settingsChange
   );
 
+  const dispatch = useAppDispatch();
+
   const email = useAppSelector((state) => state.userData.userData.email);
 
   const handleUpdate = async () => {
@@ -34,15 +38,14 @@ function SettingsDetailSections({
     }
 
     axios
-      .patch(`http://localhost:3000/api/update-settings`, {
-        // .patch(`https://xsjs2s-3000.csb.app/api/update-settings`, {
+      // .patch(`http://localhost:3000/api/update-settings`, {
+      .patch(`https://xsjs2s-3000.csb.app/api/update-settings`, {
         email,
         value,
         newValue,
       })
       .then((response) => {
         console.log("Update successful", response.data);
-        toast.success("Update successful");
       })
       .catch((error) => {
         console.error(error);
@@ -50,6 +53,8 @@ function SettingsDetailSections({
       })
       .finally(() => {
         setIsUpdating(false);
+        toast.success("Update successful");
+        dispatch(updateUserField({ field: value, newValue }));
       });
   };
 

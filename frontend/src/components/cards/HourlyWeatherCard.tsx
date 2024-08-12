@@ -10,6 +10,8 @@ function HourlyWeatherCard({ weatherData }) {
     (state) => state.timeFrame.activeTimeFrame
   );
 
+  console.log(toggleTimeFrame);
+
   const hourlyData = weatherData ? weatherData.values : null;
 
   console.log(hourlyData);

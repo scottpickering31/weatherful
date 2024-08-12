@@ -11,8 +11,14 @@ import {
   makeSelectUserData,
   makeSelectTimeFrame,
 } from "../utils/selectors";
+import { fetchWeatherData } from "../state/reducers/weatherDataSlice";
 
-type TimeFrame = "predictor" | "hourly" | "daily" | "fortnightly" | "historical";
+type TimeFrame =
+  | "predictor"
+  | "hourly"
+  | "daily"
+  | "fortnightly"
+  | "historical";
 
 const NavBar = memo(() => {
   const dispatch = useAppDispatch();
@@ -20,8 +26,9 @@ const NavBar = memo(() => {
   const user = useAppSelector(makeSelectUserData());
   const timeFrame = useAppSelector(makeSelectTimeFrame());
 
-  const handleClick = (stateText: TimeFrame) => {
+  const handleClick = async (stateText: TimeFrame) => {
     dispatch(setActiveTimeFrame(stateText));
+    await dispatch(fetchWeatherData(stateText));
   };
 
   const handleSettingsClick = () => {
@@ -56,7 +63,7 @@ const NavBar = memo(() => {
               key={index}
               image={button.image}
               text={button.text}
-              onClick={() => handleClick(button.stateText as TimeFrame)}
+              handleClick={handleClick}
               AIOutline={button.AIOutline}
               CurrentTimeFrame={timeFrame}
               stateText={button.stateText}

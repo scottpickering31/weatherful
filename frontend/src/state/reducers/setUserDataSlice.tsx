@@ -1,15 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface userData {
-  userData: {
-    user_id: number;
-    name: string;
-    email: string;
-    password: string;
-  };
+interface UserData {
+  user_id: number;
+  name: string;
+  email: string;
+  password: string;
 }
 
-const initialState: userData = {
+interface UserDataState {
+  userData: UserData;
+}
+
+const initialState: UserDataState = {
   userData: {
     user_id: 0,
     name: "",
@@ -22,11 +24,18 @@ const userDataSlice = createSlice({
   name: "userData",
   initialState,
   reducers: {
-    setuserData: (state, action: PayloadAction<userData>) => {
+    setUserData: (state, action: PayloadAction<UserData>) => {
       state.userData = action.payload;
+    },
+    updateUserField: (
+      state,
+      action: PayloadAction<{ field: keyof UserData; newValue: string }>
+    ) => {
+      const { field, newValue } = action.payload;
+      state.userData[field] = newValue;
     },
   },
 });
 
-export const { setuserData } = userDataSlice.actions;
+export const { setUserData, updateUserField } = userDataSlice.actions;
 export default userDataSlice.reducer;
