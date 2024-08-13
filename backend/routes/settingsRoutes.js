@@ -5,6 +5,9 @@ const {
   searchHistory,
   getSearchHistory,
 } = require("../controllers/searchHistoryController");
+const { requireAuth } = require("../middleware/authMiddleware");
+
+router.use(requireAuth);
 
 // PATCH ROUTES
 router.patch("/update-settings", profileUpdate);

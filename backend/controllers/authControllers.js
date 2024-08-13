@@ -1,9 +1,6 @@
 const mysql = require("mysql");
 const jwt = require("jsonwebtoken");
 const { hashPassword, comparePassword } = require("../helpers/auth");
-const dotenv = require("dotenv");
-
-dotenv.config();
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -13,7 +10,7 @@ const db = mysql.createConnection({
 });
 
 const createToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+  return jwt.sign({ id }, "weatherfulsecret", { expiresIn: "1d" });
 };
 
 // Asynchronous signUp function
@@ -64,6 +61,8 @@ const login = (req, res) => {
     }
 
     const user = results[0];
+    const token = createToken(user.user_id);
+    res.cookie("jwt", token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
     const isMatch = await comparePassword(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ error: "Invalid email or password" });

@@ -1,18 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const {
-  signUp,
-  login,
-} = require("../controllers/authControllers");
-const {
-  updateAvatars
-} = require("../controllers/avatarControllers");
+const { requireAuth } = require("../middleware/authMiddleware");
+const { signUp, login } = require("../controllers/authControllers");
+const { updateAvatars } = require("../controllers/avatarControllers");
 
 // POST ROUTES
 router.post("/signup", signUp);
 router.post("/login", login);
 
 // PATCH ROUTES
-router.patch("/update-avatar", updateAvatars);
+router.patch("/update-avatar", requireAuth, updateAvatars);
 
 module.exports = router;
