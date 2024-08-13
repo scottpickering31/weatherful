@@ -38,8 +38,8 @@ function SettingsDetailSections({
     }
 
     axios
-      // .patch(`http://localhost:3000/api/update-settings`, {
-      .patch(`https://xsjs2s-3000.csb.app/api/update-settings`, {
+      .patch(`http://localhost:3000/api/update-settings`, {
+      // .patch(`https://xsjs2s-3000.csb.app/api/update-settings`, {
         email,
         value,
         newValue,

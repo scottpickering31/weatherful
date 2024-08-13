@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("mysql");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 dotenv.config({
   path: "../.env",
@@ -11,13 +12,14 @@ const app = express();
 
 app.use(
   cors({
-    // origin: "http://localhost:5173",
-    origin: "https://xsjs2s-5173.csb.app",
+    origin: "http://localhost:5173",
+    // origin: "https://xsjs2s-5173.csb.app",
     credentials: true,
   })
 );
 
 app.use(express.json());
+app.use(cookieParser());
 app.use("/api", require("./routes/authRoutes"));
 app.use("/api", require("./routes/settingsRoutes"));
 
