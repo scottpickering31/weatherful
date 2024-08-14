@@ -12,13 +12,6 @@ function WeatherCardContainer() {
   const [showSearchHistoryModal, setShowSearchHistoryModal] = useState(false);
   const [searchHistoryData, setSearchHistoryData] = useState([]);
   const user = useAppSelector((state) => state.userData.userData);
-  const error = useAppSelector((state) => state.weatherData.error);
-
-  useEffect(() => {
-    if (error) {
-      toast.error("Invalid location entered, please try another");
-    }
-  }, [error]);
 
   const handleClick = async () => {
     setShowSearchHistoryModal(!showSearchHistoryModal);
