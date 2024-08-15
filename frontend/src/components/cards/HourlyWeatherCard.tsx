@@ -48,6 +48,21 @@ function HourlyWeatherCard({ weatherData }) {
     dispatch(setIconData(weatherImages[weatherType]));
   }
 
+  console.log("Weather Type:", weatherType);
+
+  const getIcon = (weatherType) => {
+    const iconPath = weatherImages[weatherType];
+    if (iconPath) {
+      console.log(`Icon path for ${weatherType}:`, iconPath);
+      dispatch(setIconData(iconPath));
+    } else {
+      console.warn(`No icon found for ${weatherType}, using placeholder.`);
+      dispatch(setIconData("/images/placeholder-image.webp"));
+    }
+  };
+
+  getIcon(weatherType);
+
   const setDate = (date) => {
     const formattedDate = format(new Date(date), "eee d MMMM y");
     return formattedDate;
@@ -57,7 +72,6 @@ function HourlyWeatherCard({ weatherData }) {
     const hours = format(new Date(time), `HH:mm`);
     return hours;
   };
-
 
   return (
     <div className="border-4 border-slate-300 rounded-xl flex flex-col items-center h-small w-small bg-white">

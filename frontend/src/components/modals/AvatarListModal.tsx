@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/useReduxState";
 import {
   setIconArrayVisible,
   setAvatarIconData,
-} from "../../state/reducers/avatarIconDataSlice";
+} from "../../state/reducers/iconDataSlice";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 
@@ -27,12 +27,15 @@ function AvatarList() {
 
   const dispatch = useAppDispatch();
   const iconArrayVisible = useAppSelector(
-    (state) => state.avatarIconData.iconArrayVisible
+    (state) => state.iconData.iconArrayVisible
   );
-  const currentIcon = useAppSelector(
-    (state) => state.avatarIconData.avatarIconData
-  );
+  const currentIcon = useAppSelector((state) => state.iconData.avatarIconData);
+
+  console.log("currentIcon", currentIcon);
+
   const user = useAppSelector((state) => state.userData.userData);
+
+  console.log(user);
 
   const handleAvatarClick = () => {
     dispatch(setIconArrayVisible(!iconArrayVisible));
@@ -44,11 +47,16 @@ function AvatarList() {
     dispatch(setIconArrayVisible(false));
 
     axios
-      .patch("http://localhost:3000/api/update-avatar", {
-        // .patch("https://xsjs2s-3000.csb.app/api/update-avatar", {
-        email: user.email,
-        avatarIconData: selectedAvatar,
-      })
+      .patch(
+        "https://xsjs2s-3000.csb.app/api/update-avatar",
+        {
+          email: user.email,
+          avatarIconData: selectedAvatar,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         console.log("Avatar updated successfully:", response.data);
         toast.success("Avatar updated successfully");

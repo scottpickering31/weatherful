@@ -20,8 +20,8 @@ function SignUpPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/api/signup", values)
-      // .post("https://xsjs2s-3000.csb.app/api/signup", values)
+      // .post("http://localhost:3000/api/signup", values)
+      .post("https://xsjs2s-3000.csb.app/api/signup", values)
       .then((response) => {
         const data = response.data;
         console.log("Response data:", data);

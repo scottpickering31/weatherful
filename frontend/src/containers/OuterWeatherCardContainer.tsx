@@ -17,8 +17,8 @@ function WeatherCardContainer() {
     setShowSearchHistoryModal(!showSearchHistoryModal);
     if (showSearchHistoryModal === false) {
       axios
-        .post("http://localhost:3000/api/get-search-history", {
-        // .post("https://xsjs2s-3000.csb.app/api/get-search-history", {
+        // .post("http://localhost:3000/api/get-search-history", {
+        .post("https://xsjs2s-3000.csb.app/api/get-search-history", {
           user_id: user.user_id,
         })
         .then((response) => {

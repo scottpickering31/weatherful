@@ -62,6 +62,7 @@ const login = (req, res) => {
 
     const user = results[0];
     const token = createToken(user.user_id);
+    console.log("Auth token " + token);
     res.cookie("jwt", token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
     const isMatch = await comparePassword(password, user.password);
     if (!isMatch) {

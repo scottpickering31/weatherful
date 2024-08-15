@@ -32,9 +32,8 @@ function SearchBar() {
 
       const sendDataToBackend = async () => {
         axios
-          .post("http://localhost:3000/api/search-history", data)
-          // axios
-          //   .post("https://xsjs2s-3000.csb.app/api/search-history", data)
+          // .post("http://localhost:3000/api/search-history", data)
+          .post("https://xsjs2s-3000.csb.app/api/search-history", data)
           .then((response) => {
             console.log("Data sent successfully" + response.data);
           })

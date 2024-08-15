@@ -5,7 +5,7 @@ import { useAppDispatch } from "../hooks/useReduxState";
 import { setLoggedIn } from "../state/reducers/loggedInSlice";
 import { useNavigate } from "react-router-dom";
 import { setUserData } from "../state/reducers/setUserDataSlice";
-import { setAvatarIconData } from "../state/reducers/avatarIconDataSlice";
+import { setAvatarIconData } from "../state/reducers/iconDataSlice";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 
@@ -20,9 +20,8 @@ function Loginpage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-    .post("http://localhost:3000/api/login", values)
-    // axios
-    //   .post("https://xsjs2s-3000.csb.app/api/login", values)
+      // .post("http://localhost:3000/api/login", values)
+      .post("https://xsjs2s-3000.csb.app/api/login", values)
       .then((response) => {
         const data = response.data;
         console.log("Response data:", data);

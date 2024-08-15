@@ -5,7 +5,6 @@ import toggleTimeframeSlice from "../reducers/toggleTimeframeSlice";
 import inputDataSlice from "../reducers/inputDataSlice";
 import loggedInSlice from "../reducers/loggedInSlice";
 import userDataSlice from "../reducers/setUserDataSlice";
-import avatarIconDataSlice from "../reducers/avatarIconDataSlice";
 import showSettingsSlice from "../reducers/setShowSettingsSlice";
 import settingsTextSlice from "../reducers/setSettingsTextSlice";
 import settingsChangeButtonSlice from "../reducers/settingsChangeButtonSlice";
@@ -18,7 +17,6 @@ export const store = configureStore({
     timeFrame: toggleTimeframeSlice,
     inputData: inputDataSlice,
     userData: userDataSlice,
-    avatarIconData: avatarIconDataSlice,
     showSettings: showSettingsSlice,
     settingsText: settingsTextSlice,
     settingsChange: settingsChangeButtonSlice,
