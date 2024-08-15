@@ -19,38 +19,33 @@ function HourlyWeatherCard({ weatherData }) {
 
   const hourlyData = weatherData ? weatherData.values : null;
   const iconData = useAppSelector((state) => state.iconData.iconData);
-  const weatherType = weatherData.currentConditions.icon;
 
-  console.log(hourlyData);
+  console.log(hourlyData + "Hourly Data");
 
   const hourlyDataMap = hourlyData
     ? hourlyData.slice(counter, counter + 1)
     : null;
 
-  console.log(hourlyDataMap);
+  console.log(hourlyDataMap + "Hourly Data Map");
 
-  const getIcon = (weatherType) => {
-    if (weatherType in weatherImages) {
-      dispatch(setIconData(weatherImages[weatherType]));
-    } else {
-      dispatch(setIconData("/images/placeholder-image.webp"));
-    }
-  };
+  const weatherType = hourlyDataMap[0].conditions;
+
+  console.log(weatherType);
 
   function prevHour() {
     if (counter > 1) {
       setCounter((prevCounter) => prevCounter - 1);
+      dispatch(setIconData(weatherImages[weatherType]));
     } else {
       setHideCounter("hidden");
       setCounter(0);
-      getIcon(weatherType);
     }
   }
 
   function nextHour() {
     setCounter((prevCounter) => prevCounter + 1);
     setHideCounter("");
-    getIcon(weatherType);
+    dispatch(setIconData(weatherImages[weatherType]));
   }
 
   const setDate = (date) => {
@@ -62,6 +57,7 @@ function HourlyWeatherCard({ weatherData }) {
     const hours = format(new Date(time), `HH:mm`);
     return hours;
   };
+
 
   return (
     <div className="border-4 border-slate-300 rounded-xl flex flex-col items-center h-small w-small bg-white">

@@ -44,8 +44,8 @@ function AvatarList() {
     dispatch(setIconArrayVisible(false));
 
     axios
-      // .patch("http://localhost:3000/api/update-avatar", {
-        .patch("https://xsjs2s-3000.csb.app/api/update-avatar", {
+      .patch("http://localhost:3000/api/update-avatar", {
+        // .patch("https://xsjs2s-3000.csb.app/api/update-avatar", {
         email: user.email,
         avatarIconData: selectedAvatar,
       })

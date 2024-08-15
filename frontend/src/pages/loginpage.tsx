@@ -19,10 +19,10 @@ function Loginpage() {
   const navigation = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // axios;
-    // .post("http://localhost:3000/api/login", values)
     axios
-      .post("https://xsjs2s-3000.csb.app/api/login", values)
+    .post("http://localhost:3000/api/login", values)
+    // axios
+    //   .post("https://xsjs2s-3000.csb.app/api/login", values)
       .then((response) => {
         const data = response.data;
         console.log("Response data:", data);
