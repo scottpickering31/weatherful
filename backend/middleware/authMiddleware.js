@@ -2,11 +2,11 @@ const jwt = require("jsonwebtoken");
 
 const requireAuth = (req, res, next) => {
   console.log("Executing requireAuth middleware");
+  console.log("Cookies:", req.cookies);
   const token = req.cookies.jwt;
   console.log("Received Token:", token);
 
   if (token) {
-    console.log(token);
     jwt.verify(token, "weatherfulsecret", (err, decodedToken) => {
       if (err) {
         console.error("Token verification failed:", err);

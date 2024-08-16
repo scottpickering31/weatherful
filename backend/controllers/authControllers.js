@@ -32,13 +32,6 @@ const signUp = async (req, res) => {
         return res.status(500).json({ error: "Internal Server Error" });
       }
       const user_id = results.insertId;
-      const token = createToken(user_id);
-      res.cookie("jwt", token, {
-        maxAge: 24 * 60 * 60 * 1000,
-        httpOnly: true,
-        secure: true,
-        sameSite: "None",
-      });
       res.status(201).json({
         message:
           "User created successfully, Please log in using your credentials!",
