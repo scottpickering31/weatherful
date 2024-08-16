@@ -10,24 +10,25 @@ dotenv.config({
 
 const app = express();
 
+// Middleware for parsing cookies - should come first
+app.use(cookieParser());
+
+// Middleware for parsing JSON request bodies - should come before routes
+app.use(express.json());
+
+// Middleware for CORS - allows cross-origin requests and credentials
 app.use(
   cors({
-    // origin: "http://localhost:5173",
-    origin: "https://xsjs2s-5173.csb.app",
-    credentials: true,
+    origin: "https://xsjs2s-5173.csb.app", // Allow the specific origin
+    credentials: true, // Allow cookies to be sent and received
   })
 );
 
-app.use(express.json());
-app.use(cookieParser());
-app.use("/api", require("./routes/authRoutes"));
-app.use("/api", require("./routes/settingsRoutes"));
+// Routes - defined after middleware
+app.use("/api", require("./routes/authRoutes")); // Auth routes
+app.use("/api", require("./routes/settingsRoutes")); // Settings routes
 
-console.log("DB_HOST:", process.env.DB_HOST);
-console.log("DB_USERNAME:", process.env.DB_USERNAME);
-console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
-console.log("DB_DATABASE:", process.env.DB_DATABASE);
-
+// Connect to the database
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USERNAME,

@@ -9,14 +9,9 @@ const { requireAuth } = require("../middleware/authMiddleware");
 
 router.use(requireAuth);
 
-// PATCH ROUTES
+// Private routes (Auth required)
 router.patch("/update-settings", profileUpdate);
-
-// POST ROUTES
-
 router.post("/search-history", searchHistory);
 router.post("/get-search-history", getSearchHistory);
-
-// GET ROUTES
 
 module.exports = router;

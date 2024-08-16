@@ -31,14 +31,18 @@ const signUp = async (req, res) => {
         console.error("Error inserting user:", err);
         return res.status(500).json({ error: "Internal Server Error" });
       }
-      const user_id = results.user_id;
-      const user = { name, email, user_id };
-      const token = createToken(user.user_id);
-      res.cookie("jwt", token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
+      const user_id = results.insertId;
+      const token = createToken(user_id);
+      res.cookie("jwt", token, {
+        maxAge: 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+      });
       res.status(201).json({
         message:
           "User created successfully, Please log in using your credentials!",
-        user,
+        user: { name, email, user_id },
       });
     });
   } catch (error) {
@@ -48,7 +52,7 @@ const signUp = async (req, res) => {
 };
 
 // Asynchronous login function
-const login = (req, res) => {
+const login = async (req, res) => {
   const { email, password } = req.body;
   const query = "SELECT * FROM users WHERE email = ?";
   db.query(query, [email], async (err, results) => {
@@ -61,14 +65,18 @@ const login = (req, res) => {
     }
 
     const user = results[0];
-    const token = createToken(user.user_id);
-    console.log("Auth token " + token);
-    res.cookie("jwt", token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
     const isMatch = await comparePassword(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
 
+    const token = createToken(user.user_id);
+    res.cookie("jwt", token, {
+      maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    });
     res.status(200).json({ message: "Login successful", user });
   });
 };
