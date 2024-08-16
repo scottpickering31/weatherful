@@ -20,6 +20,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: "https://xsjs2s-5173.csb.app", // Allow the specific origin
+    // origin: "http://localhost:5173", // Allow the specific origin
     credentials: true, // Allow cookies to be sent and received
   })
 );

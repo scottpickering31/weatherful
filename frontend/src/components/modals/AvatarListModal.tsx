@@ -5,6 +5,7 @@ import {
 } from "../../state/reducers/iconDataSlice";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
+import axiosInstance from "../../utils/axiosInstance";
 
 function AvatarList() {
   const avatarArray = {
@@ -46,25 +47,14 @@ function AvatarList() {
     dispatch(setAvatarIconData(selectedAvatar));
     dispatch(setIconArrayVisible(false));
 
-    axios
-      .patch(
-        "https://xsjs2s-3000.csb.app/api/update-avatar",
-        {
-          email: user.email,
-          avatarIconData: selectedAvatar,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .then((response) => {
-        console.log("Avatar updated successfully:", response.data);
-        toast.success("Avatar updated successfully");
-      })
-      .catch((error) => {
-        console.error("Error updating avatar:", error);
-        toast.error("Error updating avatar");
+    try {
+      await axiosInstance.patch("/update-avatar", {
+        email: user.email,
+        avatarIconData: selectedAvatar,
       });
+    } catch (error) {
+      console.error("Error updating avatar:", error);
+    }
   };
 
   return (

@@ -1,6 +1,5 @@
-import { useEffect } from "react";
 import { useAppSelector } from "../hooks/useReduxState";
-import { Toaster, toast } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import SearchBar from "../components/SearchBar";
 import InnerWeatherCardContainer from "./InnerWeatherCardContainer";
 import SearchHistoryButton from "../components/buttons/SearchHistoryButton";
@@ -18,9 +17,15 @@ function WeatherCardContainer() {
     if (showSearchHistoryModal === false) {
       axios
         // .post("http://localhost:3000/api/get-search-history", {
-        .post("https://xsjs2s-3000.csb.app/api/get-search-history", {
-          user_id: user.user_id,
-        })
+        .post(
+          "https://xsjs2s-3000.csb.app/api/get-search-history",
+          {
+            user_id: user.user_id,
+          },
+          {
+            withCredentials: true,
+          }
+        )
         .then((response) => {
           setSearchHistoryData(response.data);
         })
